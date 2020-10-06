@@ -1,14 +1,22 @@
-.btnchoose{
-    margin-top: 20px;
+html,body {
+    height: 100%;
+    width:100%
 }
 #choose{
-    border: 1px solid red;
+    border-radius: 10px;
     width: 30%;
-    padding: 20px;
-
+    height: 450px;
+    margin-left: 30%;
+    margin-top: 10%;
+    padding-top: 20px;
+    text-align: center;
+    opacity:0.8;
+    background: whitesmoke;
 }
 #bg{
     width: 100%;
+    height: 100%;
     border: 1px solid green;
-
+    background: url("../images/choosebg.jpg");
+    background-size: cover;
 }
