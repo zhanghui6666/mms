@@ -16,4 +16,16 @@ public class MedicineDaoImpl implements MedicineDao {
         List<Medicine> medicines = template.query(sql, new BeanPropertyRowMapper<Medicine>(Medicine.class));
         return medicines;
     }
+
+    @Override
+    public int findTotalCount() {
+        String sql = "select count(*) from medicine";
+        return template.queryForObject(sql,Integer.class);
+    }
+
+    @Override
+    public List<Medicine> finByPage(int start, int rows) {
+        String sql = "select * from medicine limit ? , ?";
+        return template.query(sql,new BeanPropertyRowMapper<Medicine>(Medicine.class),start,rows);
+    }
 }
