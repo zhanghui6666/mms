@@ -1,0 +1,25 @@
+html,body {
+    height: 100%;
+    width:100%
+}
+div,table,td{
+    border: 1px solid red;
+}
+#controlMedMain{
+    border: 1px solid black;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+    height: 80%;
+    position: relative;
+}
+#controlMedBtn{
+    position: absolute;
+    bottom: 5%;
+}
+.table{
+    text-align: center;
+}
+#controlMedTab{
+    height: 80%;
+}
