@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: ZB
+  Date: 2020/10/7
+  Time: 15:47
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,15 +21,15 @@
 </head>
 <body>
 <div>
-        <table class="table_header">
-            <tr class="tr_header">
-                <td class="table_header">
-                    <img src="../images/login_logo.png" height="49" width="334"/></td>
-                <td class="table_header">
-                    <span class="span_header">新用户，</span><a href="register.html" class="a_header">快速注册</a>
-                </td>
-            </tr>
-        </table>
+    <table class="table_header">
+        <tr class="tr_header">
+            <td class="table_header">
+                <img src="../images/login_logo.png" height="49" width="334"/></td>
+            <td class="table_header">
+                <span class="span_header">新用户，</span><a href="register.html" class="a_header">快速注册</a>
+            </td>
+        </tr>
+    </table>
 </div>
 <div class="div_mid">
     <div class="container_mid">
@@ -31,7 +39,7 @@
             <div class="content_menu">
                 <ul class="menu_ul">
                     <li id="li1" class="menu_li1">
-                       <a href="login.html" target="bt1">用户登录</a>
+                        <a href="login.html" target="bt1">用户登录</a>
                     </li>
                     <li id="li2" class="menu_li2">
                         <a href="adminlogin.html " target="bt1">管理员登录</a>
@@ -91,8 +99,8 @@
 <div class="div_footer">
     <div class="div_button">
         <dl>
-        <dd>Copyright©2005-2019 xxx药房网（南京）医药科技有限公司版权所有，并保留所有权利。互联网药品交易服务证：京C20160005号</dd>
-        <dd>（ICP证、EDI证已二证合一）增值电信业务经营许可证：京B2-20180434</dd>
+            <dd>Copyright©2005-2019 xxx药房网（南京）医药科技有限公司版权所有，并保留所有权利。互联网药品交易服务证：京C20160005号</dd>
+            <dd>（ICP证、EDI证已二证合一）增值电信业务经营许可证：京B2-20180434</dd>
         </dl>
     </div>
 </div>
