@@ -31,21 +31,58 @@
             <div class="content_menu">
                 <ul class="menu_ul">
                     <li id="li1" class="menu_li1">
-
+                       <a href="#bt1">用户登录</a>
                     </li>
                     <li id="li2" class="menu_li2">
-
+                        <a href="adminlogin.html #bt1" target="btt">管理员登录</a>
                     </li>
                 </ul>
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
+
+            <form class="form-horizontal" id="btt">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">账号</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail3" placeholder="用户编号">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword3" placeholder="密码">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-sm-offset-2 col-sm-10 ">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">记住密码
+                            </label>
+                            <a href="#" class="content_a">忘记密码</a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <div class="col-sm-offset-2 col-sm-10 ">
+                        <button type="submit" class="btn btn-default content_imput">登录</button>
+                    </div>
+                </div>
+            </form>
+            <div class="other_login">
+                <span class="other_span">您还可以通过以下方式登录：</span>
+                <a href="#"><img src="../images/other_qq.jpg" class="other_qq"></a>
+                <a href="#"><img src="../images/other_weixin.jpg" class="other_weixin"> </a>
+            </div>
+            <!--<div class="form-group">
+                <label for="exampleInputEmail1"> 用户编号</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
+            </div>-->
+
         </div>
     </div>
 
