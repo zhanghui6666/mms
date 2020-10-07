@@ -91,35 +91,3 @@ dl{
     margin-right: auto;
     list-style: none outside none;
 }
-.content_imput{
-    background: #1d8bd7;
-    text-align: center;
-    color: #fff;
-    display: inline-block;
-    height: 40px;
-    width: 100%;
-    font-size: 18px;
-    margin-top: 10px;
-    cursor: pointer;
-    float: left;
-}
-.content_a{
-    margin-left: 50px;
-}
-.other_login{
-    line-height: 40px;
-    margin-top: 15px;
-    margin-left: 25px;
-}
-.other_span{
-    float: left;
-}
-.other_qq {
-    width: 30px;
-    height:30px;
-}
-.other_weixin{
-    margin-left: 10px;
-    width: 30px;
-    height:30px;
-}
