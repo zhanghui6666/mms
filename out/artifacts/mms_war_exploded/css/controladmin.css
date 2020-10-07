@@ -1,0 +1,34 @@
+html,body {
+    height: 100%;
+    width:100%
+}
+div,table,td{
+    border: 1px solid red;
+}
+#controlAdminBg{
+    width: 100%;
+    height: 100%;
+    background: url("../images/adminconbg.jpg");
+}
+#controlAdminMain{
+    border: 1px solid black;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+    height: 80%;
+    position: relative;
+    background: whitesmoke;
+}
+#controlAdminBtn{
+    position: absolute;
+    bottom: 5%;
+}
+.table{
+    text-align: center;
+}
+thead{
+    background: #4cae4c;
+}
+#controlAdminTab{
+    height: 80%;
+}

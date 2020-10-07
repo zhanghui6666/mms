@@ -1,0 +1,14 @@
+.btnchoose{
+    margin-top: 20px;
+}
+#choose{
+    border: 1px solid red;
+    width: 30%;
+    padding: 20px;
+
+}
+#bg{
+    width: 100%;
+    border: 1px solid green;
+
+}
