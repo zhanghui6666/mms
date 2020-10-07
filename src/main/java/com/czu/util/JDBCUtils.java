@@ -1,6 +1,8 @@
 package com.czu.util;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+import com.alibaba.druid.pool.DruidPooledConnection;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -14,22 +16,20 @@ import java.util.Properties;
  */
 public class JDBCUtils {
 
-    private static DataSource ds ;
+    private static DruidDataSource datasource ;
 
     static {
 
         try {
-            //1.加载配置文件
-            Properties pro = new Properties();
-            //使用ClassLoader加载配置文件，获取字节输入流
-            InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream("druid.properties");
-            pro.load(is);
+            datasource = new DruidDataSource();
 
+            datasource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+            datasource.setUrl("jdbc:mysql://localhost:3306/mms?characterEncoding=utf-8&serverTimezone=UTC");
+            datasource.setUsername("root");
+            datasource.setPassword("root");
             //2.初始化连接池对象
-            ds = DruidDataSourceFactory.createDataSource(pro);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -39,7 +39,7 @@ public class JDBCUtils {
      * 获取连接池对象
      */
     public static DataSource getDataSource(){
-        return ds;
+        return datasource;
     }
 
 
@@ -47,6 +47,6 @@ public class JDBCUtils {
      * 获取连接Connection对象
      */
     public static Connection getConnection() throws SQLException {
-        return  ds.getConnection();
+        return  datasource.getConnection();
     }
 }
