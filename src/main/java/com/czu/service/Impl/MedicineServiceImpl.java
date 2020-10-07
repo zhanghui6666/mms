@@ -19,6 +19,11 @@ public class MedicineServiceImpl implements MedicineService {
     public PageBean<Medicine> findMedicineByPage(String _currentPage, String _rows) {
         int currentPage = Integer.parseInt(_currentPage);
         int rows = Integer.parseInt(_rows);
+
+        if (currentPage <= 0){
+            currentPage = 1;
+        }
+
         PageBean<Medicine> pb = new PageBean<>();
         pb.setCurrentPage(currentPage);
         pb.setRows(rows);

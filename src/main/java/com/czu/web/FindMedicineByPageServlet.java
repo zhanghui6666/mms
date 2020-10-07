@@ -20,6 +20,12 @@ public class FindMedicineByPageServlet extends HttpServlet {
         String currentPage = request.getParameter("currentPage");//当前页码
         String rows = request.getParameter("rows");//每页显示的条数
 
+        if (currentPage ==null || "".equals(currentPage)){
+            currentPage = "1";
+        }
+        if (rows ==null || "".equals(rows)){
+            rows = "50";
+        }
         MedicineService medicineService = new MedicineServiceImpl();
         PageBean<Medicine> pb = medicineService.findMedicineByPage(currentPage, rows);
 

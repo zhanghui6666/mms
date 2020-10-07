@@ -17,9 +17,6 @@ public class FindAllMedicineServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MedicineService medicineService = new MedicineServiceImpl();
         List<Medicine> medicines = medicineService.finAllMedicine();
-        for (Medicine medicine : medicines) {
-            System.out.println(medicine);
-        }
         request.setAttribute("medicines",medicines);
         request.getRequestDispatcher("/medicineList.jsp").forward(request,response);
     }
