@@ -50,7 +50,7 @@
 
 <div class="nav2">
     <div id="function">
-        <a class="btn btn-default" href="homepage.jsp" role="button">首页</a>
+        <a class="btn btn-default" href="clientHomepage.jsp" role="button">首页</a>
         <a class="btn btn-default" href="${pageContext.request.contextPath}/findMedicineByPageServlet" role="button">药品大全</a>
         <a class="btn btn-default" href="pharmacy.jsp" role="button">药店</a>
     </div>
@@ -62,39 +62,40 @@
 
     <div class="container2">
         <form id="form" method="post">
-            <table border="1" class="table table-bordered table-hover" id="tb1">
+            <div class="table-responsive">
+            <table border="1" class="table table-bordered table-hover  table-condensed" id="tb1" style="width: 100%;
+            table-layout: fixed;">
                 <tr class="success">
-                    <th><input type="checkbox" id="firstCb"></th>
-                    <th>编号</th>
-                    <th>药名</th>
-                    <th>特性</th>
-                    <th>作用</th>
-                    <th>单价</th>
-                    <th>数量</th>
-                    <th>序号</th>
-                    <th>操作</th>
+                    <th style="width:3%"><input type="checkbox" id="firstCb"></th>
+                    <th style="width:10%">编号</th>
+                    <th style="width:10%">药名</th>
+                    <th style="width:5%">特性</th>
+                    <th style="width:40%">作用</th>
+                    <th style="width:5%">单价</th>
+                    <th style="width:5%">数量</th>
+                    <th style="width:5%">序号</th>
+                    <th style="width:17%">操作</th>
                 </tr>
 
                 <c:forEach items="${pb.list}" var="medicine">
                     <tr>
-                        <th><input type="checkbox" name="mid" value="${medicine.mid}"></th>
-                        <td>${medicine.mno}</td>
-                        <td>${medicine.mname}</td>
-                        <td>${medicine.mmode}</td>
-                        <td>${medicine.mefficacy}</td>
-                        <td>${medicine.mprice}</td>
-                        <td>${medicine.mnumber}</td>
-                        <td>${medicine.mid}</td>
-                        <td><a class="btn btn-default btn-sm" href="#">加入购物车</a>&nbsp;
+                        <th class="wrap"><input type="checkbox" name="mid" value="${medicine.mid}"></th>
+                        <td class="wrap" onmouseover="this.className = 'wrap1'" onmouseout="this.className = 'wrap'">${medicine.mno}</td>
+                        <td class="wrap" onmouseover="this.className = 'wrap1'" onmouseout="this.className = 'wrap'">${medicine.mname}</td>
+                        <td class="wrap" onmouseover="this.className = 'wrap1'" onmouseout="this.className = 'wrap'">${medicine.mmode}</td>
+                        <td class="wrap" onmouseover="this.className = 'wrap1'" onmouseout="this.className = 'wrap'">${medicine.mefficacy}</td>
+                        <td class="wrap" onmouseover="this.className = 'wrap1'" onmouseout="this.className = 'wrap'">${medicine.mprice}</td>
+                        <td class="wrap" onmouseover="this.className = 'wrap1'" onmouseout="this.className = 'wrap'">${medicine.mnumber}</td>
+                        <td class="wrap" onmouseover="this.className = 'wrap1'" onmouseout="this.className = 'wrap'">${medicine.mid}</td>
+                        <td><a class="btn btn-default" href="#" role="button" style="margin-left: 50px">加入购物车</a></td>
                     </tr>
                 </c:forEach>
             </table>
+            </div>
         </form>
         <div>
             <nav aria-label="Page navigation">
                 <ul class="pagination">
-
-                    <%--如果是第一页不允许点击--%>
                     <c:if test="${pb.currentPage == 1}">
                         <li class="disabled">
                     </c:if>
@@ -104,7 +105,7 @@
                     </c:if>
 
                         <c:if test="${pb.currentPage != 1}">
-                        <a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${pb.currentPage - 1}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}" aria-label="Previous">
+                        <a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${pb.currentPage - 1}&rows=20&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}" aria-label="Previous">
                         </c:if>
 
                             <span aria-hidden="true">&laquo;</span>
@@ -113,7 +114,7 @@
 
 
 
-                    <%--中间页--%>
+                        <%--中间页--%>
                         <%--显示6页中间页[begin=起始页,end=最大页]--%>
                         <%--总页数没有6页--%>
                         <c:choose>
@@ -148,6 +149,7 @@
                                 <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a></li>
                             </c:if>
                         </c:forEach>
+
                     <%--<c:forEach begin="1" end="${pb.totalPage}" var="i">
 
                         <c:if test="${pb.currentPage == i}">
@@ -161,7 +163,8 @@
 
 
 
-                    <%--如果是最后一页不允许点击--%>
+
+
                     <c:if test="${pb.currentPage ==pb.totalPage}">
                         <li class="disabled">
                     </c:if>
@@ -170,7 +173,7 @@
                         <li>
                     </c:if>
                     <c:if test="${pb.currentPage != pb.totalPage}">
-                        <a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${pb.currentPage + 1}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}" aria-label="Next">
+                        <a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${pb.currentPage + 1}&rows=20&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}" aria-label="Next">
                     </c:if>
                             <span aria-hidden="true">&raquo;</span>
                         </a>

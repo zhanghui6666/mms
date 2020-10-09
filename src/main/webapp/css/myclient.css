@@ -56,8 +56,16 @@
     height:700px;
 }
 
-#tb1{
-    table-layout: auto;
-    word-break: break-all;
-    word-wrap: break-word; //表格固定布局
+.wrap{
+    list-style:none;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    overflow: hidden;
+    margin-top:5px;
+}
+
+.wrap1{
+    list-style:none;
+    margin-top:5px;
 }

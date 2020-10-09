@@ -18,7 +18,7 @@ public class FindAllMedicineServlet extends HttpServlet {
         MedicineService medicineService = new MedicineServiceImpl();
         List<Medicine> medicines = medicineService.finAllMedicine();
         request.setAttribute("medicines",medicines);
-        request.getRequestDispatcher("/medicineList.jsp").forward(request,response);
+        request.getRequestDispatcher("/clientMedicineList.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

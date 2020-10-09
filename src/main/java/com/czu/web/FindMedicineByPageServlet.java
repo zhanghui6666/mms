@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 
@@ -33,11 +34,11 @@ public class FindMedicineByPageServlet extends HttpServlet {
         MedicineService medicineService = new MedicineServiceImpl();
         PageBean<Medicine> pb = medicineService.findMedicineByPage(currentPage, rows,condition);
 
-        System.out.println(pb);
+        //System.out.println(pb);
         request.setAttribute("pb", pb);
         request.setAttribute("condition",condition);//将查询条件存入request
 
-        request.getRequestDispatcher("/medicineList.jsp").forward(request,response);
+        request.getRequestDispatcher("/clientMedicineList.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

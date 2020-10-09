@@ -22,7 +22,7 @@
 
     <div class="nav2">
         <div id="function">
-            <a class="btn btn-default" href="homepage.jsp" role="button">首页</a>
+            <a class="btn btn-default" href="clientHomepage.jsp" role="button">首页</a>
             <a class="btn btn-default" href="${pageContext.request.contextPath}/findMedicineByPageServlet" role="button">药品大全</a>
             <a class="btn btn-default" href="pharmacy.jsp" role="button">药店</a>
         </div>
