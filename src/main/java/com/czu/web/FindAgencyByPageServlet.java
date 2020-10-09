@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet("/FindAgencyByPageServlet")
+@WebServlet("/findAgencyByPageServlet")
 public class FindAgencyByPageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
@@ -31,14 +31,14 @@ public class FindAgencyByPageServlet extends HttpServlet {
             rows = "20";
         }
         //获取查询条件
-        Map<String, String[]> condition = request.getParameterMap();
+        Map<String, String[]> condition1 = request.getParameterMap();
 
         AgencyService agencyService = new AgencyServiceImpl();
-        PageBean<Agency> pb = agencyService.findAgencyByPage(currentPage, rows,condition);
+        PageBean<Agency> pb1 = agencyService.findAgencyByPage(currentPage, rows,condition1);
 
         //System.out.println(pb);
-        request.setAttribute("pb", pb);
-        request.setAttribute("condition",condition);//将查询条件存入request
+        request.setAttribute("pb1", pb1);
+        request.setAttribute("condition1",condition1);//将查询条件存入request
 
         request.getRequestDispatcher("/clientAgencyList.jsp").forward(request,response);
     }

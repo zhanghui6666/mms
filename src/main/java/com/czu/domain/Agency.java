@@ -1,19 +1,19 @@
 package com.czu.domain;
 
 public class Agency {
-        private String cno;
+        private String ano;
         private String aname;
         private String asex;
         private String aphone;
-        private String aewmark;
+        private String aremark;
         private  Integer aid;
 
-    public String getCno() {
-        return cno;
+    public String getAno() {
+        return ano;
     }
 
-    public void setCno(String cno) {
-        this.cno = cno;
+    public void setAno(String ano) {
+        this.ano = ano;
     }
 
     public String getAname() {
@@ -40,12 +40,12 @@ public class Agency {
         this.aphone = aphone;
     }
 
-    public String getAewmark() {
-        return aewmark;
+    public String getAremark() {
+        return aremark;
     }
 
-    public void setAewmark(String aewmark) {
-        this.aewmark = aewmark;
+    public void setAremark(String aremark) {
+        this.aremark = aremark;
     }
 
     public Integer getAid() {
@@ -56,13 +56,14 @@ public class Agency {
         this.aid = aid;
     }
 
+    @Override
     public String toString() {
         return "Agency{" +
-                "cno=" + cno +
+                "ano='" + ano + '\'' +
                 ", aname='" + aname + '\'' +
                 ", asex='" + asex + '\'' +
                 ", aphone='" + aphone + '\'' +
-                ", aewmark='" + aewmark + '\'' +
+                ", aremark='" + aremark + '\'' +
                 ", aid=" + aid +
                 '}';
     }

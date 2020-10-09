@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/bootstrap.js"></script>
-    <link rel="stylesheet" href="css/myclient.css">
+<%--    <link rel="stylesheet" href="css/myclient.css">--%>
     <link rel="stylesheet" href="css/sweetalert.css">
     <script src="js/sweetalert-dev.js"></script>
 
@@ -20,32 +20,53 @@
 <%--复杂查询--%>
 <div class="nav1">
     <div class="logo_container">
-        <form class="form-inline" style="float:right;margin-top:30px" action="${pageContext.request.contextPath}/findMedicineByPageServlet" method="post">
+       <%-- <form class="form-inline" style="float:right;margin-top:30px" action="${pageContext.request.contextPath}/findMedicineByPageServlet" method="post">
             <div class="form-group">
                 <label for="medicineno">药品编号</label>
-                <input style="width: 150px" type="text" name="mno" value="${condition.mno[0]}" class="form-control" id="medicineno">
+                <input style="width: 150px" type="text" name="mno" value="${condition.mno[0]}" class="form-control" >
             </div>
             <div class="form-group">
                 <label for="medicineName">药品名</label>
-                <input style="width: 150px" type="text" name="mname" value="${condition.mname[0]}" class="form-control" id="medicineName">
+                <input style="width: 150px" type="text" name="mname" value="${condition.mname[0]}" class="form-control">
             </div>
             <div class="form-group">
                 <label for="medicineFunction">药品功效</label>
                 <input style="width: 150px" type="text" name="mefficacy" value="${condition.mefficacy[0]}" class="form-control"
-                       id="medicineFunction">
+                       >
             </div>
             <button type="submit" class="btn btn-default" style="margin-left: 30px;margin-right: 10px">查询药品信息</button>
-        </form>
+        </form>--%>
         <img src="images/title.png">
     </div>
 </div>
 
 <div class="nav2">
-    <div id="function">
-        <a class="btn btn-default" href="clientHomepage.jsp" role="button">首页</a>
-        <a class="btn btn-default" href="${pageContext.request.contextPath}/findMedicineByPageServlet" role="button">药品大全</a>
-        <a class="btn btn-default" href="pharmacy.jsp" role="button">药店</a>
-    </div>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav function">
+                    <li><a class="navbar-brand" href="clientHomepage.jsp">首页</a></li>
+                    <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet">药品大全</a></li>
+                    <li><a href="${pageContext.request.contextPath}/findAgencyByPageServlet">药店</a></li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input style="width: 200px" type="text" name="mno" class="form-control" id="medicineno" value="${condition.mno[0]}" placeholder="药品编号">
+                        <input style="width: 200px;margin-left: 20px" type="text" name="mname" class="form-control" value="${condition.mname[0]}" id="medicineName" placeholder="药品名">
+                        <input style="width: 200px;margin-left: 20px" type="text" name="mefficacy" class="form-control" value="${condition.mefficacy[0]}" id="medicineFunction" placeholder="药品功效">
+                    </div>
+                    <button type="submit" style="margin-left: 20px" class="btn btn-default">查询</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">购物车</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
 </div>
 
 <div class="nav3">
@@ -187,7 +208,7 @@
 
         <%--跳转指定页数--%>
         <div style="float: right;margin-top: 22px;">
-            <div class="jump" style="float: left">
+            <div class="jump" style="float: left;height: 30px">
                 <div class="page-jump">
                     <div class="input-group">
                         <input type="text" class="form-control" id="pageCode" name="pageCode" style="width:80px">
@@ -199,7 +220,7 @@
 
             <%--总页数--%>
             <div style="float: left;">
-                <span style="font-size: 25px;margin-left: 20px; float: left">
+                <span style="font-size:25px;margin-left:10px;margin-right:10px; float: left">
                     共${pb.totalCount}条记录，共${pb.totalPage}页
                 </span>
             </div>
@@ -215,7 +236,7 @@
             return;
         }
         if(pc > ${pb.totalPage}) {//判断当前页码是否大于最大页
-            swal("请输入正确的页码");
+            swal("页码太大啦!");
             return;
         }
         location = "${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage="+pc;
@@ -230,6 +251,15 @@
 
         };
     }
+
+    /*$(".function li").click(function(){
+        $(".function li").removeClass("active");
+        $(this).addClass("active");
+    })*/
+
+   /* $("#getcolor").click(function(){
+        $(this).children("li").addClass("active").parent().siblings().find("li").removeClass("active");
+    });*/
 </script>
 </body>
 </html>
