@@ -29,7 +29,7 @@
 <body>
 <div class="nav1">
     <div class="logo_container">
-        <form class="form-inline" style="float:right;margin-top: 30px" action="${pageContext.request.contextPath}/findMedicineByPageServlet" method="post">
+        <form class="form-inline" style="float:right; margin-top:30px" action="${pageContext.request.contextPath}/findMedicineByPageServlet" method="post">
             <div class="form-group">
                 <label for="medicineno">药品编号</label>
                 <input type="text" name="mno" value="${condition.mno[0]}" class="form-control" id="medicineno">
@@ -160,10 +160,6 @@
                             <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a></li>
                         </c:if>
                     </c:forEach>--%>
-
-
-
-
 
                     <c:if test="${pb.currentPage ==pb.totalPage}">
                         <li class="disabled">

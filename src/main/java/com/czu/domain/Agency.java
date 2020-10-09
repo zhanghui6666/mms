@@ -1,18 +1,18 @@
 package com.czu.domain;
 
 public class Agency {
-        private Character cno;
+        private String cno;
         private String aname;
         private String asex;
         private String aphone;
         private String aewmark;
         private  Integer aid;
 
-    public Character getCno() {
+    public String getCno() {
         return cno;
     }
 
-    public void setCno(Character cno) {
+    public void setCno(String cno) {
         this.cno = cno;
     }
 

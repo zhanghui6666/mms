@@ -12,49 +12,26 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/bootstrap.js"></script>
     <link rel="stylesheet" href="css/myclient.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+    <script src="js/sweetalert-dev.js"></script>
 
-    <script>
-        function _go() {
-            var pc = $("#pageCode").val();//获取文本框中的当前页码
-            if(!/^[1-9]\d*$/.test(pc)) {//对当前页码进行整数校验
-                alert('请输入正确的页码！');
-                return;
-            }
-            if(pc > ${pb.totalPage}) {//判断当前页码是否大于最大页
-                alert('请输入正确的页码！');
-                return;
-            }
-            location = "${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage="+pc;
-        }
-        window.onload = function () {
-            document.getElementById("firstCb").onclick = function () {
-
-                var cbs = document.getElementsByName('mid');
-                for (let i = 0; i < cbs.length; i++) {
-                    cbs[i].checked = this.checked;
-                }
-
-            };
-        }
-    </script>
 </head>
 <body>
 <%--复杂查询--%>
 <div class="nav1">
     <div class="logo_container">
-        <form class="form-inline" style="float:right;margin-top: 30px"
-              action="${pageContext.request.contextPath}/findMedicineByPageServlet" method="post">
+        <form class="form-inline" style="float:right;margin-top:30px" action="${pageContext.request.contextPath}/findMedicineByPageServlet" method="post">
             <div class="form-group">
                 <label for="medicineno">药品编号</label>
-                <input type="text" name="mno" value="${condition.mno[0]}" class="form-control" id="medicineno">
+                <input style="width: 150px" type="text" name="mno" value="${condition.mno[0]}" class="form-control" id="medicineno">
             </div>
             <div class="form-group">
                 <label for="medicineName">药品名</label>
-                <input type="text" name="mname" value="${condition.mname[0]}" class="form-control" id="medicineName">
+                <input style="width: 150px" type="text" name="mname" value="${condition.mname[0]}" class="form-control" id="medicineName">
             </div>
             <div class="form-group">
                 <label for="medicineFunction">药品功效</label>
-                <input type="text" name="mefficacy" value="${condition.mefficacy[0]}" class="form-control"
+                <input style="width: 150px" type="text" name="mefficacy" value="${condition.mefficacy[0]}" class="form-control"
                        id="medicineFunction">
             </div>
             <button type="submit" class="btn btn-default" style="margin-left: 30px;margin-right: 10px">查询药品信息</button>
@@ -230,5 +207,29 @@
     </div>
     <div class="container3"></div>
 </div>
+<script>
+    function _go() {
+        var pc = $("#pageCode").val();//获取文本框中的当前页码
+        if(!/^[1-9]\d*$/.test(pc)) {//对当前页码进行整数校验
+            swal("请输入正确的页码");
+            return;
+        }
+        if(pc > ${pb.totalPage}) {//判断当前页码是否大于最大页
+            swal("请输入正确的页码");
+            return;
+        }
+        location = "${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage="+pc;
+    }
+    window.onload = function () {
+        document.getElementById("firstCb").onclick = function () {
+
+            var cbs = document.getElementsByName('mid');
+            for (let i = 0; i < cbs.length; i++) {
+                cbs[i].checked = this.checked;
+            }
+
+        };
+    }
+</script>
 </body>
 </html>
