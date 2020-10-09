@@ -4,7 +4,6 @@ public class adminInfo {
     private Integer aid;
     private String aname;
     private String apassword;
-    private String aaccess;
 
     public Integer getAid() {
         return aid;
@@ -30,13 +29,6 @@ public class adminInfo {
         this.apassword = apassword;
     }
 
-    public String getAaccess() {
-        return aaccess;
-    }
-
-    public void setAaccess(String aaccess) {
-        this.aaccess = aaccess;
-    }
 
     @Override
     public String toString() {
@@ -44,7 +36,6 @@ public class adminInfo {
                 "aid=" + aid +
                 ", aname='" + aname + '\'' +
                 ", apassword='" + apassword + '\'' +
-                ", aaccess='" + aaccess + '\'' +
                 '}';
     }
 }

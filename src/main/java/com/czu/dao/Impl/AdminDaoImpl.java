@@ -16,4 +16,18 @@ public class AdminDaoImpl implements AdminDao {
         List<adminInfo> adminInfos=template.query(sql,new BeanPropertyRowMapper<adminInfo>(adminInfo.class));
         return adminInfos;
     }
+
+    @Override
+    public void addAdmin(adminInfo admininfo) {
+        String sql="insert into admin (aname,apassword) values (?,?)";
+        template.update(sql,admininfo.getAname(),admininfo.getApassword());
+    }
+
+    @Override
+    public void deleteAdmin(Integer aid) {
+        String sql="delete from admin where aid=?";
+        template.update(sql,aid);
+    }
+
+
 }

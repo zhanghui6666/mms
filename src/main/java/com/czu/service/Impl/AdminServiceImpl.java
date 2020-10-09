@@ -14,4 +14,16 @@ public class AdminServiceImpl implements AdminService {
     public List<adminInfo> findAllAdminInfo() {
         return adminDao.findAllAdmin();
     }
+
+    @Override
+    public void addAdminInfo(adminInfo adminInfo) {
+        adminDao.addAdmin(adminInfo);
+    }
+
+    @Override
+    public void deleteAdminInfo(Integer aid) {
+        adminDao.deleteAdmin(aid);
+    }
+
+
 }

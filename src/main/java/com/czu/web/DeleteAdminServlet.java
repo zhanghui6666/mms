@@ -1,6 +1,5 @@
 package com.czu.web;
 
-import com.czu.domain.adminInfo;
 import com.czu.service.AdminService;
 import com.czu.service.Impl.AdminServiceImpl;
 
@@ -10,15 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/findAllAdminServlet")
-public class FindAllAdminServlet extends HttpServlet {
+@WebServlet("/deleteAdminServlet")
+public class DeleteAdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        //1.获取参数
+        String aid = request.getParameter("aid");//当前页码
+        //2.调用service方法删除管理员
         AdminService adminService=new AdminServiceImpl();
-        List<adminInfo> adminInfos=adminService.findAllAdminInfo();
-        request.setAttribute("adminInfos",adminInfos);
-        request.getRequestDispatcher("/admincontroladminList.jsp").forward(request,response);
+        adminService.deleteAdminInfo(Integer.valueOf(aid));
+        //跳转到查找界面
+        response.sendRedirect(request.getContextPath()+"/findAllAdminServlet");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

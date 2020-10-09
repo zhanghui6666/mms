@@ -10,4 +10,16 @@ public interface AdminService {
      * @return
      */
     List<adminInfo> findAllAdminInfo();
+
+    /**
+     * 添加一个管理员
+     * @param adminInfo
+     */
+    void addAdminInfo(adminInfo adminInfo);
+
+    /**
+     * 删除一个管理员
+     * @param aid
+     */
+    void deleteAdminInfo(Integer aid);
 }

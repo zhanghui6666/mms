@@ -8,11 +8,18 @@ div,table,td{
 #addadminbody{
     height: 100%;
     width:100%;
+    background: url("../images/chooseback.jpg");
+    background-size: cover;
 }
 #addtab{
-    width: 60%;
+    width: 40%;
     margin-left:auto;
     margin-right:auto;
+    margin-top: 10%;
+    opacity: 85%;
+    overflow:auto;
+    border-radius: 10px;
+    background: url("../images/addbg.jpg");
 }
 .table{
     width: 100%;
@@ -24,5 +31,6 @@ div,table,td{
     margin-right:auto;
 }
 .btn{
-    width: 300px;
+    width: 100px;
+    margin-left: 75px;
 }

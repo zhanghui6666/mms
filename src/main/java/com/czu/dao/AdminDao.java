@@ -10,4 +10,15 @@ public interface AdminDao {
      * @return
      */
     List<adminInfo> findAllAdmin();
+
+    /**
+     * 添加一个管理员
+     */
+    void addAdmin(adminInfo adminInfo);
+
+    /**
+     * 删除一个管理员
+     * @param aid 管理员id
+     */
+    void deleteAdmin(Integer aid);
 }
