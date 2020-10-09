@@ -7,6 +7,7 @@ import com.czu.domain.PageBean;
 import com.czu.service.MedicineService;
 
 import java.util.List;
+import java.util.Map;
 
 public class MedicineServiceImpl implements MedicineService {
     private MedicineDao mdao = new MedicineDaoImpl();
@@ -16,26 +17,22 @@ public class MedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public PageBean<Medicine> findMedicineByPage(String _currentPage, String _rows) {
+    public PageBean<Medicine> findMedicineByPage(String _currentPage, String _rows, Map<String, String[]> condition) {
         int currentPage = Integer.parseInt(_currentPage);
         int rows = Integer.parseInt(_rows);
-
-        if (currentPage <= 0){
-            currentPage = 1;
-        }
 
         PageBean<Medicine> pb = new PageBean<>();
         pb.setCurrentPage(currentPage);
         pb.setRows(rows);
 
-        int totalCount = mdao.findTotalCount();
+        int totalCount = mdao.findTotalCount(condition);
         pb.setTotalCount(totalCount);
 
         int start = (currentPage-1)*rows;
-        List<Medicine> list = mdao.finByPage(start, rows);
+        List<Medicine> list = mdao.finByPage(start, rows,condition);
         pb.setList(list);
 
-        int totalPage = totalCount % rows ==0 ? totalCount/rows : totalCount/rows +1;
+        int totalPage = (totalCount % rows) ==0 ? totalCount/rows : (totalCount/rows) +1;
 
         pb.setTotalPage(totalPage);
 
