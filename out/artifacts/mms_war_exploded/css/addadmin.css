@@ -1,0 +1,28 @@
+html,body {
+    height: 100%;
+    width:100%
+}
+div,table,td{
+    border: 1px solid red;
+}
+#addadminbody{
+    height: 100%;
+    width:100%;
+}
+#addtab{
+    width: 60%;
+    margin-left:auto;
+    margin-right:auto;
+}
+.table{
+    width: 100%;
+    text-align: center;
+}
+#accesschoose{
+    width: 100%;
+    margin-left:auto;
+    margin-right:auto;
+}
+.btn{
+    width: 300px;
+}
