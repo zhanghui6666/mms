@@ -11,12 +11,12 @@
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
-    <link rel="shortcut icon" href="../images/login-favicon.ico">
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="../css/bootstrap-theme.css">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <script src="../js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="shortcut icon" href="images/login-favicon.ico">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="css/login.css">
 
 </head>
 <body>
@@ -24,7 +24,7 @@
     <table class="table_header">
         <tr class="tr_header">
             <td class="table_header">
-                <img src="../images/login_logo.png" height="49" width="334"/></td>
+                <img src="images/login_logo.png" height="49" width="334"/></td>
             <td class="table_header">
                 <span class="span_header">新用户，</span><a href="register.html" class="a_header">快速注册</a>
             </td>
@@ -34,7 +34,7 @@
 <div class="div_mid">
     <div class="container_mid">
         <div class="slogan_mid">
-            <img src="../images/login_slogan.png" height="429" width="571" class="img_mid"/></div>
+            <img src="images/login_slogan.png" height="429" width="571" class="img_mid"/></div>
         <div class="content_mid">
             <div class="content_menu">
                 <ul class="menu_ul">
@@ -47,17 +47,17 @@
                 </ul>
             </div>
 
-            <form class="form-horizontal" >
+            <form class="form-horizontal" action="${pageContext.request.contextPath}/clientLoginServlet">
                 <div class="form-group">
                     <label for="cno" class="col-sm-2 control-label">账号</label>
                     <div class="col-sm-10">
-                        <input type="cno" class="form-control" id="cno" placeholder="用户账号">
+                        <input type="cno" class="form-control" id="cno" name="cno" placeholder="用户账号">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="Password" class="col-sm-2 control-label">密码</label>
+                    <label for="cpassword" class="col-sm-2 control-label">密码</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="Password" placeholder="密码">
+                        <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="密码">
                     </div>
                 </div>
                 <div class="form-group ">
@@ -80,8 +80,8 @@
 
             <div class="other_login">
                 <span class="other_span">您还可以通过以下方式登录：</span>
-                <a href="#"><img src="../images/other_qq.jpg" class="other_qq"></a>
-                <a href="#"><img src="../images/other_weixin.jpg" class="other_weixin"> </a>
+                <a href="#"><img src="images/other_qq.jpg" class="other_qq"></a>
+                <a href="#"><img src="images/other_weixin.jpg" class="other_weixin"> </a>
             </div>
             <!--<div class="form-group">
                 <label for="exampleInputEmail1"> 用户编号</label>

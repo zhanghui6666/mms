@@ -12,7 +12,13 @@ public class ClientDaoImpl implements ClientDao {
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
     @Override
     public Client login(String cno,String cpassword) {
-        String sql="select * from Client where cno = ? & cpassword = ?";
-        return template.queryForObject(sql,new BeanPropertyRowMapper<Client>(Client.class),cno,cpassword);
+        try{
+
+            String sql="select * from client where cno = ? and cpassword = ?";
+            return template.queryForObject(sql,new BeanPropertyRowMapper<Client>(Client.class),cno,cpassword);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
