@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: ZB
-  Date: 2020/10/7
-  Time: 15:47
+  Date: 2020/10/12
+  Time: 15:11
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,14 +10,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>登录</title>
+    <title>管理员登录</title>
     <link rel="shortcut icon" href="images/login-favicon.ico">
     <script src="js/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/bootstrap.js"></script>
     <link rel="stylesheet" href="css/login.css">
-
 </head>
 <body>
 <div>
@@ -47,17 +46,17 @@
                 </ul>
             </div>
 
-            <form class="form-horizontal" action="${pageContext.request.contextPath}/clientLoginServlet">
+            <form class="form-horizontal" >
                 <div class="form-group">
-                    <label for="cno" class="col-sm-2 control-label">账号</label>
+                    <label for="aname" class="col-sm-2 control-label">id</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="cno" name="cno" placeholder="用户账号">
+                        <input type="text" class="form-control" id="aname" name="aname" placeholder="aname">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="cpassword" class="col-sm-2 control-label">密码</label>
+                    <label for="apassword" class="col-sm-2 control-label">密码</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="密码">
+                        <input type="password" class="form-control" id="apassword" name="apassword" placeholder="密码">
                     </div>
                 </div>
                 <div class="form-group ">
@@ -78,11 +77,6 @@
                 </div>
             </form>
 
-            <div class="other_login">
-                <span class="other_span">您还可以通过以下方式登录：</span>
-                <a href="#"><img src="images/other_qq.jpg" class="other_qq"></a>
-                <a href="#"><img src="images/other_weixin.jpg" class="other_weixin"> </a>
-            </div>
             <!--<div class="form-group">
                 <label for="exampleInputEmail1"> 用户编号</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
