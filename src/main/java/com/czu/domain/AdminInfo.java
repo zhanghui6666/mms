@@ -1,6 +1,6 @@
 package com.czu.domain;
 
-public class adminInfo {
+public class AdminInfo {
     private Integer aid;
     private String aname;
     private String apassword;

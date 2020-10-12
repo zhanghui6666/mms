@@ -1,6 +1,6 @@
 package com.czu.web;
 
-import com.czu.domain.adminInfo;
+import com.czu.domain.AdminInfo;
 import com.czu.service.AdminService;
 import com.czu.service.Impl.AdminServiceImpl;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class FindAllAdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AdminService adminService=new AdminServiceImpl();
-        List<adminInfo> adminInfos=adminService.findAllAdminInfo();
+        List<AdminInfo> adminInfos=adminService.findAllAdminInfo();
         request.setAttribute("adminInfos",adminInfos);
         request.getRequestDispatcher("/admincontroladminList.jsp").forward(request,response);
     }

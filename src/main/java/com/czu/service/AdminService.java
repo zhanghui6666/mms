@@ -1,6 +1,7 @@
 package com.czu.service;
 
-import com.czu.domain.adminInfo;
+import com.czu.domain.AdminUserInfo;
+import com.czu.domain.AdminInfo;
 
 import java.util.List;
 
@@ -9,17 +10,48 @@ public interface AdminService {
      * 查询所有的管理员信息
      * @return
      */
-    List<adminInfo> findAllAdminInfo();
+    List<AdminInfo> findAllAdminInfo();
 
     /**
      * 添加一个管理员
      * @param adminInfo
      */
-    void addAdminInfo(adminInfo adminInfo);
+    void addAdminInfo(AdminInfo adminInfo);
 
     /**
      * 删除一个管理员
      * @param aid
      */
     void deleteAdminInfo(Integer aid);
+
+    /**
+     * 修改一个管理员密码
+     * @param aid
+     */
+    void updateAdminInfo(String aid,String password);
+
+    /**
+     * 查询所有的用户信息
+     * @return
+     */
+    List<AdminUserInfo> findAllUser();
+
+    /**
+     * 根据用户名删除用户
+     * @param cno
+     */
+    void deleteUserInfo(String cno);
+
+    /**
+     * 通过用户名查找指定用户
+     * @param cno
+     * @return
+     */
+    AdminUserInfo selectOneUser(String cno);
+
+    /**
+     * 修改一个用户的信息
+     * @param adminUserInfo
+     */
+    void updateOneUser(AdminUserInfo adminUserInfo);
 }

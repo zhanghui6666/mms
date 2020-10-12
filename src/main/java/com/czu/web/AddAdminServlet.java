@@ -1,9 +1,8 @@
 package com.czu.web;
 
-import com.czu.domain.adminInfo;
+import com.czu.domain.AdminInfo;
 import com.czu.service.AdminService;
 import com.czu.service.Impl.AdminServiceImpl;
-import com.google.protobuf.Message;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
@@ -24,7 +23,7 @@ public class AddAdminServlet extends HttpServlet {
         //获取要添加的管理员
         Map<String,String[]> map=request.getParameterMap();
         //封装对象
-        adminInfo admininfo=new adminInfo();
+        AdminInfo admininfo=new AdminInfo();
 
         try {
             BeanUtils.populate(admininfo,map);
@@ -37,9 +36,9 @@ public class AddAdminServlet extends HttpServlet {
 
         //调用service来判断并保存
         AdminService service=new AdminServiceImpl();
-        List<adminInfo> adminInfos=service.findAllAdminInfo();
+        List<AdminInfo> adminInfos=service.findAllAdminInfo();
         int is=0;
-        for (adminInfo aadmininfo :
+        for (AdminInfo aadmininfo :
                 adminInfos) {
             if (aadmininfo.getAname().equals(admininfo.getAname())){
                 is++;
