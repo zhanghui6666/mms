@@ -4,6 +4,7 @@ import com.czu.dao.Impl.MedicineDaoImpl;
 import com.czu.dao.MedicineDao;
 import com.czu.domain.Medicine;
 import com.czu.domain.PageBean;
+import com.czu.domain.SCM;
 import com.czu.service.MedicineService;
 
 import java.util.List;
@@ -37,5 +38,20 @@ public class MedicineServiceImpl implements MedicineService {
         pb.setTotalPage(totalPage);
 
         return pb;
+    }
+
+    @Override
+    public Integer findShopCartExist(SCM scm) {
+        return mdao.findShopCartExist(scm);
+    }
+
+    @Override
+    public void AddIntoShopcart(SCM scm) {
+        mdao.AddIntoShopcart(scm);
+    }
+
+    @Override
+    public void UpdateShopcart(SCM scm) {
+        mdao.UpdateShopcart(scm);
     }
 }

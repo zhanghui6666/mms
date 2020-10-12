@@ -17,7 +17,7 @@
 
 </head>
 <body style="padding-top:50px">
-
+<%--复杂查询--%>
 <div class="nav1">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -45,14 +45,14 @@
                     <button type="submit" style="margin-left: 20px;color: black" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 </form>
                 <ul class="nav navbar-nav navbar-right barshopcart">
-                    <li><a href="${pageContext.request.contextPath}/clientShopcart.jsp">购物车</a></li>
+                    <li><a href="${pageContext.request.contextPath}/findShopCartByPageServlet">购物车</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
 </div>
 
-<%--复杂查询--%>
+
 <div class="nav2">
     <div class="logo_container">
        <%-- <form class="form-inline" style="float:right;margin-top:30px" action="${pageContext.request.contextPath}/findMedicineByPageServlet" method="post">
@@ -113,8 +113,10 @@
                                 onmouseout="this.className = 'wrap'">${medicine.mnumber}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
                                 onmouseout="this.className = 'wrap'">${medicine.mid}</td>
-                            <td><a class="btn btn-primary" href="#" role="button" style="margin-left: 50px;">加入购物车</a>
-                            </td>
+                            <td><a class="btn btn-primary" href="putMedicineInShopCartServlet?mno=${medicine.mno}"  role="button" style="margin-left: 50px;">加入购物车</a></td>
+<%--
+                            <td><button type="button" class="btn btn-primary" onclick="add()" style="margin-left: 50px;">加入购物车</button></td>
+--%>
                         </tr>
                     </c:forEach>
                 </table>
@@ -148,7 +150,7 @@
                     <c:choose>
                         <c:when test="${pb.totalPage <= 6}">
                             <c:set var="begin" value="1"/>
-                            <c:set var="end" value="${page.totalPage}"/>
+                            <c:set var="end" value="${pb2.totalPage}"/>
                         </c:when>
                         <%--页数超过了6页--%>
                         <c:otherwise>
@@ -171,13 +173,13 @@
                         <%--当前页,选中--%>
                         <c:if test="${pb.currentPage == i}">
                             <li class="active"><a
-                                    href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a>
+                                    href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=20&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a>
                             </li>
                         </c:if>
 
                         <c:if test="${pb.currentPage != i}">
                             <li>
-                                <a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a>
+                                <a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=20&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a>
                             </li>
                         </c:if>
                     </c:forEach>
@@ -235,6 +237,24 @@
     <div class="container3"></div>
 </div>
 <script>
+    function add() {
+        swal({
+                title:"添加成功",
+                text:"成功添加了药品",
+                type:"success",
+                confirmButtonText: "确定",
+            },
+            function (isConfirm) {
+                if (isConfirm){
+                    location ="putMedicineInShopCartServlet?mno=${medicine.mno}";
+                }
+
+            }
+        )
+
+    }
+
+
     function _go() {
         var pc = $("#pageCode").val();//获取文本框中的当前页码
         if(!/^[1-9]\d*$/.test(pc)) {//对当前页码进行整数校验

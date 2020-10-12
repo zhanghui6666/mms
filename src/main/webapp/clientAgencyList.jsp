@@ -45,7 +45,7 @@
                     <button type="submit" style="margin-left: 20px;color: black" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 </form>
                 <ul class="nav navbar-nav navbar-right barshopcart">
-                    <li><a href="${pageContext.request.contextPath}/clientShopcart.jsp">购物车</a></li>
+                    <li><a href="${pageContext.request.contextPath}/findShopCartByPageServlet">购物车</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -130,8 +130,7 @@
                         </c:if>
 
                         <c:if test="${pb1.currentPage != 1}">
-                        <a href="${pageContext.request.contextPath}/findAgencyByPageServlet?currentPage=${pb1.currentPage - 1}&rows=20&mno=${condition1.ano[0]}&mname=${condition1.aname[0]}&mefficacy=${condition1.aremark[0]}"
-                           aria-label="Previous">
+                        <a href="${pageContext.request.contextPath}/findAgencyByPageServlet?currentPage=${pb1.currentPage - 1}&rows=20&mno=${condition1.ano[0]}&mname=${condition1.aname[0]}&mefficacy=${condition1.aremark[0]}" aria-label="Previous">
                             </c:if>
 
                             <span aria-hidden="true">&laquo;</span>
@@ -144,7 +143,7 @@
                     <c:choose>
                         <c:when test="${pb1.totalPage <= 6}">
                             <c:set var="begin" value="1"/>
-                            <c:set var="end" value="${page.totalPage}"/>
+                            <c:set var="end" value="${pb1.totalPage}"/>
                         </c:when>
                         <%--页数超过了6页--%>
                         <c:otherwise>
@@ -166,14 +165,14 @@
                     <c:forEach var="i" begin="${begin}" end="${end}">
                         <%--当前页,选中--%>
                         <c:if test="${pb1.currentPage == i}">
-                            <li class="active"><a
-                                    href="${pageContext.request.contextPath}/findAgencyByPageServlet?currentPage=${i}&rows=50&mno=${condition.ano[0]}&mname=${condition.aname[0]}&mefficacy=${condition.aremark[0]}">${i}</a>
+                            <li class="active">
+                                <a href="${pageContext.request.contextPath}/findAgencyByPageServlet?currentPage=${i}&rows=20&mno=${condition.ano[0]}&mname=${condition.aname[0]}&mefficacy=${condition.aremark[0]}">${i}</a>
                             </li>
                         </c:if>
 
                         <c:if test="${pb1.currentPage != i}">
                             <li>
-                                <a href="${pageContext.request.contextPath}/findAgencyByPageServlet?currentPage=${i}&rows=50&mno=${condition1.ano[0]}&mname=${condition1.aname[0]}&mefficacy=${condition1.aremark[0]}">${i}</a>
+                                <a href="${pageContext.request.contextPath}/findAgencyByPageServlet?currentPage=${i}&rows=20&mno=${condition1.ano[0]}&mname=${condition1.aname[0]}&mefficacy=${condition1.aremark[0]}">${i}</a>
                             </li>
                         </c:if>
                     </c:forEach>

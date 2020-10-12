@@ -1,19 +1,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>医药管理系统</title>
+    <title>购物车</title>
     <script src="js/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/bootstrap.js"></script>
     <link rel="stylesheet" href="css/myclient.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+    <script src="js/sweetalert-dev.js"></script>
 
 </head>
 <body style="padding-top:50px">
+<%--复杂查询--%>
 <div class="nav1">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -24,52 +28,222 @@
             <span class="icon-bar"></span>
         </button>
         <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav barfunction">
                     <li class="active"><a href="${pageContext.request.contextPath}/clientHomepage.jsp">首页</a></li>
                     <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet">药品大全</a></li>
                     <li><a href="${pageContext.request.contextPath}/findAgencyByPageServlet">药店</a></li>
                 </ul>
-
                 <ul class="nav navbar-nav navbar-right barshopcart">
-                    <li><a href="${pageContext.request.contextPath}/clientShopcart.jsp">购物车</a></li>
+                    <li><a href="${pageContext.request.contextPath}/findShopCartByPageServlet">购物车</a></li>
                 </ul>
-            </div>
-        </div>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
     </nav>
 </div>
 
 
-<div class="nav3" style="margin-top: 0;">
-    <div class="container1"></div>
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img id="img1" src="images/client_back4.jpg">
-            </div>
-            <div class="item">
-                <img id="img2" src="images/client_back2.jpg">
-            </div>
-            <div class="item">
-                <img id="img3" src="images/client_back3.jpg">
-            </div>
-        </div>
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+
+<div class="nav2">
+    <div class="logo_container">
+        <%-- <form class="form-inline" style="float:right;margin-top:30px" action="${pageContext.request.contextPath}/findAgencyByPageServlet" method="post">
+             <div class="form-group">
+                 <label for="agencyNo">药店编号</label>
+                 <input style="width: 150px" type="text" name="ano" value="${condition1.ano[0]}" class="form-control" id="agencyNo">
+             </div>
+             <div class="form-group">
+                 <label for="agencyName">药店负责人姓名</label>
+                 <input style="width: 150px" type="text" name="mname" value="${condition1.aname[0]}" class="form-control" id="agencyName">
+             </div>
+             <div class="form-group">
+                 <label for="agencyRemark">药店名</label>
+                 <input style="width: 150px" type="text" name="mefficacy" value="${condition1.aremark[0]}" class="form-control"
+                        id="agencyRemark">
+             </div>
+             <button type="submit" class="btn btn-default" style="margin-left: 30px;margin-right: 10px">查询药店信息</button>
+         </form>--%>
+        <img src="images/title.png">
     </div>
-    <div class="container3"></div>
 </div>
 
 
+
+<div class="nav3">
+
+    <div class="container1"></div>
+
+    <%--获取数据--%>
+    <div class="container2">
+        <form id="form" method="post">
+            <div class="table-responsive">
+                <table border="1" class="table table-bordered table-hover  table-condensed" id="tb1" style="width: 100%;
+            table-layout: fixed;">
+                    <tr class="success">
+                        <th style="width:10%">序号</th>
+                        <th style="width:10%">药品编号</th>
+                        <th style="width:10%">药品名</th>
+                        <th style="width:40%">药品功效</th>
+                        <th style="width:10%">药品单价</th>
+                        <th style="width:10%">药品数量</th>
+                        <th style="width:10%">药品总价</th>
+                    </tr>
+
+                    <c:forEach items="${pb2.list}" var="shopcart" varStatus="status">
+                        <tr>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${status.index+1}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${shopcart.mno}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${shopcart.mname}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${shopcart.mefficacy}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${shopcart.mprice}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${shopcart.num}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${shopcart.mprice * shopcart.num}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </form>
+
+        <%--分页--%>
+        <div style="float: left">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <c:if test="${pb2.currentPage == 1}">
+                    <li class="disabled">
+                     </c:if>
+
+                        <c:if test="${pb2.currentPage != 1}">
+                    <li>
+                        </c:if>
+                        <c:if test="${pb2.currentPage != 1}">
+                        <a href="${pageContext.request.contextPath}/findShopCartByPageServlet?currentPage=${pb2.currentPage - 1}&rows=10" aria-label="Previous">
+                            </c:if>
+
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <%--中间页--%>
+                    <%--显示6页中间页[begin=起始页,end=最大页]--%>
+                    <%--总页数没有6页--%>
+                    <c:choose>
+                        <c:when test="${pb2.totalPage <= 6}">
+                            <c:set var="begin" value="1"/>
+                            <c:set var="end" value="${pb2.totalPage}"/>
+                        </c:when>
+                        <%--页数超过了6页--%>
+                        <c:otherwise>
+                            <c:set var="begin" value="${pb2.currentPage - 1}"/>
+                            <c:set var="end" value="${pb2.currentPage + 3}"/>
+                            <%--如果begin减1后为0,设置起始页为1,最大页为6--%>
+                            <c:if test="${begin -1 <= 0}">
+                                <c:set var="begin" value="1"/>
+                                <c:set var="end" value="6"/>
+                            </c:if>
+                            <%--如果end超过最大页,设置起始页=最大页-5--%>
+                            <c:if test="${end > pb2.totalPage}">
+                                <c:set var="begin" value="${pb2.totalPage - 5}"/>
+                                <c:set var="end" value="${pb2.totalPage}"/>
+                            </c:if>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <%--遍历--%>
+                    <c:forEach var="i" begin="${begin}" end="${end}">
+                        <%--当前页,选中--%>
+                        <c:if test="${pb2.currentPage == i}">
+                            <li class="active">
+                                <a href="${pageContext.request.contextPath}/findShopCartByPageServlet?currentPage=${i}&rows=10">${i}</a>
+                            </li>
+                        </c:if>
+
+                        <c:if test="${pb2.currentPage != i}">
+                            <li>
+                                <a href="${pageContext.request.contextPath}/findShopCartByPageServlet?currentPage=${i}&rows=10">${i}</a>
+                            </li>
+                        </c:if>
+                    </c:forEach>
+
+                    <%--<c:forEach begin="1" end="${pb.totalPage}" var="i">
+
+                        <c:if test="${pb.currentPage == i}">
+                            <li class="active"><a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a></li>
+                        </c:if>
+
+                        <c:if test="${pb.currentPage != i}">
+                            <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a></li>
+                        </c:if>
+                    </c:forEach>--%>
+
+                    <c:if test="${pb2.currentPage ==pb2.totalPage}">
+                    <li class="disabled">
+                        </c:if>
+
+                        <c:if test="${pb2.currentPage !=pb2.totalPage}">
+                    <li>
+                        </c:if>
+                        <c:if test="${pb2.currentPage != pb2.totalPage}">
+                        <a href="${pageContext.request.contextPath}/findShopCartByPageServlet?currentPage=${pb2.currentPage + 1}&rows=10"
+                           aria-label="Next">
+                            </c:if>
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <%--跳转指定页数--%>
+        <div style="float: right;margin-top: 22px;">
+            <div class="jump" style="float: left">
+                <div class="page-jump">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="pageCode" name="pageCode" value="${pb2.currentPage}" style="width:100px">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit" onclick="_go()" style="background: black">Go!</button>
+                        </span>
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-6 -->
+
+            </div>
+
+            <%--总页数--%>
+            <div style="float: left;">
+                <span style="font-size: 25px;margin-left: 20px; float: left">
+                    共${pb2.totalCount}条记录，共${pb2.totalPage}页
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="container3"></div>
+</div>
 <script>
+    function _go() {
+        var pc = $("#pageCode").val();//获取文本框中的当前页码
+        if(!/^[1-9]\d*$/.test(pc)) {//对当前页码进行整数校验
+            swal("请输入正确的页码");
+            return;
+        }
+        if(pc > ${pb2.totalPage}) {//判断当前页码是否大于最大页
+            swal("页码太大啦!");
+            return;
+        }
+        location = "${pageContext.request.contextPath}/findShopCartByPageServlet?currentPage="+pc;
+    }
+
+    /*  $("#function li").click(function(){
+          $("#function li").removeClass("active");
+          $(this).addClass("active");
+      })*/
+
 
     $(function () {
         $(".barfunction").find("li").each(function () {
@@ -81,6 +255,7 @@
             }
         });
     })
+
 
     $(function () {
         $(".barshopcart").find("li").each(function () {

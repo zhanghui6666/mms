@@ -1,6 +1,7 @@
 package com.czu.dao;
 
 import com.czu.domain.Medicine;
+import com.czu.domain.SCM;
 
 import java.util.List;
 import java.util.Map;
@@ -27,4 +28,10 @@ public interface MedicineDao {
      * @return
      */
     List<Medicine> finByPage(int start, int rows, Map<String, String[]> condition);
+
+    void AddIntoShopcart(SCM scm);
+
+    Integer findShopCartExist(SCM scm);
+
+    void UpdateShopcart(SCM scm);
 }

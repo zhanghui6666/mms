@@ -39,10 +39,10 @@
             <div class="content_menu">
                 <ul class="menu_ul">
                     <li id="li1" class="menu_li1">
-                        <a href="login.html" target="bt1">用户登录</a>
+                        <a href="${pageContext.request.contextPath}/login.html" target="bt1">用户登录</a>
                     </li>
                     <li id="li2" class="menu_li2">
-                        <a href="adminlogin.html " target="bt1">管理员登录</a>
+                        <a href="${pageContext.request.contextPath}/adminlogin.html " target="bt1">管理员登录</a>
                     </li>
                 </ul>
             </div>

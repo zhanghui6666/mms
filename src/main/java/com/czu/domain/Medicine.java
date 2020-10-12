@@ -1,7 +1,7 @@
 package com.czu.domain;
 
 public class Medicine {
-    private Integer mno;
+    private String mno;
     private String mname;
     private String mmode;
     private String mefficacy;
@@ -9,11 +9,11 @@ public class Medicine {
     private Integer mnumber;
     private Integer mid;
 
-    public Integer getMno() {
+    public String getMno() {
         return mno;
     }
 
-    public void setMno(Integer mno) {
+    public void setMno(String mno) {
         this.mno = mno;
     }
 

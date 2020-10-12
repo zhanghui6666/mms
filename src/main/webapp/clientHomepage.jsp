@@ -32,7 +32,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right barshopcart">
-                    <li><a href="${pageContext.request.contextPath}/clientShopcart.jsp">购物车</a></li>
+                    <li><a href="${pageContext.request.contextPath}/findShopCartByPageServlet">购物车</a></li>
                 </ul>
             </div>
         </div>

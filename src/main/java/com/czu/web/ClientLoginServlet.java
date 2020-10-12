@@ -4,12 +4,14 @@ import com.czu.dao.ClientDao;
 import com.czu.domain.Client;
 import com.czu.service.ClientService;
 import com.czu.service.Impl.ClientServiceImpl;
+import com.mysql.cj.Session;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -17,6 +19,8 @@ import java.io.IOException;
 public class ClientLoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String cno = request.getParameter( "cno" );
+        HttpSession session = request.getSession();
+        session.setAttribute("cno",cno);
         //获取用户填写的登录密码
         String cpassword = request.getParameter( "cpassword" );
         Client client = new Client();
@@ -24,12 +28,11 @@ public class ClientLoginServlet extends HttpServlet {
         client.setCpassword(cpassword);
         ClientService clientService = new ClientServiceImpl();
         Client clientLogin = clientService.login(client);
-        System.out.println(clientLogin);
         if(clientLogin == null){
             request.getRequestDispatcher("/loginError.jsp").forward(request,response);
         }
         else {
-            request.getRequestDispatcher("/homepage.jsp").forward(request,response);
+            request.getRequestDispatcher("/clientHomepage.jsp").forward(request,response);
         }
 
 
