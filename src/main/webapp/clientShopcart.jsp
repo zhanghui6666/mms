@@ -39,13 +39,6 @@
     </nav>
 </div>
 
-<div class="nav2">
-    <div class="logo_container">
-
-        <img src="images/title.png">
-    </div>
-</div>
-
 
 <div class="nav3" style="margin-top: 0;">
     <div class="container1"></div>
@@ -88,7 +81,6 @@
             }
         });
     })
-
 
     $(function () {
         $(".barshopcart").find("li").each(function () {

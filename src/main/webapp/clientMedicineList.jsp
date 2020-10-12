@@ -11,14 +11,49 @@
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/bootstrap.js"></script>
-<%--    <link rel="stylesheet" href="css/myclient.css">--%>
+    <link rel="stylesheet" href="css/myclient.css">
     <link rel="stylesheet" href="css/sweetalert.css">
     <script src="js/sweetalert-dev.js"></script>
 
 </head>
-<body>
-<%--复杂查询--%>
+<body style="padding-top:50px">
+
 <div class="nav1">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav barfunction">
+                    <li class="active"><a href="${pageContext.request.contextPath}/clientHomepage.jsp">首页</a></li>
+                    <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet">药品大全</a></li>
+                    <li><a href="${pageContext.request.contextPath}/findAgencyByPageServlet">药店</a></li>
+                </ul>
+                <form class="navbar-form navbar-left" style="margin-left: 150px">
+                    <div class="form-group">
+                        <input style="width: 200px" type="text" name="mno" class="form-control" id="medicineno" value="${condition.mno[0]}" placeholder="药品编号">
+                        <input style="width: 200px;margin-left: 20px" type="text" name="mname" class="form-control" value="${condition.mname[0]}" id="medicineName" placeholder="药品名">
+                        <input style="width: 200px;margin-left: 20px" type="text" name="mefficacy" class="form-control" value="${condition.mefficacy[0]}" id="medicineFunction" placeholder="药品功效">
+                    </div>
+                    <button type="submit" style="margin-left: 20px;color: black" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </form>
+                <ul class="nav navbar-nav navbar-right barshopcart">
+                    <li><a href="${pageContext.request.contextPath}/clientShopcart.jsp">购物车</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+
+<%--复杂查询--%>
+<div class="nav2">
     <div class="logo_container">
        <%-- <form class="form-inline" style="float:right;margin-top:30px" action="${pageContext.request.contextPath}/findMedicineByPageServlet" method="post">
             <div class="form-group">
@@ -40,39 +75,9 @@
     </div>
 </div>
 
-<div class="nav2">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav function">
-                    <li><a class="navbar-brand" href="clientHomepage.jsp">首页</a></li>
-                    <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet">药品大全</a></li>
-                    <li><a href="${pageContext.request.contextPath}/findAgencyByPageServlet">药店</a></li>
-                </ul>
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input style="width: 200px" type="text" name="mno" class="form-control" id="medicineno" value="${condition.mno[0]}" placeholder="药品编号">
-                        <input style="width: 200px;margin-left: 20px" type="text" name="mname" class="form-control" value="${condition.mname[0]}" id="medicineName" placeholder="药品名">
-                        <input style="width: 200px;margin-left: 20px" type="text" name="mefficacy" class="form-control" value="${condition.mefficacy[0]}" id="medicineFunction" placeholder="药品功效">
-                    </div>
-                    <button type="submit" style="margin-left: 20px" class="btn btn-default">查询</button>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">购物车</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-</div>
 
 <div class="nav3">
-
     <div class="container1"></div>
-
     <%--获取数据--%>
     <div class="container2">
         <form id="form" method="post">
@@ -108,7 +113,7 @@
                                 onmouseout="this.className = 'wrap'">${medicine.mnumber}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
                                 onmouseout="this.className = 'wrap'">${medicine.mid}</td>
-                            <td><a class="btn btn-default" href="#" role="button" style="margin-left: 50px">加入购物车</a>
+                            <td><a class="btn btn-primary" href="#" role="button" style="margin-left: 50px;">加入购物车</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -211,11 +216,12 @@
             <div class="jump" style="float: left;height: 30px">
                 <div class="page-jump">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="pageCode" name="pageCode" style="width:80px">
-<%--                        <a class="btn btn-default" onclick="_go()" role="button" style="margin-left: 0;">Go!</a>--%>
-                        <button type="submit" class="btn btn-default" onclick="_go()" style="margin-left: 0;">Go!</button>
+                        <input type="text" class="form-control" id="pageCode" name="pageCode" value="${pb.currentPage}" style="width:80px">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit" onclick="_go()" style="background: black">Go!</button>
+                        </span>
                     </div><!-- /input-group -->
-                </div>
+                </div><!-- /.col-lg-6 -->
             </div>
 
             <%--总页数--%>
@@ -252,14 +258,28 @@
         };
     }
 
-    /*$(".function li").click(function(){
-        $(".function li").removeClass("active");
-        $(this).addClass("active");
-    })*/
+    $(function () {
+        $(".barfunction").find("li").each(function () {
+            var a = $(this).find("a:first")[0];
+            if ($(a).attr("href") === location.pathname) {
+                $(this).addClass("active");
+            } else {
+                $(this).removeClass("active");
+            }
+        });
+    })
 
-   /* $("#getcolor").click(function(){
-        $(this).children("li").addClass("active").parent().siblings().find("li").removeClass("active");
-    });*/
+
+    $(function () {
+        $(".barshopcart").find("li").each(function () {
+            var a = $(this).find("a:first")[0];
+            if ($(a).attr("href") === location.pathname) {
+                $(this).addClass("active");
+            } else {
+                $(this).removeClass("active");
+            }
+        });
+    })
 </script>
 </body>
 </html>
