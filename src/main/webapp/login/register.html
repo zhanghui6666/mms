@@ -12,12 +12,7 @@
     <script src="../js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/register.css">
 
-    <script>
-        function submit() {
-            swal("干得漂亮！", "你点击了按钮！", "success")
-        }
 
-    </script>
 </head>
 <body>
 <div>
@@ -41,10 +36,11 @@
                 <div class="form-group">
                     <label for="Cno">账号</label>
                     <input type="text" class="form-control form_group" required="required" id="Cno" placeholder="请输入您想要注册的账号，最好是以手机号为主">
+                    <span id="namespan" style="color: red"></span>
                 </div>
                 <div class="form-group">
                     <label for="Password">密码</label>
-                    <input type="password" class="form-control form_group" required="required" id="Password" placeholder="请输入您的密码">
+                    <input type="password" class="form-control form_group" required="required" id="Password" placeholder="请输入您的密码"onclick="checkname()" >
                 </div>
                 <div class="form-group">
                     <label for="Cname">姓名</label>
@@ -97,7 +93,91 @@
         </div>
     </div>
 </div>
-
 </body>
-
 </html>
+<script language="JavaScript">
+    function submit() {
+        swal("干得漂亮！", "你点击了按钮！", "success")
+    }
+    function checkname(){
+        var name1 = document.form.name.value;
+        if (name1 == "") {
+            document.getElementById("namespan").innerHTML = "用户名不能为空！";
+            document.form.name.focus();
+            return false;
+        }
+        document.getElementById("namespan").innerHTML  = "用户名正确";
+        return true;
+    }
+    function CheckDate(INDate){
+        if (INDate==""){return true;}
+        if(INDate.indexOf('-',0)!=-1){	separate="-"}
+        else{
+            if(INDate.indexOf('/',0)!=-1){separate="/"}
+            else {return true;}
+        }
+        area=INDate.indexOf(separate,0)
+        //获取年份
+        subYY=INDate.substr(0,area)
+        if(isNaN(subYY) || subYY<=0){
+            return true;
+        }
+        //转换月份
+        subMM=INDate.substr(area+1,INDate.indexOf(separate,area+1)-(area+1))
+        if(isNaN(subMM) || subMM<=0){
+            return true;
+        }
+        if(subMM.length<2){subMM="0"+subMM}
+        //转换日
+        area=INDate.lastIndexOf(separate)
+        subDD=INDate.substr(area+1,INDate.length-area-1)
+        if(isNaN(subDD) || subDD<=0){
+            return true;
+        }
+        if(eval(subDD)<10){subDD="0"+eval(subDD)}
+        NewDate=subYY+"-"+subMM+"-"+subDD
+        if(NewDate.length!=10){return true;}
+        if(NewDate.substr(4,1)!="-"){return true;}
+        if(NewDate.substr(7,1)!="-"){return true;}
+        var MM=NewDate.substr(5,2);
+        var DD=NewDate.substr(8,2);
+        if((subYY%4==0 && subYY%100!=0)||subYY%400==0){ //判断是否为闰年
+            if(parseInt(MM)==2){
+                if(DD>29){return true;}
+            }
+        }else{
+            if(parseInt(MM)==2){
+                if(DD>28){return true;}
+            }
+        }
+        var mm=new Array(1,3,5,7,8,10,12); //判断每月中的最大天数
+        for(i=0;i< mm.length;i++){
+            if (parseInt(MM) == mm[i]){
+                if(parseInt(DD)>31){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        if(parseInt(DD)>30){return true;}
+        if(parseInt(MM)>12){return true;}
+        return false;
+    }
+    function checkdate(myform){
+        var d=document.getElementById("datespan");
+        d.innerHTML="";
+        if(myform.sDate.value==""){
+            d.innerHTML="请输入日期";
+            myform.sDate.focus();return;
+        }
+        if(CheckDate(myform.sDate.value)){
+            d.innerHTML="您输入的日期不正确！\n 请注意日期格式（如：2007/07/17或2007-07-17）以及二月是否为闰年！";
+            myform.sDate.focus();return;
+        }
+        if(!CheckDate(myform.sDate.value)){
+            d.innerHTML="您输入的日期是正确的";
+        }
+    }
+
+</script>

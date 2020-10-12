@@ -14,6 +14,10 @@ import java.io.IOException;
 public class ClientLoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ClientService clientService = new ClientServiceImpl();
+        String username = request.getParameter("");
+        String password = request.getParameter("password");
+        response.setContentType("text/html;charset=UTF-8");
+
 
     }
 
