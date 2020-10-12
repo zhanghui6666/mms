@@ -26,7 +26,6 @@ public class PutMedicineInShopCartServlet extends HttpServlet {
         scm.setMno(mno);
         MedicineService medicineService = new MedicineServiceImpl();
         Integer num = medicineService.findShopCartExist(scm);
-
         if (num == null || num == 0){
             scm.setNum(1);
             medicineService.AddIntoShopcart(scm);

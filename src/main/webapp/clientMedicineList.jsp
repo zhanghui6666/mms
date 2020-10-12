@@ -113,7 +113,25 @@
                                 onmouseout="this.className = 'wrap'">${medicine.mnumber}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
                                 onmouseout="this.className = 'wrap'">${medicine.mid}</td>
-                            <td><a class="btn btn-primary" href="putMedicineInShopCartServlet?mno=${medicine.mno}"  role="button" style="margin-left: 50px;">加入购物车</a></td>
+                            <td><a class="btn btn-primary" href="javascript:;" onclick="swal({
+                                                                                                title:'添加成功',
+                                                                                                text:'成功添加了药品',
+                                                                                                type:'success',
+                                                                                                confirmButtonText:'确定',
+                                                                                                },
+                                                                                                function (isConfirm) {
+                                                                                                if (isConfirm){
+                                                                                                location ='putMedicineInShopCartServlet?mno=${medicine.mno}';
+                                                                                                }
+
+                                                                                                }
+                                                                                                )"
+                                   role="button" style="margin-left: 50px;">加入购物车</a></td>
+
+<%--
+                            <td><a class="btn btn-primary" onclick="/*swal('添加成功','成功添加了药品','success')*/confirm('你确定要加入购物车吗？')?location.href='putMedicineInShopCartServlet?mno=${medicine.mno}':''"  href="javascript:;"  role="button" style="margin-left: 50px;">加入购物车</a></td>
+--%>
+
 <%--
                             <td><button type="button" class="btn btn-primary" onclick="add()" style="margin-left: 50px;">加入购物车</button></td>
 --%>
@@ -237,23 +255,6 @@
     <div class="container3"></div>
 </div>
 <script>
-    function add() {
-        swal({
-                title:"添加成功",
-                text:"成功添加了药品",
-                type:"success",
-                confirmButtonText: "确定",
-            },
-            function (isConfirm) {
-                if (isConfirm){
-                    location ="putMedicineInShopCartServlet?mno=${medicine.mno}";
-                }
-
-            }
-        )
-
-    }
-
 
     function _go() {
         var pc = $("#pageCode").val();//获取文本框中的当前页码

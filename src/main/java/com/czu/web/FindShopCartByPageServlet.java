@@ -37,7 +37,7 @@ public class FindShopCartByPageServlet extends HttpServlet {
         ShopCartService shopCartService = new ShopCartServiceImpl();
         PageBean<ShopCart> pb2 = shopCartService.findShopCartByPage(currentPage, rows,cno);
 
-        System.out.println(pb2);
+        //System.out.println(pb2);
         request.setAttribute("pb2", pb2);
 
         request.getRequestDispatcher("/clientShopcart.jsp").forward(request,response);
