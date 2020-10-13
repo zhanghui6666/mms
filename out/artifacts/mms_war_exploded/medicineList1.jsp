@@ -93,6 +93,8 @@
         <div>
             <nav aria-label="Page navigation">
                 <ul class="pagination">
+
+                    <%--如果是第一页不允许点击--%>
                     <c:if test="${pb.currentPage == 1}">
                         <li class="disabled">
                     </c:if>
@@ -102,7 +104,7 @@
                     </c:if>
 
                         <c:if test="${pb.currentPage != 1}">
-                        <a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${pb.currentPage - 1}&rows=20&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}" aria-label="Previous">
+                        <a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${pb.currentPage - 1}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}" aria-label="Previous">
                         </c:if>
 
                             <span aria-hidden="true">&laquo;</span>
@@ -111,7 +113,7 @@
 
 
 
-                        <%--中间页--%>
+                    <%--中间页--%>
                         <%--显示6页中间页[begin=起始页,end=最大页]--%>
                         <%--总页数没有6页--%>
                         <c:choose>
@@ -146,7 +148,6 @@
                                 <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a></li>
                             </c:if>
                         </c:forEach>
-
                     <%--<c:forEach begin="1" end="${pb.totalPage}" var="i">
 
                         <c:if test="${pb.currentPage == i}">
@@ -160,8 +161,7 @@
 
 
 
-
-
+                    <%--如果是最后一页不允许点击--%>
                     <c:if test="${pb.currentPage ==pb.totalPage}">
                         <li class="disabled">
                     </c:if>
@@ -170,7 +170,7 @@
                         <li>
                     </c:if>
                     <c:if test="${pb.currentPage != pb.totalPage}">
-                        <a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${pb.currentPage + 1}&rows=20&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}" aria-label="Next">
+                        <a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${pb.currentPage + 1}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}" aria-label="Next">
                     </c:if>
                             <span aria-hidden="true">&raquo;</span>
                         </a>

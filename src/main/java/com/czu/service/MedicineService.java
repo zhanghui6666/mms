@@ -4,6 +4,7 @@ import com.czu.domain.Medicine;
 import com.czu.domain.PageBean;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MedicineService {
     /**
@@ -13,10 +14,11 @@ public interface MedicineService {
     List<Medicine> finAllMedicine();
 
     /**
-     * 分页查询
+     * 分页条件查询
      * @param currentPage
      * @param rows
+     * @param condition
      * @return
      */
-    PageBean<Medicine> findMedicineByPage(String currentPage, String rows);
+    PageBean<Medicine> findMedicineByPage(String currentPage, String rows, Map<String, String[]> condition);
 }

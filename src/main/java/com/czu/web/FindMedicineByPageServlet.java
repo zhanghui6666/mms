@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @WebServlet("/findMedicineByPageServlet")
 public class FindMedicineByPageServlet extends HttpServlet {
@@ -24,13 +25,17 @@ public class FindMedicineByPageServlet extends HttpServlet {
             currentPage = "1";
         }
         if (rows ==null || "".equals(rows)){
-            rows = "50";
+            rows = "20";
         }
+        //获取查询条件
+        Map<String, String[]> condition = request.getParameterMap();
+
         MedicineService medicineService = new MedicineServiceImpl();
-        PageBean<Medicine> pb = medicineService.findMedicineByPage(currentPage, rows);
+        PageBean<Medicine> pb = medicineService.findMedicineByPage(currentPage, rows,condition);
 
         System.out.println(pb);
         request.setAttribute("pb", pb);
+        request.setAttribute("condition",condition);//将查询条件存入request
 
         request.getRequestDispatcher("/medicineList.jsp").forward(request,response);
     }
