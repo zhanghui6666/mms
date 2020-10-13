@@ -13,11 +13,8 @@ public interface ShopCartDao {
      */
     int findTotalCount(String cno);
 
-    /**
-     * 分页条件查询每页记录
-     * @param start
-     * @param rows
-     * @return
-     */
-    List<ShopCart> finByPage(int start, int rows,String cno);
+
+    List<ShopCart> findShopCart(String cno);
+
+    void deleteShopCart(String cno, String mno);
 }

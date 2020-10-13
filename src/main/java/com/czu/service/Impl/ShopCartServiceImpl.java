@@ -12,26 +12,14 @@ import java.util.Map;
 public class ShopCartServiceImpl implements ShopCartService {
     private ShopCartDao sdao = new ShopCartDaoImpl();
 
+
     @Override
-    public PageBean<ShopCart> findShopCartByPage(String _currentPage, String _rows,String cno) {
-        int currentPage = Integer.parseInt(_currentPage);
-        int rows = Integer.parseInt(_rows);
+    public List<ShopCart> findShopCart(String cno) {
+        return  sdao.findShopCart(cno);
+    }
 
-        PageBean<ShopCart> pb2 = new PageBean<>();
-        pb2.setCurrentPage(currentPage);
-        pb2.setRows(rows);
-
-        int totalCount = sdao.findTotalCount(cno);
-        pb2.setTotalCount(totalCount);
-
-        int start = (currentPage-1)*rows;
-        List<ShopCart> list = sdao.finByPage(start, rows,cno);
-        pb2.setList(list);
-
-        int totalPage = (totalCount % rows) ==0 ? totalCount/rows : (totalCount/rows) +1;
-
-        pb2.setTotalPage(totalPage);
-
-        return pb2;
+    @Override
+    public void deleteShopCart(String cno, String mno) {
+        sdao.deleteShopCart(cno,mno);
     }
 }

@@ -85,7 +85,7 @@
                 <table border="1" class="table table-bordered table-hover  table-condensed" id="tb1" style="width: 100%;
             table-layout: fixed;">
                     <tr class="success">
-                        <th style="width:3%"><input type="checkbox" id="firstCb"></th>
+                       <%-- <th style="width:3%"><input type="checkbox" id="firstCb"></th>--%>
                         <th style="width:10%">编号</th>
                         <th style="width:10%">药名</th>
                         <th style="width:5%">特性</th>
@@ -98,7 +98,7 @@
 
                     <c:forEach items="${pb.list}" var="medicine">
                         <tr>
-                            <th class="wrap"><input type="checkbox" name="mid" value="${medicine.mid}"></th>
+                          <%--  <th class="wrap"><input type="checkbox" name="mid" value="${medicine.mid}"></th>--%>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
                                 onmouseout="this.className = 'wrap'">${medicine.mno}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
@@ -268,6 +268,7 @@
         }
         location = "${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage="+pc;
     }
+
     window.onload = function () {
         document.getElementById("firstCb").onclick = function () {
 

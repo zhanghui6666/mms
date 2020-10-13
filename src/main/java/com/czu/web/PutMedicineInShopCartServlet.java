@@ -18,7 +18,6 @@ public class PutMedicineInShopCartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         String mno = request.getParameter("mno");
-        //System.out.println(mno);
         HttpSession session = request.getSession();
         String cno = (String) session.getAttribute("cno");
         SCM scm = new SCM();
