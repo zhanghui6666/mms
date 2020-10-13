@@ -21,4 +21,11 @@ public class ClientDaoImpl implements ClientDao {
             return null;
         }
     }
+
+    @Override
+    public void regist(Client client) {
+        String sql = "insert into client values(?,?,?,?,?,?,?,?,?,?,null)";
+        template.update(sql,client.getCno(),client.getCpassword(),client.getCname(),client.getCsex(),client.getCage(),client.getCaddress(),client.getCphone()
+        ,client.getCsymptom(),client.getCdate(),client.getCremark());
+    }
 }

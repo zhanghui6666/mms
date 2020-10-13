@@ -26,7 +26,7 @@
             <td class="table_header">
                 <img src="images/login_logo.png" height="49" width="334"/></td>
             <td class="table_header">
-                <span class="span_header">新用户，</span><a href="register.html" class="a_header">快速注册</a>
+                <span class="span_header">新用户，</span><a href="regist.jsp" class="a_header">快速注册</a>
             </td>
         </tr>
     </table>
@@ -80,7 +80,7 @@
 
             <div class="other_login">
                 <span class="other_span">您还可以通过以下方式登录：</span>
-                <a href="#"><img src="images/other_qq.jpg" class="other_qq"></a>
+                <a href="www.qq.com"><img src="images/other_qq.jpg" class="other_qq"></a>
                 <a href="#"><img src="images/other_weixin.jpg" class="other_weixin"> </a>
             </div>
             <!--<div class="form-group">

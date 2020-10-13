@@ -12,4 +12,9 @@ public class ClientServiceImpl implements ClientService {
 
         return cdao.login(client.getCno(),client.getCpassword());
     }
+
+    @Override
+    public void Regist(Client client) {
+        cdao.regist(client);
+    }
 }

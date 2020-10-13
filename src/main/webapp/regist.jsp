@@ -1,16 +1,24 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: ZB
+  Date: 2020/10/13
+  Time: 14:38
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>注册</title>
-    <link rel="shortcut icon" href="../images/login-favicon.ico">
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/sweetalert-dev.js"></script>
-    <link rel="stylesheet" href="../css/sweetalert.css">
-    <link rel="stylesheet" href="../css/bootstrap-theme.css">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <script src="../js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/register.css">
+    <link rel="shortcut icon" href="images/login-favicon.ico">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="css/sweetalert.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/register.css">
 
 
 </head>
@@ -19,9 +27,9 @@
     <table class="table_header">
         <tr class="tr_header">
             <td class="table_header">
-                <img src="../images/login_logo.png" height="49" width="334"/></td>
+                <img src="images/login_logo.png" height="49" width="334"/></td>
             <td class="table_header">
-                <span class="span_header">已有账号，</span><a href="login.html" class="a_header">快速登录</a>
+                <span class="span_header">已有账号，</span><a href="login.jsp" class="a_header">快速登录</a>
             </td>
         </tr>
     </table>
@@ -29,9 +37,9 @@
 <div class="container">
     <div class="register">
         <div class="content">
-            <form action="/clientRegisterServlet">
+            <form action="${pageContext.request.contextPath}/clientRegisterServlet"method="post">
                 <h1>
-                <span class="content_span">新用户注册</span>
+                    <span class="content_span">新用户注册</span>
                 </h1>
                 <div class="form-group">
                     <label for="cno">账号</label>
@@ -65,7 +73,7 @@
                 </div>
                 <div class="form-group">
                     <label for="Address">家庭住址</label>
-                    <input type="text" class="form-control form_group" required="required" id="Address"  name="cage" placeholder="请输入您的家庭住址" onblur="checkaddress()">
+                    <input type="text" class="form-control form_group" required="required" id="Address"  name="caddress" placeholder="请输入您的家庭住址" onblur="checkaddress()">
                     <span id="addressspan" style="color: red"></span>
                 </div>
                 <div class="form-group">
@@ -120,18 +128,18 @@
             return true;
         }
     }
-        function checkage() {
-            var age = $("#Age").val()
-            console.log(age);
-            if (age == "") {
-                document.getElementById("agespan").innerHTML = "年龄不能为空！";
-                return false;
-            }
-            else {
-                document.getElementById("agespan").innerText="";
-                return true;
-            }
+    function checkage() {
+        var age = $("#Age").val()
+        console.log(age);
+        if (age == "") {
+            document.getElementById("agespan").innerHTML = "年龄不能为空！";
+            return false;
         }
+        else {
+            document.getElementById("agespan").innerText="";
+            return true;
+        }
+    }
     function checkname1() {
         var name1 = $("#cname").val()
         console.log(name1);

@@ -25,7 +25,7 @@
             <td class="table_header">
                 <img src="images/login_logo.png" height="49" width="334"/></td>
             <td class="table_header">
-                <span class="span_header">新用户，</span><a href="register.html" class="a_header">快速注册</a>
+                <span class="span_header">新用户，</span><a href="regist.jsp" class="a_header">快速注册</a>
             </td>
         </tr>
     </table>
@@ -46,7 +46,7 @@
                 </ul>
             </div>
 
-            <form class="form-horizontal" >
+            <form class="form-horizontal" action="${pageContext.request.contextPath}/AdminLoginServlet" >
                 <div class="form-group">
                     <label for="aname" class="col-sm-2 control-label">id</label>
                     <div class="col-sm-10">
