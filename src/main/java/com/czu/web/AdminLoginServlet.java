@@ -20,8 +20,9 @@ public class AdminLoginServlet extends HttpServlet {
         adminLogin.setAname(aname);
         adminLogin.setApassword(apassword);
         AdminLoginService adminLoginService = new AdminLoginServiceImpl();
-        AdminLogin adminglogin= adminLoginService.Adlogin(adminLogin);
-        if(adminglogin == null){
+        AdminLogin adminlogin= adminLoginService.Adlogin(adminLogin);
+        System.out.println(adminlogin);
+        if(adminlogin == null){
             request.getRequestDispatcher("/loginError.jsp").forward(request,response);
         }else {
             request.getRequestDispatcher("/adminchoose.jsp").forward(request,response);
