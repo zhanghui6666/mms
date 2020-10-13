@@ -20,6 +20,19 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sweetalert.css">
     <link rel="stylesheet" href="css/controladmin.css">
+
+    <script>
+        window.onload = function(){
+            document.getElementById("topcheckbox").onclick = function () {
+
+                var cbs = document.getElementsByName('aid');
+                for (let i = 0; i < cbs.length; i++) {
+                    cbs[i].checked = this.checked;
+                }
+
+            };
+        }
+    </script>
 </head>
 <body>
 <div id="controlAdmintop">

@@ -18,6 +18,19 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/controluser.css">
+
+    <script>
+        window.onload = function(){
+            document.getElementById("topcheckbox").onclick = function () {
+
+                var cbs = document.getElementsByName('cid');
+                for (let i = 0; i < cbs.length; i++) {
+                    cbs[i].checked = this.checked;
+                }
+
+            };
+        }
+    </script>
 </head>
 <body>
 <div>
@@ -45,7 +58,7 @@
             <tbody>
                 <c:forEach items="${adminUserInfos}" var="adminUserInfo">
                     <tr>
-                        <td><input type="checkbox" name="aid" value="${adminUserInfo.cid}"></td>
+                        <td><input type="checkbox" name="cid" value="${adminUserInfo.cid}"></td>
                         <td>${adminUserInfo.cid}</td>
                         <td>${adminUserInfo.cno}</td>
                         <td>${adminUserInfo.cpassword}</td>
@@ -57,7 +70,7 @@
                         <td>${adminUserInfo.csymptom}</td>
                         <td>${adminUserInfo.cdate}</td>
                         <td>${adminUserInfo.cremark}</td>
-                        <td><a href="${pageContext.request.contextPath}/adminFindOneUserServlet?cno=${adminUserInfo.cno}">编辑</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a href="javascript:void(0)" onclick="del(${adminUserInfo.cno})">删除</a></td>
+                        <td><a href="${pageContext.request.contextPath}/adminFindOneUserServlet?cno=${adminUserInfo.cno}" class="btn btn-default btn-primary">编辑</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a href="javascript:void(0)" onclick="del(${adminUserInfo.cno})" class="btn btn-default btn-primary">删除</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

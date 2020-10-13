@@ -55,3 +55,9 @@
     width:100%;
     height:700px;
 }
+
+#tb1{
+    table-layout: auto;
+    word-break: break-all;
+    word-wrap: break-word; //表格固定布局
+}

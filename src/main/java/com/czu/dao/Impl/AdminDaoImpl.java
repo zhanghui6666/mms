@@ -3,11 +3,15 @@ package com.czu.dao.Impl;
 import com.czu.dao.AdminDao;
 import com.czu.domain.AdminUserInfo;
 import com.czu.domain.AdminInfo;
+import com.czu.domain.Medicine;
 import com.czu.util.JDBCUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class AdminDaoImpl implements AdminDao {
     private JdbcTemplate template=new JdbcTemplate(JDBCUtils.getDataSource());
@@ -71,6 +75,76 @@ public class AdminDaoImpl implements AdminDao {
     public void updateAdmin(String aname, String password) {
         String sql="update admin set apassword=? where aname=?";
         template.update(sql,password,aname);
+    }
+
+    /**
+     * 查询符合条件的药品总条数
+     * @param condition
+     * @return
+     */
+    @Override
+    public int findMedicineCount(Map<String, String[]> condition) {
+        String sql="select count(*) from medicine where 1 = 1 ";
+        StringBuilder stringBuilder=new StringBuilder(sql);
+
+        //遍历所有的条件拼接到sql语句中
+        Set<String> keyset = condition.keySet();
+        List<Object> params=new ArrayList<>();
+        for (String key:keyset){
+            if ("currentPage".equals(key) || "rows".equals(key)){
+                continue;
+            }
+            String value=condition.get(key)[0];
+            if(!(value==null||"".equals(value))){
+                stringBuilder.append(" and "+key+" like? ");//拼接sql
+                params.add("%"+value+"%");//加条件的值
+            }
+        }
+        return template.queryForObject(stringBuilder.toString(),Integer.class,params.toArray());
+    }
+
+    /**
+     * 找出当前页的药品内容
+     * @param startpage
+     * @param rows
+     * @param condition
+     * @return
+     */
+    @Override
+    public List<Medicine> findMedcineByPage(int startpage, int rows, Map<String, String[]> condition) {
+        String sql="select * from medicine where 1 = 1 ";
+        StringBuilder stringBuilder=new StringBuilder(sql);
+
+        //遍历所有的条件拼接到sql语句中
+        //遍历所有的条件拼接到sql语句中
+        Set<String> keyset = condition.keySet();
+        List<Object> params=new ArrayList<>();
+        for (String key:keyset){
+            if ("currentPage".equals(key) || "rows".equals(key)){
+                continue;
+            }
+            String value=condition.get(key)[0];
+            if(!(value==null||"".equals(value))){
+                stringBuilder.append(" and "+key+" like? ");//拼接sql
+                params.add("%"+value+"%");//加条件的值
+            }
+        }
+
+        stringBuilder.append("limit ?,?");
+        params.add(startpage);
+        params.add(rows);
+
+        return template.query(stringBuilder.toString(),new BeanPropertyRowMapper<Medicine>(Medicine.class),params.toArray());
+    }
+
+    /**
+     * 删除一个药品
+     * @param mno
+     */
+    @Override
+    public void deleteOneMedicine(Integer mno) {
+        String sql="delete from medicine where mno=?";
+        template.update(sql,mno);
     }
 
 

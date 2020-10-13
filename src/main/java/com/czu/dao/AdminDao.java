@@ -2,8 +2,10 @@ package com.czu.dao;
 
 import com.czu.domain.AdminUserInfo;
 import com.czu.domain.AdminInfo;
+import com.czu.domain.Medicine;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AdminDao {
     /**
@@ -56,4 +58,26 @@ public interface AdminDao {
      * @param password
      */
     void updateAdmin(String aname, String password);
+
+    /**
+     * 查询符合条件的药品总条数
+     * @param condition
+     * @return
+     */
+    int findMedicineCount(Map<String, String[]> condition);
+
+    /**
+     * 找出当前页的药品内容
+     * @param startpage
+     * @param rows
+     * @param condition
+     * @return
+     */
+    List<Medicine> findMedcineByPage(int startpage, int rows, Map<String, String[]> condition);
+
+    /**
+     * 删除一个药品
+     * @param mno
+     */
+    void deleteOneMedicine(Integer mno);
 }

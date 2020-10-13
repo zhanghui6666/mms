@@ -2,8 +2,11 @@ package com.czu.service;
 
 import com.czu.domain.AdminUserInfo;
 import com.czu.domain.AdminInfo;
+import com.czu.domain.Medicine;
+import com.czu.domain.PageBean;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AdminService {
     /**
@@ -54,4 +57,19 @@ public interface AdminService {
      * @param adminUserInfo
      */
     void updateOneUser(AdminUserInfo adminUserInfo);
+
+    /**
+     * 分页查询药品
+     * @param currentPage
+     * @param rows
+     * @param condition
+     * @return
+     */
+    PageBean<Medicine> findMedicineByPage(String currentPage, String rows, Map<String, String[]> condition);
+
+    /**
+     * 删除一个药品
+     * @param mno
+     */
+    void deleteOneMedicine(Integer mno);
 }

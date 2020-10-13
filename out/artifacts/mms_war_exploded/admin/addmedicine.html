@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>药品信息添加</title>
+    <link rel="shortcut icon" href="../images/login-favicon.ico">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="../css/sweetalert.css">
+    <link rel="stylesheet" href="../css/bootstrap-theme.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/register.css">
+
+</head>
+<body>
+<div>
+    <table class="table_header">
+        <tr class="tr_header">
+            <td class="table_header">
+                <img src="../images/login_logo.png" height="49" width="334"/>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="container">
+    <div class="register">
+        <div class="content">
+            <form>
+                <h1>
+                    <span class="content_span">药品信息添加</span>
+                </h1>
+                <div class="form-group">
+                    <label for="cno">编号</label>
+                    <input type="text" class="form-control form_group" required="required" id="cno" name="cno" placeholder="请输入您想要注册的账号，最好是以手机号为主" onblur="checkname()">
+                    <span id="namespan" style="color: red"></span>
+                </div>
+                <div class="form-group">
+                    <label for="cpassword">药名</label>
+                    <input type="password" class="form-control form_group" required="required" id="cpassword" name="cpassword" placeholder="请输入您的密码"  onblur="checkpassword()" >
+                    <span id="passwordspan" style="color: red"></span>
+                </div>
+                <div class="form-group">
+                    <label for="cname">服用方式</label>
+                    <input type="text" class="form-control form_group" required="required"  id="cname" name="cname" placeholder="请输入您的真实姓名" onblur="checkname1()">
+                    <span id="name1span" style="color: red"></span>
+
+                </div>
+                <div>  <br></div>
+                <div class="form-group">
+                    <label for="Age">药效</label>
+                    <input type="text" class="form-control form_group" required="required" id="Age" name="cage" placeholder="请输入您的年龄" onblur="checkage()">
+                    <span id="agespan" style="color: red"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Address">价格</label>
+                    <input type="text" class="form-control form_group" required="required" id="Address"  name="cage" placeholder="请输入您的家庭住址" onblur="checkaddress()">
+                    <span id="addressspan" style="color: red"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Phone">库存</label>
+                    <input type="text" class="form-control form_group" required="required" id="Phone" name="cphone" placeholder="请输入您的联系方式" onblur="checkphone()">
+                    <span id="phonespan" style="color: red"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Symptom">id</label>
+                    <input type="text" class="form-control form_group" required="required" id="Symptom"  name="csymptom" placeholder="请输入您的主要症状" onblur="checksymptom()">
+                    <span id="symptomspan" style="color: red"></span>
+                </div>
+                <div>
+                    <br>
+                    <input type="reset" value="重置" class="btn btn-primary">
+                    <input type="submit" value="添加" class="btn btn-primary btn_submit" onclick="submit()">
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
