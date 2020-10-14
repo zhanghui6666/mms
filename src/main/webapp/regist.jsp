@@ -98,7 +98,6 @@
                     <input type="submit" value="注册" class="btn btn-primary btn_submit" onclick="submit()">
 
                 </div>
-
             </form>
         </div>
     </div>
@@ -189,14 +188,9 @@
         }
     }
 
-    $(      //页面加载完执行
-        $("#ajaxForm").submit(function () {    //表单提交时监听提交事件
-            $(this).ajaxSubmit(function () {
-                alert("注册成功")
-            });    //当前表单执行异步提交，optons 是配置提交时、提交后的相关选项
-            return false;//  必须返回false，才能跳到想要的页面
-        })
-    )
+
+    /*alert("注册成功")*/
+
 </script>
 </body>
 </html>

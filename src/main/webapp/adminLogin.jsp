@@ -38,10 +38,10 @@
             <div class="content_menu">
                 <ul class="menu_ul">
                     <li id="li1" class="menu_li1">
-                        <a href="login.jsp" target="bt1">用户登录</a>
+                        <a href="login.jsp" target="_Self">用户登录</a>
                     </li>
                     <li id="li2" class="menu_li2">
-                        <a href="adminLogin.jsp " target="bt1">管理员登录</a>
+                        <a href="adminLogin.jsp " target="_Self">管理员登录</a>
                     </li>
                 </ul>
             </div>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.Map;
@@ -18,7 +19,8 @@ import java.util.Map;
 @WebServlet("/clientRegisterServlet")
 public class ClientRegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         Map<String, String[]> map = request.getParameterMap();
         Client client = new Client();
         try{
@@ -32,7 +34,9 @@ public class ClientRegisterServlet extends HttpServlet {
         client.setCdate(new Date());
         ClientService clientService = new ClientServiceImpl();
         clientService.Regist(client);
-        request.getRequestDispatcher("/regist.jsp").forward(request,response);
+       /* request.getRequestDispatcher("/regist.jsp").forward(request,response);*/
+        PrintWriter out = response.getWriter();
+        out.print("<script>alert('注册成功!');window.location.href='http://localhost:8080/mms/login.jsp'</script>");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

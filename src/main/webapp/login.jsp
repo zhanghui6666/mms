@@ -106,4 +106,5 @@
 </div>
 </body>
 </html>
-<script>alert('注册成功即将跳转到登录界面!')</script>
+<%--
+<script>alert('注册成功即将跳转到登录界面!')</script>--%>
