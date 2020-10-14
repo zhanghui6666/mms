@@ -147,5 +147,48 @@ public class AdminDaoImpl implements AdminDao {
         template.update(sql,mno);
     }
 
+    @Override
+    public boolean searchMedicineMno(Integer mno) {
+        String sql="select * from medicine where mno = ?";
+        List<Medicine> medicineList=template.query(sql,new BeanPropertyRowMapper<Medicine>(Medicine.class),mno);
+//        Medicine medicine=template.queryForObject(sql,new BeanPropertyRowMapper<Medicine>(Medicine.class),mno);
+        if (medicineList.size()==0){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 添加一个药品
+     * @param medicine
+     */
+    @Override
+    public void addMedicine(Medicine medicine) {
+        String sql="insert into medicine (mno,mname,mmode,mefficacy,mprice,mnumber) values (?,?,?,?,?,?)";
+        template.update(sql,medicine.getMno(),medicine.getMname(),medicine.getMmode(),medicine.getMefficacy(),medicine.getMprice(),medicine.getMnumber());
+    }
+
+    /**
+     * 查找一个药品
+     * @param mno
+     * @return
+     */
+    @Override
+    public Medicine findOneMedicine(Integer mno) {
+        String sql="select * from medicine where mno = ?";
+        Medicine medicine=template.queryForObject(sql,new BeanPropertyRowMapper<>(Medicine.class),mno);
+        return medicine;
+    }
+
+    /**
+     * 修改一个药品信息
+     * @param medicine
+     */
+    @Override
+    public void updateMedicine(Medicine medicine) {
+        String sql="update medicine set mname=?,mmode=?,mefficacy=?,mprice=?,mnumber=? where mno=?";
+        template.update(sql,medicine.getMname(),medicine.getMmode(),medicine.getMefficacy(),medicine.getMprice(),medicine.getMnumber(),medicine.getMno());
+    }
+
 
 }

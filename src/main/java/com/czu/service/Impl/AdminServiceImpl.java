@@ -100,5 +100,33 @@ public class AdminServiceImpl implements AdminService {
         adminDao.deleteOneMedicine(mno);
     }
 
+    @Override
+    public boolean searchMedicineMno(Integer mno) {
+        return adminDao.searchMedicineMno(mno);
+    }
+
+    /**
+     * 添加一个药品
+     * @param medicine
+     */
+    @Override
+    public void addMedicine(Medicine medicine) {
+        adminDao.addMedicine(medicine);
+    }
+
+    @Override
+    public Medicine findOneMedicine(Integer mno) {
+        return adminDao.findOneMedicine(mno);
+    }
+
+    /**
+     * 修改药品的信息
+     * @param medicine
+     */
+    @Override
+    public void updateMedicine(Medicine medicine) {
+        adminDao.updateMedicine(medicine);
+    }
+
 
 }

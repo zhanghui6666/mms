@@ -1,25 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: 王宇杰
+  Date: 2020/10/14
+  Time: 11:52
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>药品信息添加</title>
-    <link rel="shortcut icon" href="../images/login-favicon.ico">
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/sweetalert-dev.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <title>药品信息修改</title>
+    <link rel="shortcut icon" href="images/login-favicon.ico">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/sweetalert-dev.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="../css/sweetalert.css">
-    <link rel="stylesheet" href="../css/bootstrap-theme.css">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/register.css">
-
+    <link rel="stylesheet" href="css/sweetalert.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/adminMedicineInfo.css">
 </head>
 <body>
 <div>
     <table class="table_header">
         <tr class="tr_header">
             <td class="table_header">
-                <img src="../images/login_logo.png" height="49" width="334"/>
+                <img src="images/login_logo.png" height="49" width="334"/>
             </td>
         </tr>
     </table>
@@ -27,52 +33,55 @@
 <div class="container">
     <div class="register">
         <div class="content">
-            <form>
+            <form action="${pageContext.request.contextPath}/adminUpdateMedicineServlet">
                 <h1>
-                    <span class="content_span">药品信息添加</span>
+                    <span class="content_span">药品信息修改</span>
                 </h1>
                 <div class="form-group">
                     <label for="mno">编号</label>
-                    <input type="text" class="form-control form_group" required="required" id="mno" name="mno" placeholder="添加的药品编号" onblur="checkmno()">
+                    <input type="text" class="form-control form_group" required="required" id="mno" name="mno"
+                           placeholder="添加的药品编号" onblur="checkmno()" readonly="readonly" value="${medicine.mno}">
                     <span id="mnospan" style="color: red"></span>
                 </div>
                 <div class="form-group">
                     <label for="mname">药名</label>
-                    <input type="password" class="form-control form_group" required="required" id="mname" name="mname" placeholder="请输入药的名称"  onblur="checkmname()" >
+                    <input type="text" class="form-control form_group" required="required" id="mname" name="mname"
+                           placeholder="请输入药的名称"  onblur="checkmname()" value="${medicine.mname}">
                     <span id="mnamespan" style="color: red"></span>
                 </div>
                 <div class="form-group">
                     <label for="mmode">使用方式</label>
-                    <input type="text" class="form-control form_group" required="required"  id="mmode" name="mmode" placeholder="请输入药的使用方式" onblur="checkmmode()">
+                    <input type="text" class="form-control form_group" required="required"  id="mmode" name="mmode"
+                           placeholder="请输入药的使用方式" onblur="checkmmode()" value="${medicine.mmode}">
                     <span id="mmodespan" style="color: red"></span>
 
                 </div>
                 <div>  <br></div>
                 <div class="form-group">
                     <label for="mefficacy">药效</label>
-                    <input type="text" class="form-control form_group" required="required" id="mefficacy" name="mefficacy" placeholder="请输入药效" onblur="checkmefficacy()">
+                    <textarea class="form-control form_group" required="required" id="mefficacy" name="mefficacy"
+                              placeholder="请输入药效" onblur="checkmefficacy()">${medicine.mefficacy}</textarea>
+<%--                    <input type="text" class="form-control form_group" required="required" id="mefficacy" name="mefficacy"--%>
+<%--                           placeholder="请输入药效" onblur="checkmefficacy()" value="${medicine.mefficacy}">--%>
                     <span id="mefficacypan" style="color: red"></span>
                 </div>
                 <div class="form-group">
                     <label for="mprice">价格</label>
-                    <input type="text" class="form-control form_group" required="required" id="mprice"  name="mprice" placeholder="请输入药的价格" onblur="checkmprice()">
+                    <input type="text" class="form-control form_group" required="required" id="mprice"  name="mprice"
+                           placeholder="请输入药的价格" onblur="checkmprice()" value="${medicine.mprice}">
                     <span id="mpricespan" style="color: red"></span>
                 </div>
                 <div class="form-group">
                     <label for="mnumber">库存</label>
-                    <input type="text" class="form-control form_group" required="required" id="mnumber" name="mnumber" placeholder="请输入新药的库存" onblur="checkmnumber()">
+                    <input type="text" class="form-control form_group" required="required" id="mnumber" name="mnumber"
+                           placeholder="请输入新药的库存" onblur="checkmnumber()" value="${medicine.mnumber}">
                     <span id="mnumberspan" style="color: red"></span>
-                </div>
-                <div class="form-group">
-                    <label for="mid">id</label>
-                    <input type="text" class="form-control form_group" required="required" id="mid"  name="mid" placeholder="药品编号，由系统生成，无需输入" readonly="readonly">
-                    <span id="symptomspan" style="color: red"></span>
                 </div>
                 <div>
                     <br>
                     <input type="reset" value="重置" class="btn btn-primary">
-                    <input type="submit" value="添加" class="btn btn-primary btn_submit" onclick="submit()">
-
+                    <input type="submit" value="消去修改" class="btn btn-primary btn_submit" onclick="submit()">
+                    <a href="${pageContext.request.contextPath}/adminControlMedicineServlet" style="margin-left: 50px"><input type="button" value="返回" class="btn btn-primary"></a>
                 </div>
 
             </form>

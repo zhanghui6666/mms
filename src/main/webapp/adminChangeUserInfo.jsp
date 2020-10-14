@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/sweetalert.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/adminChangeUserInfo.css">
 </head>
 <%
     AdminUserInfo adminUserInfo = (AdminUserInfo) request.getAttribute("adminUserInfo");
@@ -40,7 +40,7 @@
                     <span class="content_span">用户信息修改</span>
                 </h1>
                 <div class="form-group">
-                    <label for="Cno">账号</label>
+                    <label for="Cno">账号(不可修改)</label>
                     <input type="text" class="form-control form_group" required="required" id="Cno" readonly="readonly"
                            value="<%= adminUserInfo.getCno()%>" name="cno" onblur="checkno()">
                     <span id="nospan" style="color: red"></span>
@@ -116,10 +116,9 @@
                 </div>
                 <div>
                     <br>
-                    <input type="reset" value="重置" class="btn btn-primary">
+                    <input type="reset" value="消去修改" class="btn btn-primary">
                     <input type="submit" value="修改" class="btn btn-primary btn_submit" name="cid">
                 </div>
-
             </form>
         </div>
     </div>

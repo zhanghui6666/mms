@@ -52,6 +52,8 @@ public class AdminUpdateUserServlet extends HttpServlet {
         //2.调用service方法修改用户
         AdminService adminService=new AdminServiceImpl();
         adminService.updateOneUser(adminUserInfo);
+        String updateUserMessage="修改成功";
+        request.getSession().setAttribute("updateUserMessage", updateUserMessage);
 //        response.sendRedirect("/findAllUserServlet");
         request.getRequestDispatcher("/findAllUserServlet").forward(request,response);
     }

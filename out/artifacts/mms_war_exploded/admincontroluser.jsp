@@ -55,7 +55,7 @@
                 <td>状态</td>
                 <td>操作</td>
             </thead>
-            <tbody>
+            <tbody id="userbody">
                 <c:forEach items="${adminUserInfos}" var="adminUserInfo">
                     <tr>
                         <td><input type="checkbox" name="cid" value="${adminUserInfo.cid}"></td>
@@ -80,10 +80,44 @@
         <a href="${pageContext.request.contextPath}/adminchoose.jsp">
             <button type="button" class="btn btn-default" style="width: 200px">返回</button>
         </a>
-
+        <a href="javascript:void(0)" onclick="deleteChoose()">
+            <button type="button" class="btn btn-default" style="width: 200px;margin-left: 200px">删除选中</button>
+        </a>
     </div>
 </div>
 </body>
+
+<%
+    String updatemess = (String) session.getAttribute("updateUserMessage");
+    if ("".equals(updatemess) || updatemess == null) {
+    } else {
+%>
+<script>
+    $(function () {
+        swal("<%=updatemess%>");
+    })
+</script>
+<%
+    }
+    session.setAttribute("updateUserMessage", "");
+%>
+
+<%
+    String deleteemess = (String) session.getAttribute("deleteUserMessage");
+    if ("".equals(deleteemess) || deleteemess == null) {
+    } else {
+%>
+<script>
+    $(function () {
+        swal("<%=deleteemess%>");
+    })
+</script>
+<%
+    }
+    session.setAttribute("deleteUserMessage", "");
+%>
+
+
 <script>
     function del(cno){
         swal({
@@ -104,6 +138,37 @@
                 swal("取消！", "这个用户现在安全了:)", "error");
             }
         });
+    }
+
+    function deleteChoose() {
+        swal({
+            title: "确定删除吗？",
+            text: "你将无法恢复这些用户！",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定删除！",
+            cancelButtonText: "取消删除！",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                deletechoose()
+            } else {
+                swal("取消！", "这些用户现在安全了:)", "error");
+            }
+        });
+    }
+    function deletechoose() {
+        var checkeds=$("#userbody :checked");
+        var userlist=[];
+        $.each(checkeds,function (i,n) {
+            n=$(n)
+            var child=n.parents("tr").children();
+            var ano=child.eq(2).text();
+            userlist.push(ano);
+        })
+        location="adminDeleteChooseUserServlet?cnos="+userlist;
     }
 </script>
 </html>

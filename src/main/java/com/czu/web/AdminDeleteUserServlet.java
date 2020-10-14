@@ -19,6 +19,8 @@ public class AdminDeleteUserServlet extends HttpServlet {
         //2.调用service方法删除管理员
         AdminService adminService=new AdminServiceImpl();
         adminService.deleteUserInfo(cno);
+        String deleteUserMessage="删除成功";
+        request.getSession().setAttribute("deleteUserMessage", deleteUserMessage);
         //跳转到查找界面
         response.sendRedirect(request.getContextPath()+"/findAllUserServlet");
     }

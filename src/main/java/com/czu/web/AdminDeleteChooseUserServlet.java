@@ -10,19 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/deleteAdminServlet")
-public class DeleteAdminServlet extends HttpServlet {
+@WebServlet("/adminDeleteChooseUserServlet")
+public class AdminDeleteChooseUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         //1.获取参数
-        String aid = request.getParameter("aid");//当前页码
-        //2.调用service方法删除管理员
+        String cno = request.getParameter("cnos");//要删除的编号集合
+        String[] cnos=cno.split(",");
         AdminService adminService=new AdminServiceImpl();
-        adminService.deleteAdminInfo(Integer.valueOf(aid));
-        String deleteAdminMessage="删除成功";
-        request.getSession().setAttribute("deleteAdminMessage", deleteAdminMessage);
+        for (int i=0;i< cnos.length;i++){
+            adminService.deleteUserInfo(cnos[i]);
+        }
+        String deleteUserMessage="删除成功";
+        request.getSession().setAttribute("deleteUserMessage", deleteUserMessage);
         //跳转到查找界面
-        response.sendRedirect(request.getContextPath()+"/findAllAdminServlet");
+        response.sendRedirect(request.getContextPath()+"/findAllUserServlet");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

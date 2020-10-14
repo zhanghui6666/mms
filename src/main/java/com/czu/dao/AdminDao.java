@@ -80,4 +80,30 @@ public interface AdminDao {
      * @param mno
      */
     void deleteOneMedicine(Integer mno);
+
+    /**
+     * 查询药编号是否已经存在
+     * @param mno
+     * @return
+     */
+    boolean searchMedicineMno(Integer mno);
+
+    /**
+     * 添加一个药品
+     * @param medicine
+     */
+    void addMedicine(Medicine medicine);
+
+    /**
+     * 查找一个药品
+     * @param mno
+     * @return
+     */
+    Medicine findOneMedicine(Integer mno);
+
+    /**
+     *
+     * @param medicine
+     */
+    void updateMedicine(Medicine medicine);
 }

@@ -1,6 +1,6 @@
 package com.czu.web;
 
-import com.czu.domain.AdminInfo;
+import com.czu.domain.Medicine;
 import com.czu.service.AdminService;
 import com.czu.service.Impl.AdminServiceImpl;
 import org.apache.commons.beanutils.BeanUtils;
@@ -12,49 +12,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.Map;
 
-@WebServlet("/addAdminServlet")
-public class AddAdminServlet extends HttpServlet {
+@WebServlet("/adminAddMedicineServlet")
+public class AdminAddMedicineServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        String message;
-        //获取要添加的管理员
-        Map<String,String[]> map=request.getParameterMap();
+        String addMedicineMessage="";
+        //获取药品数据
+        Map<String,String[]> medicineMap=request.getParameterMap();
         //封装对象
-        AdminInfo admininfo=new AdminInfo();
-
+        Medicine medicine=new Medicine();
         try {
-            BeanUtils.populate(admininfo,map);
+            BeanUtils.populate(medicine,medicineMap);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-
-
-        //调用service来判断并保存
+        //判断是否重复
         AdminService service=new AdminServiceImpl();
-        List<AdminInfo> adminInfos=service.findAllAdminInfo();
-        int is=0;
-        for (AdminInfo aadmininfo :
-                adminInfos) {
-            if (aadmininfo.getAname().equals(admininfo.getAname())){
-                is++;
-            }
-        }
-        if (is>0){
-            message="添加的是重复的，添加失败";
-            request.getSession().setAttribute("message", message);
-        }else {
-            message="添加成功";
-            service.addAdminInfo(admininfo);
-            request.getSession().setAttribute("message", message);
-        }
+        if (service.searchMedicineMno(medicine.getMno())){
+            addMedicineMessage="添加的是重复的，添加失败";
+            request.getSession().setAttribute("addMedicineMessage", addMedicineMessage);
 
+        }else {
+            addMedicineMessage="添加成功";
+            service.addMedicine(medicine);
+            request.getSession().setAttribute("addMedicineMessage", addMedicineMessage);
+        }
         //跳转到查找界面
-        response.sendRedirect(request.getContextPath()+"/findAllAdminServlet");
+        response.sendRedirect(request.getContextPath()+"/adminControlMedicineServlet");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

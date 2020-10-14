@@ -59,7 +59,7 @@
                     <th>序号</th>
                     <th>操作</th>
                 </tr>
-
+                <tbody id="medicinebody">
                 <c:forEach items="${medicinePageBean.list}" var="medicine">
                     <tr>
                         <th><input type="checkbox" name="mid" value="${medicine.mid}"></th>
@@ -70,9 +70,10 @@
                         <td style="white-space: nowrap">${medicine.mprice}</td>
                         <td style="white-space: nowrap">${medicine.mnumber}</td>
                         <td style="white-space: nowrap">${medicine.mid}</td>
-                        <td style="width: 200px;text-align: center"><a class="btn btn-default btn-sm" href="#">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-default btn-sm" href="javascript:void(0)" onclick="del(${medicine.mno})">删除</a>&nbsp;
+                        <td style="width: 200px;text-align: center"><a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/adminFindOneMedicineServlet?mno=${medicine.mno}">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-default btn-sm" href="javascript:void(0)" onclick="del(${medicine.mno})">删除</a>&nbsp;
                     </tr>
                 </c:forEach>
+                </tbody>
             </table>
         </form>
         <div style="width: 100%;overflow: auto;">
@@ -150,15 +151,77 @@
                 </span>
                 </ul>
             </nav>
-            <a><button type="button" class="btn btn-default btn-button">添加</button></a>
-            <a href="${pageContext.request.contextPath}/adminchoose.jsp"><button type="button" class="btn btn-default btn-button">返回</button></a>
+            <a href="javascript:void(0)" onclick="deleteChoose()">
+                <button type="button" class="btn btn-default btn-button" style="width: 200px">删除选中</button>
+            </a>
+            <a href="${pageContext.request.contextPath}/adminAddMedicine.jsp">
+                <button type="button" class="btn btn-default btn-button">添加</button>
+            </a>
+            <a href="${pageContext.request.contextPath}/adminchoose.jsp">
+                <button type="button" class="btn btn-default btn-button">返回</button>
+            </a>
         </div>
     </div>
 
 
 </div>
 </body>
+<%
+    String mess = (String) session.getAttribute("addMedicineMessage");
+    if ("".equals(mess) || mess == null) {
+    } else {
+%>
 <script>
+    $(function () {
+        swal("<%=mess%>");
+    })
+</script>
+<%
+    }
+    session.setAttribute("addMedicineMessage", "");
+%>
+
+<%
+    String updatemess = (String) session.getAttribute("updateMedicineMessage");
+    if ("".equals(updatemess) || updatemess == null) {
+    } else {
+%>
+<script>
+    $(function () {
+        swal("<%=updatemess%>");
+    })
+</script>
+<%
+    }
+    session.setAttribute("updateMedicineMessage", "");
+%>
+
+<%
+    String deleteemess = (String) session.getAttribute("deleteMedicineMessage");
+    if ("".equals(deleteemess) || deleteemess == null) {
+    } else {
+%>
+<script>
+    $(function () {
+        swal("<%=deleteemess%>");
+    })
+</script>
+<%
+    }
+    session.setAttribute("deleteMedicineMessage", "");
+%>
+
+<script>
+    window.onload = function(){
+        document.getElementById("firstCb").onclick = function () {
+
+            var cbs = document.getElementsByName('mid');
+            for (let i = 0; i < cbs.length; i++) {
+                cbs[i].checked = this.checked;
+            }
+
+        };
+    }
     function del(mno){
         swal({
             title: "确定删除吗？",
@@ -178,6 +241,36 @@
                 swal("取消！", "这个药现在安全了:)", "error");
             }
         });
+    }
+    function deleteChoose() {
+        swal({
+            title: "确定删除吗？",
+            text: "你将无法恢复这些药品！",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定删除！",
+            cancelButtonText: "取消删除！",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                deletechoose()
+            } else {
+                swal("取消！", "这些药品现在安全了:)", "error");
+            }
+        });
+    }
+    function deletechoose() {
+        var checkeds=$("#medicinebody :checked");
+        var medicinelist=[];
+        $.each(checkeds,function (i,n) {
+            n=$(n)
+            var child=n.parents("tr").children();
+            var mno=child.eq(1).text();
+            medicinelist.push(mno);
+        })
+        location="adminDeleteChooseMedicineServlet?mnos="+medicinelist;
     }
 </script>
 </html>

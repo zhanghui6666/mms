@@ -49,7 +49,7 @@
                 <td>密码</td>
                 <td>操作</td>
                 </thead>
-                <tbody>
+                <tbody id="adminbody">
                 <c:forEach items="${adminInfos}" var="adminInfo">
                     <tr>
                         <td><input type="checkbox" name="aid" value="${adminInfo.aid}"></td>
@@ -64,10 +64,13 @@
         </div>
         <div id="controlAdminBtn">
             <a href="${pageContext.request.contextPath}/adminaddadmin.jsp">
-                <button type="button" class="btn btn-default" style="width: 200px;margin-left: 300px">添加</button>
+                <button type="button" class="btn btn-default" style="width: 200px;margin-left: 200px">添加</button>
             </a>
             <a href="${pageContext.request.contextPath}/adminchoose.jsp">
-                <button type="button" class="btn btn-default" style="width: 200px;margin-left: 200px">返回</button>
+                <button type="button" class="btn btn-default" style="width: 200px;margin-left: 100px">返回</button>
+            </a>
+            <a href="javascript:void(0)" onclick="deleteChoose()">
+                <button type="button" class="btn btn-default" style="width: 200px;margin-left: 100px">删除选中</button>
             </a>
         </div>
     </div>
@@ -87,6 +90,38 @@
     }
     session.setAttribute("message", "");
 %>
+
+<%
+    String updatemess = (String) session.getAttribute("updateAdminMessage");
+    if ("".equals(updatemess) || updatemess == null) {
+    } else {
+%>
+<script>
+    $(function () {
+        swal("<%=updatemess%>");
+    })
+</script>
+<%
+    }
+    session.setAttribute("updateAdminMessage", "");
+%>
+
+<%
+    String deleteemess = (String) session.getAttribute("deleteAdminMessage");
+    if ("".equals(deleteemess) || deleteemess == null) {
+    } else {
+%>
+<script>
+    $(function () {
+        swal("<%=deleteemess%>");
+    })
+</script>
+<%
+    }
+    session.setAttribute("deleteAdminMessage", "");
+%>
+
+
 <script>
     function del(aid){
         swal({
@@ -101,12 +136,41 @@
             closeOnCancel: false
         }, function (isConfirm) {
             if (isConfirm) {
-
                 location="${pageContext.request.contextPath}/deleteAdminServlet?aid="+aid;
             } else {
                 swal("取消！", "该管理员现在安全了:)", "error");
             }
         });
+    }
+    function deleteChoose() {
+        swal({
+            title: "确定删除吗？",
+            text: "你将无法恢复这些管理员！",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定删除！",
+            cancelButtonText: "取消删除！",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                deletechoose()
+            } else {
+                swal("取消！", "这些管理员现在安全了:)", "error");
+            }
+        });
+    }
+    function deletechoose() {
+        var checkeds=$("#adminbody :checked");
+        var adminlist=[];
+        $.each(checkeds,function (i,n) {
+            n=$(n)
+            var child=n.parents("tr").children();
+            var ano=child.eq(1).text();
+            adminlist.push(ano);
+        })
+        location="adminDeleteChooseAdminServlet?anos="+adminlist;
     }
    /* $(function () {
         $(".btn").click(function () {

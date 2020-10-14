@@ -6,10 +6,11 @@
     <link rel="shortcut icon" href="../images/login-favicon.ico">
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/sweetalert-dev.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="../css/sweetalert.css">
     <link rel="stylesheet" href="../css/bootstrap-theme.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
-    <script src="../js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/register.css">
 
 </head>
@@ -31,40 +32,40 @@
                     <span class="content_span">药品信息添加</span>
                 </h1>
                 <div class="form-group">
-                    <label for="cno">编号</label>
-                    <input type="text" class="form-control form_group" required="required" id="cno" name="cno" placeholder="请输入您想要注册的账号，最好是以手机号为主" onblur="checkname()">
-                    <span id="namespan" style="color: red"></span>
+                    <label for="mno">编号</label>
+                    <input type="text" class="form-control form_group" required="required" id="mno" name="mno" placeholder="添加的药品编号" onblur="checkmno()">
+                    <span id="mnospan" style="color: red"></span>
                 </div>
                 <div class="form-group">
-                    <label for="cpassword">药名</label>
-                    <input type="password" class="form-control form_group" required="required" id="cpassword" name="cpassword" placeholder="请输入您的密码"  onblur="checkpassword()" >
-                    <span id="passwordspan" style="color: red"></span>
+                    <label for="mname">药名</label>
+                    <input type="password" class="form-control form_group" required="required" id="mname" name="mname" placeholder="请输入药的名称"  onblur="checkmname()" >
+                    <span id="mnamespan" style="color: red"></span>
                 </div>
                 <div class="form-group">
-                    <label for="cname">服用方式</label>
-                    <input type="text" class="form-control form_group" required="required"  id="cname" name="cname" placeholder="请输入您的真实姓名" onblur="checkname1()">
-                    <span id="name1span" style="color: red"></span>
+                    <label for="mmode">使用方式</label>
+                    <input type="text" class="form-control form_group" required="required"  id="mmode" name="mmode" placeholder="请输入药的使用方式" onblur="checkmmode()">
+                    <span id="mmodespan" style="color: red"></span>
 
                 </div>
                 <div>  <br></div>
                 <div class="form-group">
-                    <label for="Age">药效</label>
-                    <input type="text" class="form-control form_group" required="required" id="Age" name="cage" placeholder="请输入您的年龄" onblur="checkage()">
-                    <span id="agespan" style="color: red"></span>
+                    <label for="mefficacy">药效</label>
+                    <input type="text" class="form-control form_group" required="required" id="mefficacy" name="mefficacy" placeholder="请输入药效" onblur="checkmefficacy()">
+                    <span id="mefficacypan" style="color: red"></span>
                 </div>
                 <div class="form-group">
-                    <label for="Address">价格</label>
-                    <input type="text" class="form-control form_group" required="required" id="Address"  name="cage" placeholder="请输入您的家庭住址" onblur="checkaddress()">
-                    <span id="addressspan" style="color: red"></span>
+                    <label for="mprice">价格</label>
+                    <input type="text" class="form-control form_group" required="required" id="mprice"  name="mprice" placeholder="请输入药的价格" onblur="checkmprice()">
+                    <span id="mpricespan" style="color: red"></span>
                 </div>
                 <div class="form-group">
-                    <label for="Phone">库存</label>
-                    <input type="text" class="form-control form_group" required="required" id="Phone" name="cphone" placeholder="请输入您的联系方式" onblur="checkphone()">
-                    <span id="phonespan" style="color: red"></span>
+                    <label for="mnumber">库存</label>
+                    <input type="text" class="form-control form_group" required="required" id="mnumber" name="mnumber" placeholder="请输入新药的库存" onblur="checkmnumber()">
+                    <span id="mnumberspan" style="color: red"></span>
                 </div>
                 <div class="form-group">
-                    <label for="Symptom">id</label>
-                    <input type="text" class="form-control form_group" required="required" id="Symptom"  name="csymptom" placeholder="请输入您的主要症状" onblur="checksymptom()">
+                    <label for="mid">id</label>
+                    <input type="text" class="form-control form_group" required="required" id="mid"  name="mid" placeholder="药品编号，由系统生成，无需输入" readonly="readonly">
                     <span id="symptomspan" style="color: red"></span>
                 </div>
                 <div>
@@ -80,3 +81,78 @@
 </div>
 </body>
 </html>
+<script language="JavaScript">
+
+    function checkmno() {
+        var mno = $("#mno").val()
+        console.log(mno);
+        if (mno == "") {
+            document.getElementById("mnospan").innerHTML = "药品编号不能为空！";
+            return false;
+        }
+        else {
+            document.getElementById("mnospan").innerText="";
+            return true;
+        }
+    }
+
+    function checkmname() {
+        var mname = $("#mname").val()
+        console.log(mname);
+        if (mname == "") {
+            document.getElementById("mnamespan").innerHTML = "药名不能为空！";
+            return false;
+        } else {
+            document.getElementById("mnamespan").innerText = "";
+            return true;
+        }
+    }
+    function checkmmode() {
+        var mmode = $("#mmode").val()
+        console.log(mmode);
+        if (mmode == "") {
+            document.getElementById("mmodespan").innerHTML = "服用方式不能为空！";
+            return false;
+        }
+        else {
+            document.getElementById("mmodespan").innerText="";
+            return true;
+        }
+    }
+    function checkmefficacy() {
+        var mefficacy = $("#mefficacy").val()
+        console.log(mefficacy);
+        if (mefficacy == "") {
+            document.getElementById("mefficacypan").innerHTML = "疗效不能为空！";
+            return false;
+        }
+        else {
+            document.getElementById("mefficacypan").innerText="";
+            return true;
+        }
+    }
+    function checkmprice() {
+        var mprice = $("#mprice").val()
+        console.log(mprice);
+        if (mprice == "") {
+            document.getElementById("mpricespan").innerHTML = "价格不能为空！";
+            return false;
+        }
+        else {
+            document.getElementById("mpricespan").innerText="";
+            return true;
+        }
+    }
+    function checkmnumber() {
+        var mnumber = $("#mnumber").val()
+        console.log(mnumber);
+        if (mnumber == "") {
+            document.getElementById("mnumberspan").innerHTML = "没有库存还加上干什么！";
+            return false;
+        }
+        else {
+            document.getElementById("mnumberspan").innerText="";
+            return true;
+        }
+    }
+</script>

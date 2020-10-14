@@ -1,17 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: 王宇杰
+  Date: 2020/10/14
+  Time: 10:07
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="UTF-8">
     <title>药品信息添加</title>
-    <link rel="shortcut icon" href="../images/login-favicon.ico">
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/sweetalert-dev.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="images/login-favicon.ico">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/sweetalert-dev.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="../css/sweetalert.css">
-    <link rel="stylesheet" href="../css/bootstrap-theme.css">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/adminMedicineInfo.css">
 
 </head>
 <body>
@@ -19,7 +26,7 @@
     <table class="table_header">
         <tr class="tr_header">
             <td class="table_header">
-                <img src="../images/login_logo.png" height="49" width="334"/>
+                <img src="images/login_logo.png" height="49" width="334"/>
             </td>
         </tr>
     </table>
@@ -27,7 +34,7 @@
 <div class="container">
     <div class="register">
         <div class="content">
-            <form>
+            <form action="${pageContext.request.contextPath}/adminAddMedicineServlet">
                 <h1>
                     <span class="content_span">药品信息添加</span>
                 </h1>
@@ -63,16 +70,11 @@
                     <input type="text" class="form-control form_group" required="required" id="mnumber" name="mnumber" placeholder="请输入新药的库存" onblur="checkmnumber()">
                     <span id="mnumberspan" style="color: red"></span>
                 </div>
-                <div class="form-group">
-                    <label for="mid">id</label>
-                    <input type="text" class="form-control form_group" required="required" id="mid"  name="mid" placeholder="药品编号，由系统生成，无需输入" readonly="readonly">
-                    <span id="symptomspan" style="color: red"></span>
-                </div>
                 <div>
                     <br>
                     <input type="reset" value="重置" class="btn btn-primary">
                     <input type="submit" value="添加" class="btn btn-primary btn_submit" onclick="submit()">
-
+                    <a href="${pageContext.request.contextPath}/adminControlMedicineServlet"><input type="button" value="返回" class="btn btn-primary" style="margin-left: 50px"></a>
                 </div>
 
             </form>

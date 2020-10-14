@@ -20,6 +20,8 @@ public class AdminUpdateAdminServlet extends HttpServlet {
         //调用方法修改密码
         AdminService adminService=new AdminServiceImpl();
         adminService.updateAdminInfo(aname,apassword);
+        String updateAdminMessage="修改成功";
+        request.getSession().setAttribute("updateAdminMessage", updateAdminMessage);
         //跳转到对应界面
         request.getRequestDispatcher("/findAllAdminServlet").forward(request,response);
     }

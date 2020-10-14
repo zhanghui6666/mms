@@ -29,7 +29,7 @@
                 <input type="text" class="form-control" id="apassword" name="apassword" placeholder="修改的管理员的新密码" value="${updateApassword}">
             </div>
             <button type="submit" class="btn btn-default">改密</button>
-            <button type="reset" class="btn btn-default">去修改</button>
+            <button type="reset" class="btn btn-default">消去修改</button>
             <a href="${pageContext.request.contextPath}/findAllAdminServlet"><button type="button" class="btn btn-default">返回</button></a>
         </form>
     </div>
