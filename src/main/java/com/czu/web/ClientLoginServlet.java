@@ -34,11 +34,11 @@ public class ClientLoginServlet extends HttpServlet {
         }
         else {
             /*request.getRequestDispatcher("/homepage.jsp").forward(request,response);*/
-          /*  out.print("<script>alert('登陆成功!');window.location.href='http://localhost:8080/mms/homepage.jsp'</script>");*/
-           out.print( "<head><script src='js/sweetalert-dev.js'></script>");
+            out.print("<script>alert('登陆成功!');window.location.href='http://localhost:8080/mms/homepage.jsp'</script>");
+           /*out.print( "<head><script src='js/sweetalert-dev.js'></script>");
            out.print("<link rel='stylesheet' href='css/sweetalert.css'></head>");
            out.print("<script>swal('这是一条信息！', '很漂亮，不是吗？')</script>");
-            out.print("<script>window.location.href='http://localhost:8080/mms/homepage.jsp'</script>");
+            out.print("<script>window.location.href='http://localhost:8080/mms/homepage.jsp'</script>");*/
         }
 
     }
