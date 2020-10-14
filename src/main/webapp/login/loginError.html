@@ -1,15 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ZB
-  Date: 2020/10/12
-  Time: 10:13
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<!--<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
 <%
-    response.setHeader("refresh", "3;url=userSplist");
-%>
+response.setHeader("refresh", "3;url=userSplist");
+%>-->
 <html>
 <head>
     <%-- <base href="<%=basepath%>" /> --%>
@@ -50,8 +43,8 @@
 
 
 <div id="d1">
-    <a href="${url }">立即跳转</a><br/>  //session.setAttribute("url", "login");
-    <span id="s1">${tip }</span> //session.setAttribute("tip", "注册成功");
+    <a href="login.html">立即跳转</a><br/>  //session.setAttribute("url", "login");
+    <span id="s1">${登录失败 }</span> //session.setAttribute("tip", "注册成功");
     <span id="s2">3</span>秒后自动跳转到登录页面
 </div>
 

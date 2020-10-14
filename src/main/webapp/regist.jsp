@@ -37,7 +37,7 @@
 <div class="container">
     <div class="register">
         <div class="content">
-            <form action="${pageContext.request.contextPath}/clientRegisterServlet"method="post">
+            <form action="${pageContext.request.contextPath}/clientRegisterServlet" method="post" id="ajaxForm">
                 <h1>
                     <span class="content_span">新用户注册</span>
                 </h1>
@@ -189,6 +189,14 @@
         }
     }
 
+    $(      //页面加载完执行
+        $("#ajaxForm").submit(function () {    //表单提交时监听提交事件
+            $(this).ajaxSubmit(function () {
+                alert("注册成功")
+            });    //当前表单执行异步提交，optons 是配置提交时、提交后的相关选项
+            return false;//  必须返回false，才能跳到想要的页面
+        })
+    )
 </script>
 </body>
 </html>

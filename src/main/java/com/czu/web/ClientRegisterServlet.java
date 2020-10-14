@@ -32,7 +32,7 @@ public class ClientRegisterServlet extends HttpServlet {
         client.setCdate(new Date());
         ClientService clientService = new ClientServiceImpl();
         clientService.Regist(client);
-        request.getRequestDispatcher("/login.jsp").forward(request,response);
+        request.getRequestDispatcher("/regist.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

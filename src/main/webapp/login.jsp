@@ -73,7 +73,7 @@
                 </div>
                 <div class="form-group" >
                     <div class="col-sm-offset-2 col-sm-10 ">
-                        <button type="submit" class="btn btn-default content_imput">登录</button>
+                        <button type="submit" class="btn btn-default content_imput" >登录</button>
                     </div>
                 </div>
             </form>
@@ -106,3 +106,4 @@
 </div>
 </body>
 </html>
+<script>alert('注册成功即将跳转到登录界面!')</script>
