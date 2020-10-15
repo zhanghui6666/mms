@@ -61,11 +61,7 @@
                         <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="密码">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="mpane" class=" control-label">验证码</label>
-                    <div class="col-sm-10" id="mpane">
-                    </div>
-                </div>
+
                 <div class="form-group ">
                     <div class="col-sm-offset-2 col-sm-10 ">
                         <div class="checkbox">
@@ -113,24 +109,7 @@
 </body>
 </html>
 <script>
-    $(function () {
 
-        $('#mpane').codeVerify({
-            type: 1,
-            width: '80px',
-            height: '27px',
-            fontSize: '18px',
-            codeLength: 4,
-            btnId: 'login', // 登陆按钮ID
-            ready:function () {
-            },
-            success:function () {
-            },
-            error:function () {
-              alert("验证码错误")
-            }
-        })
-    })
 </script>
 <%--
 <script>alert('注册成功即将跳转到登录界面!')</script>--%>
