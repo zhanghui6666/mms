@@ -23,18 +23,17 @@ public class ClientRegisterServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Map<String, String[]> map = request.getParameterMap();
         Client client = new Client();
-        try{
-            BeanUtils.populate(client,map);
-        }catch (IllegalAccessException e){
+        try {
+            BeanUtils.populate(client, map);
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
-        }
-        catch (InvocationTargetException e){
+        } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
         client.setCdate(new Date());
         ClientService clientService = new ClientServiceImpl();
         clientService.Regist(client);
-       /* request.getRequestDispatcher("/regist.jsp").forward(request,response);*/
+        /* request.getRequestDispatcher("/regist.jsp").forward(request,response);*/
         PrintWriter out = response.getWriter();
         out.print("<script>alert('注册成功!');window.location.href='http://localhost:8080/mms/login.jsp'</script>");
     }
