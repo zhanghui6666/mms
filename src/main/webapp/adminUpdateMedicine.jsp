@@ -79,8 +79,8 @@
                 </div>
                 <div>
                     <br>
-                    <input type="reset" value="重置" class="btn btn-primary">
-                    <input type="submit" value="消去修改" class="btn btn-primary btn_submit" onclick="submit()">
+                    <input type="reset" value="消去修改" class="btn btn-primary">
+                    <input type="submit" value="修改" class="btn btn-primary btn_submit" onclick="submit()">
                     <a href="${pageContext.request.contextPath}/adminControlMedicineServlet" style="margin-left: 50px"><input type="button" value="返回" class="btn btn-primary"></a>
                 </div>
 

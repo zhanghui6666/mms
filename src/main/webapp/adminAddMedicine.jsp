@@ -45,7 +45,7 @@
                 </div>
                 <div class="form-group">
                     <label for="mname">药名</label>
-                    <input type="password" class="form-control form_group" required="required" id="mname" name="mname" placeholder="请输入药的名称"  onblur="checkmname()" >
+                    <input type="text" class="form-control form_group" required="required" id="mname" name="mname" placeholder="请输入药的名称"  onblur="checkmname()" >
                     <span id="mnamespan" style="color: red"></span>
                 </div>
                 <div class="form-group">
