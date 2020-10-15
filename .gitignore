@@ -1,3 +1,4 @@
-/.idea/
+.idea
 /MMS.iml
 /target/
+/src/test/
