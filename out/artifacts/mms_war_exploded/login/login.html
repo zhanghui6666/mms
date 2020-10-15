@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../css/bootstrap.css">
     <script src="../js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/login.css">
+    <script src="../js/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="../css/sweetalert.css">
 
 </head>
 <body>
@@ -18,7 +20,7 @@
                 <td class="table_header">
                     <img src="../images/login_logo.png" height="49" width="334"/></td>
                 <td class="table_header">
-                    <span class="span_header">新用户，</span><a href="register.html" class="a_header">快速注册</a>
+                    <span class="span_header">新用户，</span><a href="register.html" class="a_header demo" >快速注册</a>
                 </td>
             </tr>
         </table>
@@ -65,14 +67,14 @@
                 </div>
                 <div class="form-group" >
                     <div class="col-sm-offset-2 col-sm-10 ">
-                        <button type="submit" class="btn btn-default content_imput">登录</button>
+                        <button type="submit" class="btn btn-default content_imput" onclick="swal1()">登录</button>
                     </div>
                 </div>
             </form>
 
             <div class="other_login">
                 <span class="other_span">您还可以通过以下方式登录：</span>
-                <a href="#"><img src="../images/other_qq.jpg" class="other_qq"></a>
+                <a href="www.qq.com"><img src="../images/other_qq.jpg" class="other_qq"></a>
                 <a href="#"><img src="../images/other_weixin.jpg" class="other_weixin"> </a>
             </div>
             <!--<div class="form-group">
@@ -98,3 +100,8 @@
 </div>
 </body>
 </html>
+<script>
+    function swal1() {
+        swal("恭喜!登录成功!","确定")
+    }
+</script>

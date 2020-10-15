@@ -24,7 +24,7 @@
         <br/>
         <a href="${pageContext.request.contextPath}/findAllUserServlet"><input class="btn btn-default" type="button" value="用户信息管理" style="width: 200px;margin-top: 50px"></a>
         <br/>
-        <a href="${pageContext.request.contextPath}/adminControlMedicineServlet"><input class="btn btn-default" type="button" value="仓库管理" style="width: 200px;margin-top: 50px"></a>
+        <a><input class="btn btn-default" type="button" value="仓库管理" style="width: 200px;margin-top: 50px"></a>
     </div>
 </div>
 </body>

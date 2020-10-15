@@ -78,7 +78,7 @@ public interface AdminService {
      * @param mno
      * @return
      */
-    boolean searchMedicineMno(Integer mno);
+    boolean searchMedicineMno(String mno);
 
     /**
      * 添加一个药品

@@ -148,7 +148,7 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
-    public boolean searchMedicineMno(Integer mno) {
+    public boolean searchMedicineMno(String mno) {
         String sql="select * from medicine where mno = ?";
         List<Medicine> medicineList=template.query(sql,new BeanPropertyRowMapper<Medicine>(Medicine.class),mno);
 //        Medicine medicine=template.queryForObject(sql,new BeanPropertyRowMapper<Medicine>(Medicine.class),mno);

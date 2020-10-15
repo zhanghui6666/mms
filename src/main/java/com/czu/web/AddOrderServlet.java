@@ -44,10 +44,9 @@ public class AddOrderServlet extends HttpServlet {
         orders.setNum(num);
         orders.setTotalprice(totalprice);
 
-        //System.out.println("add"+mno);
         ShopCartService shopCartService = new ShopCartServiceImpl();
         shopCartService.addOrder(orders);
-        request.getRequestDispatcher("/findShopCartByPageServlet").forward(request,response);
+
 
 
 

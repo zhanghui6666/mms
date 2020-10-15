@@ -101,7 +101,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public boolean searchMedicineMno(Integer mno) {
+    public boolean searchMedicineMno(String mno) {
         return adminDao.searchMedicineMno(mno);
     }
 
