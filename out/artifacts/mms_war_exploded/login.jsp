@@ -10,6 +10,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>登录</title>
     <link rel="shortcut icon" href="images/login-favicon.ico">
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -17,7 +19,57 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/bootstrap.js"></script>
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+    <script src="js/sweetalert-dev.js"></script>
 
+
+    <script>
+        function refreshCode() {
+            var vcode = document.getElementById("vcode");
+            vcode.src = "${pageContext.request.contextPath}/checkCodeServlet?"+new Date().getTime();
+
+        }
+
+
+        function clientlogin() {
+            $.ajax({
+                type:"post",
+                data:$('#loginform').serialize(),
+                url:"./clientLoginServlet",
+                success:function (data) {
+                    if (data == "error"){
+                        swal({
+                            title:"请输入登录信息"
+                        },function () {
+                            location = '${pageContext.request.contextPath}/login.jsp';
+                        })
+                    }else if (data=="all_error"){
+                        swal({
+                            title:"账号密码或验证码错误"
+                        },function () {
+                            location = '${pageContext.request.contextPath}/login.jsp';
+                        })
+                    }
+                    else if (data=="verifycode_error"){
+                        swal({
+                            title:"验证码错误"
+                        },function () {
+                            location = '${pageContext.request.contextPath}/login.jsp';
+                        })
+                    }
+                    else if (data=="login_error"){
+                        swal({
+                            title:"账号密码错误"
+                        },function () {
+                           location = '${pageContext.request.contextPath}/login.jsp';
+                        })
+                    }else if (data=="login_success") {
+                        location = '${pageContext.request.contextPath}/clientHomepage.jsp';
+                    }
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 <div>
@@ -36,44 +88,41 @@
         <div class="slogan_mid">
             <img src="images/login_slogan.png" height="429" width="571" class="img_mid"/></div>
         <div class="content_mid">
-            <div class="content_menu">
+            <div class="content_menu" >
                 <ul class="menu_ul">
-                    <li id="li1" class="menu_li1">
+                    <li id="li1" class="menu_li1" style="float: left">
                         <a href="login.jsp" target="bt1">用户登录</a>
                     </li>
-                    <li id="li2" class="menu_li2">
+                    <li id="li2" class="menu_li2" >
                         <a href="adminLogin.jsp " target="bt1">管理员登录</a>
                     </li>
                 </ul>
             </div>
 
-            <form class="form-horizontal" action="${pageContext.request.contextPath}/clientLoginServlet">
+            <form class="form-horizontal" id="loginform" style="margin-left: 30px">
                 <div class="form-group">
-                    <label for="cno" class="col-sm-2 control-label">账号</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="cno" name="cno" placeholder="用户账号">
+                        <input type="text" class="form-control" id="cno" name="cno" placeholder="请输入账号">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="cpassword" class="col-sm-2 control-label">密码</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="密码">
+                        <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="请输入密码">
                     </div>
                 </div>
-                <div class="form-group ">
-                    <div class="col-sm-offset-2 col-sm-10 ">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox">记住密码
-                            </label>
-                            <a href="#" class="content_a">忘记密码</a>
-                        </div>
 
+                <div class="form-group" >
+                    <div class="col-sm-10" style="width: 150px">
+                        <input type="text" class="form-control" id="verifycode" name="verifycode"  placeholder="请输入验证码" style="width: 150px">
+                    </div>
+                    <div>
+                        <a href="javascript:refreshCode()"><img style="margin-left: 30px;width: 74px;height: 34px" src="${pageContext.request.contextPath}/checkCodeServlet" title="看不清点击刷新" id="vcode"/></a>
                     </div>
                 </div>
-                <div class="form-group" >
-                    <div class="col-sm-offset-2 col-sm-10 ">
-                        <button type="submit" class="btn btn-default content_imput" >登录</button>
+
+                <div class="form-group">
+                    <div style="width: 208px;margin-left: 50px" >
+                        <button type="button"  class="btn btn-default content_imput" id="login" onclick="clientlogin()">登录</button>
                     </div>
                 </div>
             </form>
@@ -104,7 +153,9 @@
         </dl>
     </div>
 </div>
+
 </body>
 </html>
+
 <%--
 <script>alert('注册成功即将跳转到登录界面!')</script>--%>

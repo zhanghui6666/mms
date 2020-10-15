@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/bootstrap.js"></script>
     <link rel="stylesheet" href="css/myclient.css">
-
+    <link rel="stylesheet" href="css/sweetalert.css">
+    <script src="js/sweetalert-dev.js"></script>
 </head>
 <body style="padding-top:50px">
 <div class="nav1">
@@ -33,6 +34,7 @@
 
                 <ul class="nav navbar-nav navbar-right barshopcart">
                     <li><a href="${pageContext.request.contextPath}/findShopCartByPageServlet">购物车</a></li>
+                    <li><a href="javascript:logout()">退出登录</a></li>
                 </ul>
             </div>
         </div>
@@ -77,6 +79,24 @@
 
 
 <script>
+    function logout(){
+        swal({
+                title: "确定退出吗？",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定退出！",
+                closeOnConfirm: false
+            },
+            function(){
+                location = "${pageContext.request.contextPath}/logoutServlet";
+            });
+    }
+
+
+
+
+
 
     $(function () {
         $(".barfunction").find("li").each(function () {

@@ -16,7 +16,6 @@ public class AdminLoginDaoImpl implements AdminLoginDao {
                 String sql ="select * from admin where aname=? and apassword=? ";
                 return template.queryForObject(sql,new BeanPropertyRowMapper<AdminLogin>(AdminLogin.class),aname,apassword);
         }catch (Exception e){
-            e.printStackTrace();
             return null;
         }
     }

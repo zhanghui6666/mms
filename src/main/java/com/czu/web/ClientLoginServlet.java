@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -17,30 +18,38 @@ import java.io.PrintWriter;
 @WebServlet("/clientLoginServlet")
 public class ClientLoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String cno = request.getParameter( "cno" );
-        //获取用户填写的登录密码
-        String cpassword = request.getParameter( "cpassword" );
-        request.getSession().setAttribute("cno",cno);
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+        String cno = request.getParameter("cno");
+        String cpassword = request.getParameter("cpassword");
+        //验证码校验
+        String verifycode = request.getParameter("verifycode");
+        HttpSession session = request.getSession();
+        String checkcode_server = (String) session.getAttribute("CHECKCODE_SERVER");
+        session.removeAttribute("CHECKCODE_SERVER");//确保验证码一次性
+
         Client client = new Client();
         client.setCno(cno);
         client.setCpassword(cpassword);
         ClientService clientService = new ClientServiceImpl();
         Client clientLogin = clientService.login(client);
-        if(clientLogin == null){
-            request.getRequestDispatcher("/loginError.jsp").forward(request,response);
-           /* out.print("<script>alert('用户名或密码错误，登录失败');window.location.href='http://localhost:8080/mms/login.jsp'</script>");*/
+
+        if ("".equals(verifycode) || verifycode==null && clientLogin == null) {
+            response.getWriter().write("error");
+        }else if (!checkcode_server.equalsIgnoreCase(verifycode) && clientLogin == null){
+            response.getWriter().write("all_error");
         }
-        else {
-            request.getRequestDispatcher("/clientHomepage.jsp").forward(request,response);
-            //out.print("<script>alert('登陆成功!');window.location.href='http://localhost:8080/mms/clientHomepage.jsp'</script>");
-           /*out.print( "<head><script src='js/sweetalert-dev.js'></script>");
-           out.print("<link rel='stylesheet' href='css/sweetalert.css'></head>");
-           out.print("<script>swal('这是一条信息！', '很漂亮，不是吗？')</script>");
-            out.print("<script>window.location.href='http://localhost:8080/mms/homepage.jsp'</script>");*/
+        else if (!checkcode_server.equalsIgnoreCase(verifycode) && clientLogin != null) {
+            response.getWriter().write("verifycode_error");
+        } else if (checkcode_server.equalsIgnoreCase(verifycode) && clientLogin == null) {
+            response.getWriter().write("login_error");
+        } else if (checkcode_server.equalsIgnoreCase(verifycode) && clientLogin != null) {
+            request.getSession().setAttribute("cno", cno);
+            response.getWriter().write("login_success");
         }
 
     }
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request, response);
