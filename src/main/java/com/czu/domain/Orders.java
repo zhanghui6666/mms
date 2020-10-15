@@ -1,13 +1,30 @@
 package com.czu.domain;
 
-public class Medicine {
+public class Orders {
+    private Integer oid;
+    private String cno;
     private String mno;
     private String mname;
-    private String mmode;
     private String mefficacy;
     private Integer mprice;
-    private Integer mnumber;
-    private Integer mid;
+    private Integer num;
+    private Integer totalprice;
+
+    public Integer getOid() {
+        return oid;
+    }
+
+    public void setOid(Integer oid) {
+        this.oid = oid;
+    }
+
+    public String getCno() {
+        return cno;
+    }
+
+    public void setCno(String cno) {
+        this.cno = cno;
+    }
 
     public String getMno() {
         return mno;
@@ -23,14 +40,6 @@ public class Medicine {
 
     public void setMname(String mname) {
         this.mname = mname;
-    }
-
-    public String getMmode() {
-        return mmode;
-    }
-
-    public void setMmode(String mmode) {
-        this.mmode = mmode;
     }
 
     public String getMefficacy() {
@@ -49,32 +58,33 @@ public class Medicine {
         this.mprice = mprice;
     }
 
-    public Integer getMnumber() {
-        return mnumber;
+    public Integer getNum() {
+        return num;
     }
 
-    public void setMnumber(Integer mnumber) {
-        this.mnumber = mnumber;
+    public void setNum(Integer num) {
+        this.num = num;
     }
 
-    public Integer getMid() {
-        return mid;
+    public Integer getTotalprice() {
+        return totalprice;
     }
 
-    public void setMid(Integer mid) {
-        this.mid = mid;
+    public void setTotalprice(Integer totalprice) {
+        this.totalprice = totalprice;
     }
 
     @Override
     public String toString() {
-        return "Medicine{" +
-                "mno=" + mno +
+        return "Orders{" +
+                "oid=" + oid +
+                ", cno='" + cno + '\'' +
+                ", mno='" + mno + '\'' +
                 ", mname='" + mname + '\'' +
-                ", mmode='" + mmode + '\'' +
                 ", mefficacy='" + mefficacy + '\'' +
                 ", mprice=" + mprice +
-                ", mnumber=" + mnumber +
-                ", mid=" + mid +
+                ", num=" + num +
+                ", totalprice=" + totalprice +
                 '}';
     }
 }

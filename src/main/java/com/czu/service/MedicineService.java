@@ -2,6 +2,7 @@ package com.czu.service;
 
 import com.czu.domain.Medicine;
 import com.czu.domain.PageBean;
+import com.czu.domain.SCM;
 
 import java.util.List;
 import java.util.Map;
@@ -21,4 +22,14 @@ public interface MedicineService {
      * @return
      */
     PageBean<Medicine> findMedicineByPage(String currentPage, String rows, Map<String, String[]> condition);
+
+    Integer findShopCartExist(SCM scm);
+
+    void AddIntoShopcart(SCM scm);
+
+    void UpdateShopcart(SCM scm);
+
+    Integer findMedicineToalNum(String mno);
+
+    void DecreaseMedicine(String mno);
 }
