@@ -16,9 +16,9 @@ import java.util.List;
 public class FindAllAdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AdminService adminService=new AdminServiceImpl();
-        List<AdminInfo> AdminInfos =adminService.findAllAdminInfo();
-        request.setAttribute("adminInfos", AdminInfos);
-        request.getRequestDispatcher("/controladminList.jsp").forward(request,response);
+        List<AdminInfo> adminInfos=adminService.findAllAdminInfo();
+        request.setAttribute("adminInfos",adminInfos);
+        request.getRequestDispatcher("/admincontroladminList.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
