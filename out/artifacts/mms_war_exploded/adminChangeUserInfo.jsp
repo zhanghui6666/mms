@@ -106,7 +106,7 @@
                     <span id="symptomspan" style="color: red"></span>
                 </div>
                 <div class="form-group">
-                    <label for="date">出生日期</label>
+                    <label for="date">注册日期</label>
                     <input type="text" class="form-control form_group" required="required" id="date"
                            placeholder="请输入您的出生日期" value="<%= adminUserInfo.getCdate()%>" name="cdate">
                 </div>

@@ -5,6 +5,7 @@ import java.util.Date;
 public class Client {
     private String cno;
     private String cpassword;
+    private String spassword;
     private String cname;
     private String csex;
     private String cage;
@@ -15,21 +16,31 @@ public class Client {
     private String cremark;
     private Integer cid;
 
+
     @Override
     public String toString() {
         return "Client{" +
                 "cno='" + cno + '\'' +
                 ", cpassword='" + cpassword + '\'' +
+                ", spassword='" + spassword + '\'' +
                 ", cname='" + cname + '\'' +
                 ", csex='" + csex + '\'' +
                 ", cage='" + cage + '\'' +
                 ", caddress='" + caddress + '\'' +
                 ", cphone='" + cphone + '\'' +
                 ", csymptom='" + csymptom + '\'' +
-                ", cdate='" + cdate + '\'' +
+                ", cdate=" + cdate +
                 ", cremark='" + cremark + '\'' +
                 ", cid=" + cid +
                 '}';
+    }
+
+    public String getSpassword() {
+        return spassword;
+    }
+
+    public void setSpassword(String spassword) {
+        this.spassword = spassword;
     }
 
     public String getCno() {

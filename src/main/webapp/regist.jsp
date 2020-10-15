@@ -37,7 +37,7 @@
 <div class="container">
     <div class="register">
         <div class="content">
-            <form action="${pageContext.request.contextPath}/clientRegisterServlet" method="post" id="ajaxForm">
+            <form  method="post" id="registForm">
                 <h1>
                     <span class="content_span">新用户注册</span>
                 </h1>
@@ -51,6 +51,13 @@
                     <input type="password" class="form-control form_group" required="required" id="cpassword" name="cpassword" placeholder="请输入您的密码"  onblur="checkpassword()" >
                     <span id="passwordspan" style="color: red"></span>
                 </div>
+
+                <div class="form-group">
+                    <label for="spassword">超级密码</label>
+                    <input type="password" class="form-control form_group" id="spassword"  name="spassword" placeholder="请输入超级密码，用于找回密码" onblur="checkpassword()">
+                    <span id="spasswordspan" style="color: red"></span>
+                </div>
+
                 <div class="form-group">
                     <label for="cname">姓名</label>
                     <input type="text" class="form-control form_group" required="required"  id="cname" name="cname" placeholder="请输入您的真实姓名" onblur="checkname1()">
@@ -95,7 +102,7 @@
                 <div>
                     <br>
                     <input type="reset" value="重置" class="btn btn-primary">
-                    <input type="submit" value="注册" class="btn btn-primary btn_submit" onclick="submit()">
+                    <input type="button" value="注册" class="btn btn-primary btn_submit" onclick="regist()">
 
                 </div>
             </form>
@@ -103,6 +110,35 @@
     </div>
 </div>
 <script>
+    function regist(){
+        $.ajax({
+            url:"./clientRegisterServlet",
+            type:"post",
+            data:$('#registForm').serialize(),
+            success:function (data) {
+                if (data == "success"){
+                    swal({
+                        title:"注册成功！"
+                    },function () {
+                        location = "${pageContext.request.contextPath}/login.jsp";
+                    })
+                }else if (data == "error"){
+                    swal({
+                        title: "注册失败",
+                        text:"服务器异常。请稍后再试"
+                    },function () {
+                        location = "${pageContext.request.contextPath}/regist.jsp";
+                    })
+                }
+            }
+        })
+    }
+
+
+
+
+
+
     function checkname() {
         var cname1 = $("#cno").val()
         console.log(cname1);
@@ -112,6 +148,17 @@
         }
         else {
             document.getElementById("namespan").innerText="";
+            return true;
+        }
+    }
+
+    function checkspassword() {
+        var password1 = $("#spassword").val()
+        if (password1 == "") {
+            document.getElementById("spasswordspan").innerHTML = "超级密码不能为空！";
+            return false;
+        } else {
+            document.getElementById("spasswordspan").innerText = "";
             return true;
         }
     }

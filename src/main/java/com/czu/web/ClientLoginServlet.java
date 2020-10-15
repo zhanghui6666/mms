@@ -34,6 +34,8 @@ public class ClientLoginServlet extends HttpServlet {
         ClientService clientService = new ClientServiceImpl();
         Client clientLogin = clientService.login(client);
 
+
+
         if ("".equals(verifycode) || verifycode==null && clientLogin == null) {
             response.getWriter().write("error");
         }else if (!checkcode_server.equalsIgnoreCase(verifycode) && clientLogin == null){

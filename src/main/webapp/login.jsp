@@ -31,6 +31,7 @@
         }
 
 
+
         function clientlogin() {
             $.ajax({
                 type:"post",
@@ -121,8 +122,12 @@
                 </div>
 
                 <div class="form-group">
-                    <div style="width: 208px;margin-left: 50px" >
-                        <button type="button"  class="btn btn-default content_imput" id="login" onclick="clientlogin()">登录</button>
+                    <div style="width: 320px;margin-left:0; height: 30px">
+                        <button type="button" style="width: 150px;margin-left: 15px" class="btn btn-default content_imput" id="login" onclick="clientlogin()">登录</button>
+                    </div>
+                    <div>
+                    <a href="${pageContext.request.contextPath}/forget.jsp" style="margin-left: 10px;margin-top:10px;height: 10px">忘记密码</a>
+                    <a href="${pageContext.request.contextPath}/modify.jsp" style="margin-left: 10px;margin-top:10px;height: 10px">修改密码</a>
                     </div>
                 </div>
             </form>

@@ -180,6 +180,14 @@
                             </li>
                         </c:if>
                     </c:forEach>
+                        <li>
+                            <span>...</span>
+                        </li>
+
+                        <li>
+                            <input type="text" class="form-control" name="pageCode" value="${pb.currentPage}" style="width:40px;float: left">
+                            <a href="#">Go</a>
+                        </li>
 
                     <%--<c:forEach begin="1" end="${pb.totalPage}" var="i">
 
@@ -212,17 +220,6 @@
 
         <%--跳转指定页数--%>
         <div style="float: right;margin-top: 22px;">
-            <div class="jump" style="float: left;height: 30px">
-                <div class="page-jump">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="pageCode" name="pageCode" value="${pb.currentPage}" style="width:80px">
-                        <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit" onclick="_go()" style="background: black">Go!</button>
-                        </span>
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-6 -->
-            </div>
-
             <%--总页数--%>
             <div style="float: left;">
                 <span style="font-size:25px;margin-left:10px;margin-right:10px; float: left">

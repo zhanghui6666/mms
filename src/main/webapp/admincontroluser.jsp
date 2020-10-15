@@ -51,7 +51,7 @@
                 <td>地址</td>
                 <td>电话号码</td>
                 <td>症状</td>
-                <td>出生日期</td>
+                <td>注册日期</td>
                 <td>状态</td>
                 <td>操作</td>
             </thead>

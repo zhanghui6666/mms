@@ -14,7 +14,17 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void Regist(Client client) {
-        cdao.regist(client);
+    public Integer Regist(Client client) {
+        return cdao.regist(client);
+    }
+
+    @Override
+    public String Forget(String cno ,String spassword) {
+        return cdao.Forget(cno,spassword);
+    }
+
+    @Override
+    public Integer modifyPassword(String cno, String cpassword, String spassword,String ncpassword) {
+        return cdao.modifyPassword(cno,cpassword,spassword,ncpassword);
     }
 }
