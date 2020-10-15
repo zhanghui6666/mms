@@ -54,4 +54,14 @@ public class MedicineServiceImpl implements MedicineService {
     public void UpdateShopcart(SCM scm) {
         mdao.UpdateShopcart(scm);
     }
+
+    @Override
+    public Integer findMedicineToalNum(String mno) {
+        return mdao.findMedicineToalNum(mno);
+    }
+
+    @Override
+    public void DecreaseMedicine(String mno) {
+        mdao.DecreaseMedicine(mno);
+    }
 }

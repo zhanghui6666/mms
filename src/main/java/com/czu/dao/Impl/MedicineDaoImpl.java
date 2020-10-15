@@ -93,4 +93,22 @@ public class MedicineDaoImpl implements MedicineDao {
         template.update(sql,scm.getNum(),scm.getCno(),scm.getMno());
 
     }
+
+    @Override
+    public Integer findMedicineToalNum(String mno) {
+        String sql = "select mnumber from medicine where mno = ?";
+        Integer num = null;
+        try {
+           num = template.queryForObject(sql, Integer.class, mno);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+        return num;
+    }
+
+    @Override
+    public void DecreaseMedicine(String mno) {
+        String sql = "UPDATE medicine SET mnumber = mnumber -1  WHERE mno = ? ";
+        template.update(sql,mno);
+    }
 }

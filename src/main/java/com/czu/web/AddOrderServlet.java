@@ -1,10 +1,12 @@
 package com.czu.web;
 
 import com.czu.domain.Orders;
-import com.czu.domain.ShopCart;
 import com.czu.service.Impl.ShopCartServiceImpl;
 import com.czu.service.ShopCartService;
-import org.apache.commons.beanutils.BeanUtils;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,34 +15,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-import java.util.Map;
+import java.util.Arrays;
 
 @WebServlet("/addOrderServlet")
 public class AddOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String cno = (String) session.getAttribute("cno");
-        String mno = request.getParameter("mno");
-        System.out.println(cno);
-        System.out.println(mno);
-        ShopCartService shopCartService = new ShopCartServiceImpl();
-        shopCartService.deleteShopCart(cno,mno);
-        response.sendRedirect(request.getContextPath()+"/findShopCartByPageServlet");
 
-       /* Map<String, String[]> map = request.getParameterMap();
+
         Orders orders = new Orders();
-        try {
-            BeanUtils.populate(orders,map);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        System.out.println(orders);
-        List<ShopCart> shopcart = (List<ShopCart>) session.getAttribute("shopcart");
-        System.out.println(shopcart);*/
+        String mno = request.getParameter("mno");
+        String mname = request.getParameter("mname");
+        String mefficacy = request.getParameter("mefficacy");
+        String _mprice = request.getParameter("mprice");
+        String _num = request.getParameter("num");
+        String _totalprice = request.getParameter("totalprice");
+
+        int mprice = Integer.parseInt(_mprice);
+        int num = Integer.parseInt(_num);
+        int totalprice = Integer.parseInt(_totalprice);
+
+        orders.setCno(cno);
+        orders.setMno(mno);
+        orders.setMname(mname);
+        orders.setMefficacy(mefficacy);
+        orders.setMprice(mprice);
+        orders.setNum(num);
+        orders.setTotalprice(totalprice);
+
+        //System.out.println("add"+mno);
+        ShopCartService shopCartService = new ShopCartServiceImpl();
+        shopCartService.addOrder(orders);
+        request.getRequestDispatcher("/findShopCartByPageServlet").forward(request,response);
+
+
 
     }
 

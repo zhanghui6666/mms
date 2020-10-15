@@ -1,4 +1,3 @@
-<%@ page import="com.czu.domain.Orders" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -75,12 +74,12 @@
 
     <%--获取数据--%>
     <div class="container2">
-        <form id="form" action="${pageContext.request.contextPath}/addOrderServlet" method="post">
+        <form id="form" method="post">
             <div class="table-responsive">
-                <table border="1" class="table table-bordered table-hover  table-condensed" id="tb1" style="width: 100%;
-            table-layout: fixed;">
+                <table border="1" class="table table-bordered table-hover  table-condensed" id="tb1"
+                       style="width: 100%;table-layout: fixed;">
                     <tr class="success">
-                        <th style="width:3%"><input type="checkbox" id="checkAll" name="checkbox">
+                        <th style="width:3%"><input type="checkbox" id="checkAll" name="checkbox" class="checkedId">
                         <th style="width:7%">序号</th>
                         <th style="width:10%">药品编号</th>
                         <th style="width:10%">药品名</th>
@@ -93,10 +92,8 @@
 
                     <c:forEach items="${shopcart}" var="shopcart" varStatus="status">
                         <tr>
-                            <th class="wrap"><input type="checkbox" name="checkedId" class="checkedId"
-                                                    value="${status.index+1}" mno="${shopcart.mno}"
-                                                    mname="${shopcart.mname}" mefficacy="${shopcart.mefficacy}"
-                                                    mprice="${shopcart.mprice}" num="${shopcart.num}"
+                            <th class="wrap"><input type="checkbox" id="checkedBox" name="checkedId" class="checkedId"
+                                                    value="${status.index+1}"
                                                     totalprice="${shopcart.mprice * shopcart.num}"></th>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
                                 onmouseout="this.className = 'wrap'">${status.index+1}</td>
@@ -113,25 +110,28 @@
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
                                 onmouseout="this.className = 'wrap'">${shopcart.mprice * shopcart.num}</td>
                             <td>
-                                <a class="btn btn-primary" role="button" style="margin-left: 50px;" onclick="deleteShopCart(${shopcart.mno})">删除</a>
+                                <a class="btn btn-primary" role="button" style="margin-left: 50px;"
+                                   onclick="deleteShopCart(${shopcart.mno})">删除</a>
                             </td>
                         </tr>
                     </c:forEach>
                 </table>
+
                 <%--<div class="panel-footer" style="text-align: right;">
                 <a class="btn btn-primary" href="javascript:buyMedicine();"  role="button" style="margin-left: 50px;">购买</a>
                 共计<span id="total" >0</span>元
                 </div>--%>
-            </div>
 
+            </div>
             <nav class="navbar navbar-default navbar-fixed-bottom">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse">
                         <div style="text-align: left;float: left;margin-top:8px;margin-left: 135px">
-                            <a class="btn btn-danger" href="javascript:void(0);" id="delSelected" role="button">删除选中</a>
+                            <a class="btn btn-danger delAll" href="javascript:void(0);" id="delSelected" role="button">删除选中</a>
                         </div>
                         <div style="text-align: right;float: right;margin-top:8px;margin-right: 135px;color: #D9534F;font-size: 25px">
-                            <button class="btn btn-danger" style="margin-right: 20px">购买</button>
+                            <%--<button class="btn btn-danger buy" style="margin-right: 20px">购买</button>--%>
+                            <a class="btn btn-danger buy" style="margin-right: 20px" role="button">购买</a>
                             共计<span id="total">0</span>元
                         </div>
                     </div><!-- /.navbar-collapse -->
@@ -254,11 +254,15 @@
     <div class="container3"></div>
 </div>
 <script>
+    function buydel(mno) {
+        location = 'deleteOrderServlet?mno=' + mno;
+    }
+
 
     function deleteShopCart(mno) {
         swal({
                 title: "确定删除吗？",
-                text: "再见",
+                text: "删除这个药品",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -269,29 +273,32 @@
             },
             function (isConfirm) {
                 if (isConfirm) {
-                    swal({title:'删除成功',
-                         text:'成功删除了药品',
-                         type:'success',
-                         confirmButtonText:'确定',},
-                        function (isConfirm) {
-                            if (isConfirm){
-                                location ='addOrderServlet?mno='+mno;
-                            }
+                    $.ajax({
+                        url: "./deleteOrderServlet",
+                        data: {mno: mno},
+                        type: "post",
+                        success: function () {
+                            swal({
+                                    title: '删除成功',
+                                    text: '成功删除了药品',
+                                    type: 'success',
+                                    confirmButtonText: '确定',
+                                },
+                                function () {
+                                    location = 'findShopCartByPageServlet';
+                                }
+                            );
                         }
-                    );
+                    })
                 } else {
-                    swal("取消！", "你的药品未被删除)","error");
+                    swal("取消！", "您的药品未被删除)", "error");
                 }
             });
-
-            /*if (confirm("确定删除吗？")){
-                location.href = "${pageContext.request.contextPath}/addOrderServlet?mno="+mno;
-    }*/
-
+    }
 
 
     window.onload = function () {
-        document.getElementById("delSelected").onclick = function () {
+        document.getElementById("delSelected").onclick = function (mno) {
             swal({
                     title: "确定删除吗？",
                     text: "再见",
@@ -305,10 +312,12 @@
                 },
                 function (isConfirm) {
                     if (isConfirm) {
-                        swal({title:'删除成功',
-                                text:'成功删除了药品',
-                                type:'success',
-                                confirmButtonText:'确定',},
+                        swal({
+                                title: '删除成功',
+                                text: '成功删除了药品',
+                                type: 'success',
+                                confirmButtonText: '确定',
+                            },
                             function (isConfirm) {
                                 if (isConfirm) {
                                     var flag = false;
@@ -329,13 +338,12 @@
                             }
                         );
                     } else {
-                        swal("取消！", "你的药品未被删除)","error");
+                        swal("取消！", "你的药品未被删除)", "error");
                     }
 
                 });
         }
 
-    }
     }
     /*window.onload = function () {
         document.getElementById("checkAll").onclick = function () {
@@ -348,5 +356,14 @@
     }*/
 
 </script>
+
+
+<%
+    String delMessage = (String) session.getAttribute("delMessage");
+    if (delMessage == null || "".equals(delMessage)) {
+    } else {
+
+    }
+%>
 </body>
 </html>

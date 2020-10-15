@@ -113,28 +113,8 @@
                                 onmouseout="this.className = 'wrap'">${medicine.mnumber}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
                                 onmouseout="this.className = 'wrap'">${medicine.mid}</td>
-                            <td><a class="btn btn-primary" href="javascript:;" onclick="swal({
-                                                                                                title:'添加成功',
-                                                                                                text:'成功添加了药品',
-                                                                                                type:'success',
-                                                                                                confirmButtonText:'确定',
-                                                                                                },
-                                                                                                function (isConfirm) {
-                                                                                                if (isConfirm){
-                                                                                                location ='putMedicineInShopCartServlet?mno=${medicine.mno}';
-                                                                                                }
-
-                                                                                                }
-                                                                                                )"
+                            <td><a class="btn btn-primary" href="javascript:;" onclick="addShopCart(${medicine.mno})"
                                    role="button" style="margin-left: 50px;">加入购物车</a></td>
-
-<%--
-                            <td><a class="btn btn-primary" onclick="/*swal('添加成功','成功添加了药品','success')*/confirm('你确定要加入购物车吗？')?location.href='putMedicineInShopCartServlet?mno=${medicine.mno}':''"  href="javascript:;"  role="button" style="margin-left: 50px;">加入购物车</a></td>
---%>
-
-<%--
-                            <td><button type="button" class="btn btn-primary" onclick="add()" style="margin-left: 50px;">加入购物车</button></td>
---%>
                         </tr>
                     </c:forEach>
                 </table>
@@ -148,11 +128,9 @@
                     <c:if test="${pb.currentPage == 1}">
                     <li class="disabled">
                         </c:if>
-
                         <c:if test="${pb.currentPage != 1}">
                     <li>
                         </c:if>
-
                         <c:if test="${pb.currentPage != 1}">
                         <a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${pb.currentPage - 1}&rows=20&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}"
                            aria-label="Previous">
@@ -256,6 +234,32 @@
 </div>
 <script>
 
+    function addShopCart(mno) {
+            $.ajax({
+                url: "./putMedicineInShopCartServlet",
+                data: {mno: mno},
+                type: "post",
+                scriptCharset: 'utf-8',
+                success: function (addMsg) {
+                    if (addMsg=="false"){
+                        swal("库存不足，请通知管理员添加药品！")
+                    }else {
+                        swal({
+                                title:'添加成功',
+                                text:'成功添加了药品',
+                                type:'success',
+                                confirmButtonText:'确定',
+                            },
+                            function () {
+                                location = '${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${pb.currentPage}&rows=20&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}';
+                            }
+                        );
+                    }
+                }
+            })
+    }
+
+
     function _go() {
         var pc = $("#pageCode").val();//获取文本框中的当前页码
         if(!/^[1-9]\d*$/.test(pc)) {//对当前页码进行整数校验
@@ -269,17 +273,6 @@
         location = "${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage="+pc;
     }
 
-    window.onload = function () {
-        document.getElementById("firstCb").onclick = function () {
-
-            var cbs = document.getElementsByName('mid');
-            for (let i = 0; i < cbs.length; i++) {
-                cbs[i].checked = this.checked;
-            }
-
-        };
-    }
-
     $(function () {
         $(".barfunction").find("li").each(function () {
             var a = $(this).find("a:first")[0];
@@ -290,7 +283,6 @@
             }
         });
     })
-
 
     $(function () {
         $(".barshopcart").find("li").each(function () {

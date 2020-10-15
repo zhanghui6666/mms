@@ -2,6 +2,7 @@ package com.czu.service.Impl;
 
 import com.czu.dao.Impl.ShopCartDaoImpl;
 import com.czu.dao.ShopCartDao;
+import com.czu.domain.Orders;
 import com.czu.domain.PageBean;
 import com.czu.domain.ShopCart;
 import com.czu.service.ShopCartService;
@@ -21,5 +22,10 @@ public class ShopCartServiceImpl implements ShopCartService {
     @Override
     public void deleteShopCart(String cno, String mno) {
         sdao.deleteShopCart(cno,mno);
+    }
+
+    @Override
+    public void addOrder(Orders orders) {
+        sdao.addOrder(orders);
     }
 }

@@ -2,6 +2,7 @@ package com.czu.dao.Impl;
 
 import com.czu.dao.ShopCartDao;
 import com.czu.domain.Medicine;
+import com.czu.domain.Orders;
 import com.czu.domain.ShopCart;
 import com.czu.util.JDBCUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -31,5 +32,11 @@ public class ShopCartDaoImpl implements ShopCartDao {
     public void deleteShopCart(String cno, String mno) {
         String sql = "delete from shopcart where cno = ? and mno = ? ";
         template.update(sql,cno,mno);
+    }
+
+    @Override
+    public void addOrder(Orders orders) {
+        String sql = "insert into orders values(null,?,?,?,?,?,?,?)";
+        template.update(sql,orders.getCno(),orders.getMno(),orders.getMname(),orders.getMefficacy(),orders.getMprice(),orders.getNum(),orders.getTotalprice());
     }
 }

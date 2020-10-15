@@ -1,6 +1,7 @@
 package com.czu.dao;
 
 import com.czu.domain.Agency;
+import com.czu.domain.Orders;
 import com.czu.domain.ShopCart;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface ShopCartDao {
     List<ShopCart> findShopCart(String cno);
 
     void deleteShopCart(String cno, String mno);
+
+    void addOrder(Orders orders);
 }

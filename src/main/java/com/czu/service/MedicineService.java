@@ -28,4 +28,8 @@ public interface MedicineService {
     void AddIntoShopcart(SCM scm);
 
     void UpdateShopcart(SCM scm);
+
+    Integer findMedicineToalNum(String mno);
+
+    void DecreaseMedicine(String mno);
 }
