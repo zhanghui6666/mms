@@ -1,5 +1,7 @@
 package com.czu.domain;
 
+import java.util.Date;
+
 public class Client {
     private String cno;
     private String cpassword;
@@ -9,7 +11,7 @@ public class Client {
     private String caddress;
     private String cphone;
     private String csymptom;
-    private String cdate;
+    private Date cdate;
     private String cremark;
     private Integer cid;
 
@@ -94,11 +96,11 @@ public class Client {
         this.csymptom = csymptom;
     }
 
-    public String getCdate() {
+    public Date getCdate() {
         return cdate;
     }
 
-    public void setCdate(String cdate) {
+    public void setCdate(Date cdate) {
         this.cdate = cdate;
     }
 
