@@ -55,4 +55,14 @@ public class ClientDaoImpl implements ClientDao {
             return null;
         }
     }
+
+    @Override
+    public String findIfRepeat(String cno) {
+        try {
+            String sql = "select cno from client where cno = ?";
+            return template.queryForObject(sql,String.class,cno);
+        }catch (Exception e){
+            return null;
+        }
+    }
 }

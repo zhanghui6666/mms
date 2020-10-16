@@ -20,68 +20,54 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sweetalert.css">
     <link rel="stylesheet" href="css/myclient.css">
+    <script>
+        $(function () {
+            $("#adminFunChoose").find("li").each(function () {
+                var a = $(this).find("a:first")[0];
+                if ($(a).attr("href") === location.pathname) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        })
+    </script>
 </head>
-<body style="padding-top:50px">
-<%--复杂查询--%>
+<body>
 <div class="nav1">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <form class="navbar-form navbar-left" style="margin-left: 150px">
-                    <div class="form-group">
-                        <input style="width: 200px" type="text" name="mno" class="form-control" id="medicineno" value="${condition.mno[0]}" placeholder="药品编号">
-                        <input style="width: 200px;margin-left: 20px" type="text" name="mname" class="form-control" value="${condition.mname[0]}" id="medicineName" placeholder="药品名">
-                        <input style="width: 200px;margin-left: 20px" type="text" name="mefficacy" class="form-control" value="${condition.mefficacy[0]}" id="medicineFunction" placeholder="药品功效">
-                    </div>
-                    <ul class="nav navbar-nav navbar-right barshopcart" style="margin-left: 150px">
-                        <li><a href="javascript:deleteChoose()">删除选中</a></li>
-                        <li><a href="${pageContext.request.contextPath}/adminAddMedicine.jsp">添加</a></li>
-                        <li><a href="${pageContext.request.contextPath}/adminchoose.jsp">返回</a></li>
-<%--                        <a href="javascript:deleteChoose()" onclick="deleteChoose()">--%>
-<%--                            <button type="button" class="btn btn-default btn-button" style="width: 200px">删除选中</button>--%>
-<%--                        </a>--%>
-<%--                        <a href="${pageContext.request.contextPath}/adminAddMedicine.jsp">--%>
-<%--                            <button type="button" class="btn btn-default btn-button">添加</button>--%>
-<%--                        </a>--%>
-<%--                        <a href="${pageContext.request.contextPath}/adminchoose.jsp">--%>
-<%--                            <button type="button" class="btn btn-default btn-button">返回</button>--%>
-<%--                        </a>--%>
-                    </ul>
-                    <button type="submit" style="margin-left: 20px;color: black" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                </form>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-</div>
 
+        <ul class="nav nav-tabs" id="adminFunChoose">
+        <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/findAllAdminServlet#">管理员信息管理</a></li>
+        <li role="presentation"><a href="${pageContext.request.contextPath}/findAllUserServlet">用户信息管理</a></li>
+        <li role="presentation"><a href="${pageContext.request.contextPath}/adminControlMedicineServlet">仓库管理</a></li>
+        <form class="navbar-form navbar-left" style="margin-left: 80px">
+            <div class="form-group">
+                <input style="width: 200px" type="text" name="mno" class="form-control" id="medicineno" value="${condition.mno[0]}" placeholder="药品编号">
+                <input style="width: 200px;margin-left: 20px" type="text" name="mname" class="form-control" value="${condition.mname[0]}" id="medicineName" placeholder="药品名">
+                <input style="width: 200px;margin-left: 20px" type="text" name="mefficacy" class="form-control" value="${condition.mefficacy[0]}" id="medicineFunction" placeholder="药品功效">
+            </div>
+            <button type="submit" style="margin-left: 20px;color: black" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+        <li><a href="javascript:deleteChoose()">删除选中</a></li>
+        <li><a href="${pageContext.request.contextPath}/adminAddMedicine.jsp">添加</a></li>
+        <li><a href="${pageContext.request.contextPath}/adminchoose.jsp">返回</a></li>
+        <li role="presentation" class="dropdown" style="margin-right: 30px">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="javascript:logout()">退出登录</a></li>
+            </ul>
+        </li>
+        </ul>
+    </ul>
+
+</div>
 
 <div class="nav2">
     <div class="logo_container">
-        <%-- <form class="form-inline" style="float:right;margin-top:30px" action="${pageContext.request.contextPath}/findMedicineByPageServlet" method="post">
-             <div class="form-group">
-                 <label for="medicineno">药品编号</label>
-                 <input style="width: 150px" type="text" name="mno" value="${condition.mno[0]}" class="form-control" >
-             </div>
-             <div class="form-group">
-                 <label for="medicineName">药品名</label>
-                 <input style="width: 150px" type="text" name="mname" value="${condition.mname[0]}" class="form-control">
-             </div>
-             <div class="form-group">
-                 <label for="medicineFunction">药品功效</label>
-                 <input style="width: 150px" type="text" name="mefficacy" value="${condition.mefficacy[0]}" class="form-control"
-                        >
-             </div>
-             <button type="submit" class="btn btn-default" style="margin-left: 30px;margin-right: 10px">查询药品信息</button>
-         </form>--%>
         <img src="images/title.png">
     </div>
 </div>
@@ -93,7 +79,7 @@
     <div class="container2">
         <form id="form" method="post">
             <div class="table-responsive">
-                <table border="1" class="table table-bordered table-hover  table-condensed" id="tb1" style="width: 99%;table-layout: fixed;">
+                <table border="1" class="table table-bordered table-hover table-condensed" id="tb1" style="width: 99%;table-layout: fixed;">
                     <tr class="success">
                         <th style="width:3%"><input type="checkbox" id="firstCb"></th>
                         <th style="width:7%">编号</th>
@@ -124,7 +110,8 @@
                                 onmouseout="this.className = 'wrap'">${medicine.mnumber}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
                                 onmouseout="this.className = 'wrap'">${medicine.mid}</td>
-                            <td style="width: 200px;text-align: center"><a class="btn btn-primary" href="${pageContext.request.contextPath}/adminFindOneMedicineServlet?mno=${medicine.mno}">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary" href="javascript:void(0)" onclick="del(${medicine.mno})">删除</a>&nbsp;
+                            <td style="text-align: center"><a class="btn btn-primary" style="margin-right: 20px"  href="${pageContext.request.contextPath}/adminFindOneMedicineServlet?mno=${medicine.mno}">编辑</a>
+                                <a class="btn btn-primary"  href="javascript:void(0)" onclick="del(${medicine.mno})">删除</a>&nbsp;
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -227,6 +214,24 @@
     <div class="container3"></div>
 </div>
 <script>
+
+    function logout(){
+        swal({
+                title: "确定退出吗？",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定退出！",
+                closeOnConfirm: false
+            },
+            function(){
+                location = "${pageContext.request.contextPath}/adminLogoutServlet";
+            });
+    }
+
+
+
+
     function _go() {
         var pc = $("#pageCode").val();//获取文本框中的当前页码
         if(!/^[1-9]\d*$/.test(pc)) {//对当前页码进行整数校验

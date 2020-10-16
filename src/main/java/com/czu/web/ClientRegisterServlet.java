@@ -21,6 +21,9 @@ public class ClientRegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
+        ClientService clientService = new ClientServiceImpl();
+
+        //注册
         Map<String, String[]> map = request.getParameterMap();
         Client client = new Client();
         try{
@@ -32,7 +35,6 @@ public class ClientRegisterServlet extends HttpServlet {
             e.printStackTrace();
         }
         client.setCdate(new Date());
-        ClientService clientService = new ClientServiceImpl();
         Integer flag = clientService.Regist(client);
         if (flag == 1){
             response.getWriter().write("success");

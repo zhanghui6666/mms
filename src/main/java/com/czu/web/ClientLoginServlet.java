@@ -36,7 +36,7 @@ public class ClientLoginServlet extends HttpServlet {
 
 
 
-        if ("".equals(verifycode) || verifycode==null && clientLogin == null) {
+        if (verifycode==null || verifycode.length()<=0 && clientLogin == null) {
             response.getWriter().write("error");
         }else if (!checkcode_server.equalsIgnoreCase(verifycode) && clientLogin == null){
             response.getWriter().write("all_error");

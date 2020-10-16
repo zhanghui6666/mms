@@ -17,8 +17,9 @@
     <link rel="stylesheet" href="css/sweetalert.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
-    <link rel="stylesheet" href="css/controluser.css">
-
+    <link rel="stylesheet" href="css/myclient.css">
+   <%-- <link rel="stylesheet" href="css/controluser.css">
+--%>
     <script>
         window.onload = function(){
             document.getElementById("topcheckbox").onclick = function () {
@@ -30,61 +31,114 @@
 
             };
         }
+
+        $(function () {
+            $("#adminFunChoose").find("li").each(function () {
+                var a = $(this).find("a:first")[0];
+                if ($(a).attr("href") === location.pathname) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        })
     </script>
 </head>
 <body>
-<div>
-    <img src="images/title.png">
-</div>
-<div id="controlUserMain">
-    <div id="controlUserTab">
-        <h3>用户信息表</h3>
-        <table class="table table-hover">
-            <thead>
-                <td><input type="checkbox" id="topcheckbox"></td>
-                <td>编号</td>
-                <td>用户名</td>
-                <td>密码</td>
-                <td>姓名</td>
-                <td>性别</td>
-                <td>年龄</td>
-                <td>地址</td>
-                <td>电话号码</td>
-                <td>症状</td>
-                <td>注册日期</td>
-                <td>状态</td>
-                <td>操作</td>
-            </thead>
-            <tbody id="userbody">
-                <c:forEach items="${adminUserInfos}" var="adminUserInfo">
-                    <tr>
-                        <td><input type="checkbox" name="cid" value="${adminUserInfo.cid}"></td>
-                        <td>${adminUserInfo.cid}</td>
-                        <td>${adminUserInfo.cno}</td>
-                        <td>${adminUserInfo.cpassword}</td>
-                        <td>${adminUserInfo.cname}</td>
-                        <td>${adminUserInfo.csex}</td>
-                        <td>${adminUserInfo.cage}</td>
-                        <td>${adminUserInfo.caddress}</td>
-                        <td>${adminUserInfo.cphone}</td>
-                        <td>${adminUserInfo.csymptom}</td>
-                        <td>${adminUserInfo.cdate}</td>
-                        <td>${adminUserInfo.cremark}</td>
-                        <td><a href="${pageContext.request.contextPath}/adminFindOneUserServlet?cno=${adminUserInfo.cno}" class="btn btn-default btn-primary">编辑</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a href="javascript:void(0)" onclick="del(${adminUserInfo.cno})" class="btn btn-default btn-primary">删除</a></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
-    <div id="controlUserBtn">
-        <a href="${pageContext.request.contextPath}/adminchoose.jsp">
-            <button type="button" class="btn btn-default" style="width: 200px">返回</button>
-        </a>
-        <a href="javascript:void(0)" onclick="deleteChoose()">
-            <button type="button" class="btn btn-default" style="width: 200px;margin-left: 200px">删除选中</button>
-        </a>
+<div class="nav1">
+    <ul class="nav nav-tabs" id="adminFunChoose">
+    <ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/findAllAdminServlet#">管理员信息管理</a></li>
+    <li role="presentation"><a href="${pageContext.request.contextPath}/findAllUserServlet">用户信息管理</a></li>
+    <li role="presentation"><a href="${pageContext.request.contextPath}/adminControlMedicineServlet">仓库管理</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li role="presentation"><a href="javascript:void(0)" onclick="deleteChoose()">删除选中</a></li>
+        <li role="presentation" class="dropdown" style="margin-right: 30px">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+            </a>
+
+            <ul class="dropdown-menu">
+                <li><a href="javascript:logout()">退出登录</a></li>
+            </ul>
+        </li>
+    </ul>
+
+</ul></div>
+
+
+<div class="nav2">
+    <div class="logo_container">
+        <img src="images/title.png">
     </div>
 </div>
+
+
+<div class="nav3">
+    <div class="container1"></div>
+
+    <div class="container2">
+        <div id="controlUserMain">
+            <div id="controlUserTab">
+                <table border="1" class="table table-bordered table-hover table-condensed" id="tb1" style="width: 99%;table-layout: fixed;">
+                    <thead>
+                    <td style="width:2%"><input type="checkbox" id="topcheckbox"></td>
+                    <td style="width:3%" >编号</td>
+                    <td style="width:7%">用户名</td>
+                    <td style="width:7%">密码</td>
+                    <td style="width:5%">姓名</td>
+                    <td style="width:4%">性别</td>
+                    <td style="width:5%">年龄</td>
+                    <td style="width:10%">地址</td>
+                    <td style="width:10%">电话号码</td>
+                    <td style="width:10%">症状</td>
+                    <td style="width:12%">注册日期</td>
+                    <td style="width:11%">状态</td>
+                    <td style="width:14%">操作</td>
+                    </thead>
+                    <tbody id="userbody">
+                    <c:forEach items="${adminUserInfos}" var="adminUserInfo">
+                        <tr>
+                            <td><input type="checkbox" name="cid" value="${adminUserInfo.cid}"></td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${adminUserInfo.cid}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${adminUserInfo.cno}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${adminUserInfo.cpassword}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${adminUserInfo.cname}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${adminUserInfo.csex}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${adminUserInfo.cage}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${adminUserInfo.caddress}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${adminUserInfo.cphone}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${adminUserInfo.csymptom}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${adminUserInfo.cdate}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${adminUserInfo.cremark}</td>
+                            <td style="text-align: center"><a style="margin-right: 10px" href="${pageContext.request.contextPath}/adminFindOneUserServlet?cno=${adminUserInfo.cno}" class="btn btn-primary">编辑</a>
+                                <a href="javascript:void(0)" onclick="del(${adminUserInfo.cno})" class="btn btn-primary">删除</a></td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container3"></div>
+</div>
+
+
+
+
+
 </body>
 
 <%

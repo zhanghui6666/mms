@@ -34,7 +34,7 @@ public class AdminLoginServlet extends HttpServlet {
         System.out.println(verifycode);
         System.out.println(adminlogin);
 
-        if ("".equals(verifycode) || verifycode==null && adminlogin == null) {
+        if (verifycode==null || verifycode.length()<=0 && adminlogin == null) {
             System.out.println("error");
             response.getWriter().write("error");
         }else if (!checkcode_server.equalsIgnoreCase(verifycode) && adminlogin == null){

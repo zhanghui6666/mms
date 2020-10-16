@@ -10,4 +10,6 @@ public interface ClientDao {
     String Forget(String cno ,String spassword);
 
     Integer modifyPassword(String cno, String cpassword, String spassword,String ncpassword);
+
+    String findIfRepeat(String cno);
 }

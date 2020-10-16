@@ -27,4 +27,9 @@ public class ClientServiceImpl implements ClientService {
     public Integer modifyPassword(String cno, String cpassword, String spassword,String ncpassword) {
         return cdao.modifyPassword(cno,cpassword,spassword,ncpassword);
     }
+
+    @Override
+    public String findIfRepeat(String cno) {
+        return cdao.findIfRepeat(cno);
+    }
 }

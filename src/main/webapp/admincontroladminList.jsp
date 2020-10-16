@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sweetalert.css">
-    <link rel="stylesheet" href="css/controladmin.css">
+    <link rel="stylesheet" href="css/myclient.css">
+   <%-- <link rel="stylesheet" href="css/controladmin.css">--%>
 
     <script>
         window.onload = function(){
@@ -32,49 +33,83 @@
 
             };
         }
+
+        $(function () {
+            $("#adminFunChoose").find("li").each(function () {
+                var a = $(this).find("a:first")[0];
+                if ($(a).attr("href") === location.pathname) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        })
     </script>
 </head>
 <body>
-<div id="controlAdmintop">
-    <img src="images/title.png">
-</div>
-<div id="controlAdminBg">
-    <div id="controlAdminMain">
-        <div id="controlAdminTab">
-            <table class="table table-hover">
-                <thead>
-                <td><input type="checkbox" id="topcheckbox"></td>
-                <td>编号</td>
-                <td>账号</td>
-                <td>密码</td>
-                <td>操作</td>
-                </thead>
-                <tbody id="adminbody">
-                <c:forEach items="${adminInfos}" var="adminInfo">
-                    <tr>
-                        <td><input type="checkbox" name="aid" value="${adminInfo.aid}"></td>
-                        <td>${adminInfo.aid}</td>
-                        <td>${adminInfo.aname}</td>
-                        <td>${adminInfo.apassword}</td>
-                        <td><a href="${pageContext.request.contextPath}/adminSendAdminServlet?aname=${adminInfo.aname}&apassword=${adminInfo.apassword}" class="btn btn-large btn-primary">改密</a>&nbsp;&nbsp; / &nbsp;&nbsp;<a href="javascript:void(0)" onclick="del(${adminInfo.aid})" class="btn btn-large btn-primary">删除</a></td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </div>
-        <div id="controlAdminBtn">
-            <a href="${pageContext.request.contextPath}/adminaddadmin.jsp">
-                <button type="button" class="btn btn-default" style="width: 200px;margin-left: 200px">添加</button>
-            </a>
-            <a href="${pageContext.request.contextPath}/adminchoose.jsp">
-                <button type="button" class="btn btn-default" style="width: 200px;margin-left: 100px">返回</button>
-            </a>
-            <a href="javascript:void(0)" onclick="deleteChoose()">
-                <button type="button" class="btn btn-default" style="width: 200px;margin-left: 100px">删除选中</button>
-            </a>
-        </div>
+
+    <div class="nav1">
+        <ul class="nav nav-tabs" id="adminFunChoose">
+            <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/findAllAdminServlet#">管理员信息管理</a></li>
+            <li role="presentation"><a href="${pageContext.request.contextPath}/findAllUserServlet">用户信息管理</a></li>
+            <li role="presentation"><a href="${pageContext.request.contextPath}/adminControlMedicineServlet">仓库管理</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li role="presentation"><a href="${pageContext.request.contextPath}/adminaddadmin.jsp">添加</a></li>
+                <li role="presentation"><a href="javascript:void(0)">删除选中</a></li>
+                <li role="presentation" class="dropdown" style="margin-right: 30px">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:logout()">退出登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </ul>
     </div>
-</div>
+
+    <div class="nav2"></div>
+
+    <div class="nav3">
+        <div class="container1"></div>
+        <div class="container2">
+        <div id="controlAdmintop">
+            <img src="images/title.png">
+        </div>
+        <div id="controlAdminBg">
+            <div id="controlAdminMain">
+                <div id="controlAdminTab">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <td style="width: 10%"><input type="checkbox" id="topcheckbox"></td>
+                        <td style="width: 20%">编号</td>
+                        <td style="width: 20%">账号</td>
+                        <td style="width: 20%">密码</td>
+                        <td style="width: 30%">操作</td>
+                        </thead>
+                        <tbody id="adminbody">
+                        <c:forEach items="${adminInfos}" var="adminInfo">
+                            <tr>
+                                <td><input type="checkbox" name="aid" value="${adminInfo.aid}"></td>
+                                <td>${adminInfo.aid}</td>
+                                <td>${adminInfo.aname}</td>
+                                <td>${adminInfo.apassword}</td>
+                                <td style="text-align: center"><a style="margin-right: 30px" href="${pageContext.request.contextPath}/adminSendAdminServlet?aname=${adminInfo.aname}&apassword=${adminInfo.apassword}" class="btn btn-large btn-primary">改密</a>
+                                    <a href="javascript:void(0)" onclick="del(${adminInfo.aid})" class="btn btn-large btn-primary">删除</a></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        </div>
+        <div class="container3"></div>
+    </div>
+
 </body>
 <%
     String mess = (String) session.getAttribute("message");
