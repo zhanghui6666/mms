@@ -44,10 +44,18 @@
                     </div>
                     <button type="submit" style="margin-left: 20px;color: black" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 </form>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-toggle="modal" data-target="#myModal" >反馈</a></li>
+                            <li><a href="javascript:logout()">退出登录</a></li>
+                        </ul>
+                    </li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right barshopcart">
-                    <li><a href="#" data-toggle="modal" data-target="#myModal" >反馈</a></li>
                     <li><a href="${pageContext.request.contextPath}/findShopCartByPageServlet">购物车</a></li>
-                    <li><a href="javascript:logout()">退出登录</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -63,7 +71,7 @@
                 <div class="modal-body">
                     <form  method="post" id="feedbackForm">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="反馈信息" name="ctext" style="width:500px" aria-describedby="basic-addon1">
+                            <input type="text" autocomplete="off" class="form-control" placeholder="反馈信息" name="ctext" style="width:500px" aria-describedby="basic-addon1">
                         </div>
                     </form>
                 </div>
@@ -79,22 +87,6 @@
 
 <div class="nav2">
     <div class="logo_container">
-       <%-- <form class="form-inline" style="float:right;margin-top:30px" action="${pageContext.request.contextPath}/findMedicineByPageServlet" method="post">
-            <div class="form-group">
-                <label for="medicineno">药品编号</label>
-                <input style="width: 150px" type="text" name="mno" value="${condition.mno[0]}" class="form-control" >
-            </div>
-            <div class="form-group">
-                <label for="medicineName">药品名</label>
-                <input style="width: 150px" type="text" name="mname" value="${condition.mname[0]}" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="medicineFunction">药品功效</label>
-                <input style="width: 150px" type="text" name="mefficacy" value="${condition.mefficacy[0]}" class="form-control"
-                       >
-            </div>
-            <button type="submit" class="btn btn-default" style="margin-left: 30px;margin-right: 10px">查询药品信息</button>
-        </form>--%>
         <img src="images/title.png">
     </div>
 </div>
@@ -208,20 +200,9 @@
                         </li>
 
                         <li>
-                            <input type="text" class="form-control" name="pageCode" value="${pb.currentPage}" style="width:40px;float: left">
-                            <a href="#">Go</a>
+                            <input type="text" class="form-control"  id="pageCode" name="pageCode" value="${pb.currentPage}" style="width:60px;float: left">
+                            <a href="javascript:_go()">Go</a>
                         </li>
-
-                    <%--<c:forEach begin="1" end="${pb.totalPage}" var="i">
-
-                        <c:if test="${pb.currentPage == i}">
-                            <li class="active"><a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a></li>
-                        </c:if>
-
-                        <c:if test="${pb.currentPage != i}">
-                            <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a></li>
-                        </c:if>
-                    </c:forEach>--%>
 
                     <c:if test="${pb.currentPage ==pb.totalPage}">
                     <li class="disabled">
@@ -256,11 +237,24 @@
 <script>
 
     function feedbackreg() {
-        $.ajax({
-            url: "./feedbackServlet",
-            type: "post",
-            data: $('#feedbackForm').serialize(),
-        });
+        var ctext = $(".ctext").val();
+        var reg = /^\s*$/
+        if (ctext != null && ctext != undefined && !reg.test(ctext)){
+            $.ajax({
+                url: "./feedbackServlet",
+                type: "post",
+                data: $('#feedbackForm').serialize(),
+                success:function () {
+                    window.location.reload();
+                }
+            });
+        }else {
+            swal({
+                title: "写点什么吧！"
+            },function () {
+                window.location.reload();
+            })
+        }
     }
 
     function logout(){

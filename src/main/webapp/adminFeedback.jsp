@@ -79,9 +79,9 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li role="presentation"><a href="javascript:void(0)" onclick="deleteChoose()">删除选中</a></li>
-                    <li role="presentation" class="dropdown" style="margin-right: 30px">
+                    <li class="dropdown" style="margin-right: 30px;margin-top:3px">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         </a>
 
                         <ul class="dropdown-menu">
@@ -111,20 +111,22 @@
             <div id="controlUserTab">
                 <table border="1" class="table table-bordered table-hover table-condensed" id="tb1" style="width: 99%;table-layout: fixed;">
                     <thead>
-                    <td style="width:2%"><input type="checkbox" id="topcheckbox" class="usercheck"></td>
+                    <td style="width:2%"><input type="checkbox" id="topcheckbox" class="feedbackcheck"></td>
                     <td style="width:3%" >序号</td>
+                    <td style="width:5%" >反馈号</td>
                     <td style="width:15%">用户账号</td>
                     <td style="width:15%">用户名</td>
-                    <td style="width:45%">反馈信息</td>
+                    <td style="width:40%">反馈信息</td>
                     <td style="width:20%">操作</td>
 
                     </thead>
-                    <tbody id="userbody">
                     <c:forEach items="${feedBacks}" var="feedBacks" varStatus="status">
                         <tr>
-                            <td><input type="checkbox" name="cid" value="${status.index+1}" class="usercheck"></td>
+                            <td><input type="checkbox" name="cid" value="${status.index+1}" class="feedbackcheck"></td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
                                 onmouseout="this.className = 'wrap'">${status.index+1}</td>
+                            <td class="wrap" onmouseover="this.className = 'wrap1'"
+                                onmouseout="this.className = 'wrap'">${feedBacks.fid}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
                                 onmouseout="this.className = 'wrap'">${feedBacks.cno}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
@@ -199,7 +201,7 @@
     }
 
     function deleteChoose() {
-        var checked = $("input[class='usercheck']:checked");
+        var checked = $("input[class='feedbackcheck']:checked");
         if (checked.length==0){
             swal("请至少选择一个")
         }else{
@@ -224,15 +226,15 @@
 
     }
     function deletechoose() {
-        var checkeds=$("#userbody :checked");
-        var userlist=[];
+        var checkeds=$("input[class='feedbackcheck']:checked");
+        var fids=[];
         $.each(checkeds,function (i,n) {
             n=$(n)
             var child=n.parents("tr").children();
             var ano=child.eq(2).text();
-            userlist.push(ano);
+            fids.push(ano);
         })
-        location="adminDeleteChooseFeedbackServlet?fids="+userlist;
+        location="adminDeleteChooseFeedbackServlet?fids="+fids;
     }
 </script>
 </html>

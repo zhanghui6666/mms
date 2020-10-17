@@ -81,9 +81,9 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li role="presentation"><a href="${pageContext.request.contextPath}/adminaddadmin.jsp">添加</a></li>
                         <li role="presentation"><a href="javascript:deleteChoose()">删除选中</a></li>
-                        <li role="presentation" class="dropdown" style="margin-right: 30px">
+                        <li class="dropdown" style="margin-right: 30px;margin-top:3px">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="javascript:logout()">退出登录</a></li>

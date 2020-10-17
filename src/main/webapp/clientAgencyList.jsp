@@ -44,10 +44,17 @@
                     </div>
                     <button type="submit" style="margin-left: 20px;color: black" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-toggle="modal" data-target="#myModal" >反馈</a></li>
+                            <li><a href="javascript:logout()">退出登录</a></li>
+                        </ul>
+                    </li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right barshopcart">
-                    <li><a href="#" data-toggle="modal" data-target="#myModal" >反馈</a></li>
                     <li><a href="${pageContext.request.contextPath}/findShopCartByPageServlet">购物车</a></li>
-                    <li><a href="javascript:logout()">退出登录</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -63,7 +70,7 @@
                 <div class="modal-body">
                     <form  method="post" id="feedbackForm">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="反馈信息" name="ctext" style="width:500px" aria-describedby="basic-addon1">
+                            <input type="text" autocomplete="off" class="form-control" placeholder="反馈信息" name="ctext" style="width:500px" aria-describedby="basic-addon1">
                         </div>
                     </form>
                 </div>
@@ -80,22 +87,6 @@
 
 <div class="nav2">
     <div class="logo_container">
-       <%-- <form class="form-inline" style="float:right;margin-top:30px" action="${pageContext.request.contextPath}/findAgencyByPageServlet" method="post">
-            <div class="form-group">
-                <label for="agencyNo">药店编号</label>
-                <input style="width: 150px" type="text" name="ano" value="${condition1.ano[0]}" class="form-control" id="agencyNo">
-            </div>
-            <div class="form-group">
-                <label for="agencyName">药店负责人姓名</label>
-                <input style="width: 150px" type="text" name="mname" value="${condition1.aname[0]}" class="form-control" id="agencyName">
-            </div>
-            <div class="form-group">
-                <label for="agencyRemark">药店名</label>
-                <input style="width: 150px" type="text" name="mefficacy" value="${condition1.aremark[0]}" class="form-control"
-                       id="agencyRemark">
-            </div>
-            <button type="submit" class="btn btn-default" style="margin-left: 30px;margin-right: 10px">查询药店信息</button>
-        </form>--%>
         <img src="images/title.png">
     </div>
 </div>
@@ -201,16 +192,15 @@
                         </c:if>
                     </c:forEach>
 
-                    <%--<c:forEach begin="1" end="${pb.totalPage}" var="i">
+                        <li>
+                            <span>...</span>
+                        </li>
 
-                        <c:if test="${pb.currentPage == i}">
-                            <li class="active"><a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a></li>
-                        </c:if>
+                        <li>
+                            <input type="text" class="form-control" id="pageCode" name="pageCode" value="${medicinePageBean.currentPage}" style="width:60px;float: left">
+                            <a href="javascript:_go()">Go</a>
+                        </li>
 
-                        <c:if test="${pb.currentPage != i}">
-                            <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a></li>
-                        </c:if>
-                    </c:forEach>--%>
 
                     <c:if test="${pb1.currentPage ==pb1.totalPage}">
                     <li class="disabled">
@@ -232,18 +222,6 @@
 
         <%--跳转指定页数--%>
         <div style="float: right;margin-top: 22px;">
-            <div class="jump" style="float: left">
-                <div class="page-jump">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="pageCode" name="pageCode" value="${pb1.currentPage}" style="width:100px">
-                        <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit" onclick="_go()" style="background: black">Go!</button>
-                        </span>
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-6 -->
-
-            </div>
-
             <%--总页数--%>
             <div style="float: left;">
                 <span style="font-size: 25px;margin-left: 20px; float: left">
@@ -257,11 +235,24 @@
 <script>
 
     function feedbackreg() {
-        $.ajax({
-            url: "./feedbackServlet",
-            type: "post",
-            data: $('#feedbackForm').serialize(),
-        });
+        var ctext = $(".ctext").val();
+        var reg = /^\s*$/
+        if (ctext != null && ctext != undefined && !reg.test(ctext)){
+            $.ajax({
+                url: "./feedbackServlet",
+                type: "post",
+                data: $('#feedbackForm').serialize(),
+                success:function () {
+                    window.location.reload();
+                }
+            });
+        }else {
+            swal({
+                title: "写点什么吧！"
+            },function () {
+                window.location.reload();
+            })
+        }
     }
 
 

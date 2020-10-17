@@ -24,7 +24,7 @@ public class AdminDeleteChooseMedicineServlet extends HttpServlet {
             String deleteMedicineMessage="删除成功";
             request.getSession().setAttribute("deleteMedicineMessage", deleteMedicineMessage);
             //跳转到查找界面
-            //response.sendRedirect(request.getContextPath()+"/adminControlMedicineServlet");
+            response.sendRedirect(request.getContextPath()+"/adminControlMedicineServlet");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

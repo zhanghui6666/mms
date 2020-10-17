@@ -35,7 +35,6 @@ public class ClientLoginServlet extends HttpServlet {
         Client clientLogin = clientService.login(client);
 
 
-
         if (verifycode==null || verifycode.length()<=0 && clientLogin == null) {
             response.getWriter().write("error");
         }else if (!checkcode_server.equalsIgnoreCase(verifycode) && clientLogin == null){
@@ -46,7 +45,9 @@ public class ClientLoginServlet extends HttpServlet {
         } else if (checkcode_server.equalsIgnoreCase(verifycode) && clientLogin == null) {
             response.getWriter().write("login_error");
         } else if (checkcode_server.equalsIgnoreCase(verifycode) && clientLogin != null) {
+            String cname = clientLogin.getCname();
             request.getSession().setAttribute("cno", cno);
+            request.getSession().setAttribute("cname",cname);
             response.getWriter().write("login_success");
         }
 

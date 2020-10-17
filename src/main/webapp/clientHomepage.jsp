@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,13 +14,31 @@
     <link rel="stylesheet" href="css/myclient.css">
     <link rel="stylesheet" href="css/sweetalert.css">
     <script src="js/sweetalert-dev.js"></script>
+    <style>
+        .title {
+            font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+        }
+    </style>
     <script>
         function feedbackreg() {
-            $.ajax({
-                url: "./feedbackServlet",
-                type: "post",
-                data: $('#feedbackForm').serialize(),
-            });
+            var ctext = $(".ctext").val();
+            var reg = /^\s*$/
+            if (ctext != null && ctext != undefined && !reg.test(ctext)){
+                $.ajax({
+                    url: "./feedbackServlet",
+                    type: "post",
+                    data: $('#feedbackForm').serialize(),
+                    success:function () {
+                        window.location.reload();
+                    }
+                });
+            }else {
+                swal({
+                    title: "写点什么吧！"
+                },function () {
+                    window.location.reload();
+                })
+            }
         }
     </script>
 </head>
@@ -40,13 +59,19 @@
                     <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet">药品大全</a></li>
                     <li><a href="${pageContext.request.contextPath}/findAgencyByPageServlet">药店</a></li>
                 </ul>
-
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-toggle="modal" data-target="#myModal" >反馈</a></li>
+                            <li><a href="javascript:logout()">退出登录</a></li>
+                        </ul>
+                    </li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right barshopcart">
-                    <li><a href="#" data-toggle="modal" data-target="#myModal" >反馈</a></li>
                     <li><a href="${pageContext.request.contextPath}/findShopCartByPageServlet">购物车</a></li>
-                    <li><a href="javascript:logout()">退出登录</a></li>
-
-
                 </ul>
             </div>
         </div>
@@ -62,7 +87,7 @@
                 <div class="modal-body">
                     <form  method="post" id="feedbackForm">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="反馈信息" name="ctext" style="width:500px" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control ctext" placeholder="反馈信息" autocomplete="off" name="ctext" style="width:500px" aria-describedby="basic-addon1">
                         </div>
                     </form>
                 </div>
@@ -76,9 +101,10 @@
 </div>
 
 <div class="nav2">
-    <div class="logo_container">
-
+    <div class="logo_container clearfix">
+        <h1 style="float: right;margin-right:500px;" class="title">欢迎回来&nbsp&nbsp${cname}&nbsp!</h1>
         <img src="images/title.png">
+
     </div>
 </div>
 

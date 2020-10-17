@@ -19,6 +19,7 @@ public class AdminDeleteChooseFeedbackServlet extends HttpServlet {
         String[] fids=fid.split(",");
         AdminService adminService=new AdminServiceImpl();
         for (int i=0;i< fids.length;i++){
+            System.out.println(fids[i]);
             adminService.deleteFeedbackInfo(fids[i]);
         }
         String deleteFeedbackMessage="删除成功";

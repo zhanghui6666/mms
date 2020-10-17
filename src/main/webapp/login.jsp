@@ -70,6 +70,28 @@
                 }
             })
         }
+
+
+        function shide() {
+            var flag = $('#cpassword').attr('type');
+            if (flag == "password"){
+                $('#cpassword').attr("type","text");
+            } else {
+                $('#cpassword').attr("type","password");
+            }
+        }
+
+
+        $(function () {
+            $("#loginFunChoose").find("li").each(function () {
+                var a = $(this).find("a:first")[0];
+                if ($(a).attr("href") === location.pathname) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        })
     </script>
 </head>
 <body>
@@ -89,32 +111,29 @@
         <div class="slogan_mid">
             <img src="images/login_slogan.png" height="429" width="571" class="img_mid"/></div>
         <div class="content_mid">
-            <div class="content_menu" >
-                <ul class="menu_ul">
-                    <li id="li1" class="menu_li1" style="float: left">
-                        <a href="login.jsp" target="bt1">用户登录</a>
-                    </li>
-                    <li id="li2" class="menu_li2" >
-                        <a href="adminLogin.jsp " target="bt1">管理员登录</a>
-                    </li>
+            <div class="content_menu">
+                <ul class="nav nav-pills" id="loginFunChoose">
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/login.jsp" target="bt1">用户登录</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/adminLogin.jsp" target="bt1">管理员登录</a></li>
                 </ul>
             </div>
 
             <form class="form-horizontal" id="loginform" style="margin-left: 30px">
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="cno" name="cno" placeholder="请输入账号">
+                        <input type="text" autocomplete="off" class="form-control" id="cno" name="cno" placeholder="请输入账号">
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="请输入密码">
+                    <div class="col-sm-10" style="width: 320px">
+                        <span class="glyphicon glyphicon-eye-open" style="float: right;margin-top: 10px;margin-right: 30px" aria-hidden="true" id="shide" onclick="shide()"></span>
+                        <input type="password" autocomplete="off" style="width: 238px" class="form-control" id="cpassword" name="cpassword" placeholder="请输入密码">
                     </div>
                 </div>
 
                 <div class="form-group" >
                     <div class="col-sm-10" style="width: 150px">
-                        <input type="text" class="form-control" id="verifycode" name="verifycode"  placeholder="请输入验证码" style="width: 150px">
+                        <input type="text" class="form-control" autocomplete="off" id="verifycode" name="verifycode"  placeholder="请输入验证码" style="width: 150px">
                     </div>
                     <div>
                         <a href="javascript:refreshCode()"><img style="margin-left: 30px;width: 74px;height: 34px" src="${pageContext.request.contextPath}/checkCodeServlet" title="看不清点击刷新" id="vcode"/></a>
@@ -134,7 +153,7 @@
 
             <div class="other_login">
                 <span class="other_span">您还可以通过以下方式登录：</span>
-                <a href="www.qq.com"><img src="images/other_qq.jpg" class="other_qq"></a>
+                <a href="https://www.qq.com/"><img src="images/other_qq.jpg" class="other_qq"></a>
                 <a href="#"><img src="images/other_weixin.jpg" class="other_weixin"> </a>
             </div>
             <!--<div class="form-group">

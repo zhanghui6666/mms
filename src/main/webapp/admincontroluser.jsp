@@ -79,9 +79,9 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li role="presentation"><a href="javascript:void(0)" onclick="deleteChoose()">删除选中</a></li>
-                    <li role="presentation" class="dropdown" style="margin-right: 30px">
+                    <li class="dropdown" style="margin-right: 30px;margin-top:3px">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         </a>
 
                         <ul class="dropdown-menu">
@@ -126,11 +126,11 @@
                     <td style="width:14%">操作</td>
                     </thead>
                     <tbody id="userbody">
-                    <c:forEach items="${adminUserInfos}" var="adminUserInfo">
+                    <c:forEach items="${adminUserInfos}" var="adminUserInfo" varStatus="status">
                         <tr>
-                            <td><input type="checkbox" name="cid" value="${adminUserInfo.cid}" class="usercheck"></td>
+                            <td><input type="checkbox" name="cid" value="${status.index+1}" class="usercheck"></td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${adminUserInfo.cid}</td>
+                                onmouseout="this.className = 'wrap'">${status.index+1}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
                                 onmouseout="this.className = 'wrap'">${adminUserInfo.cno}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"

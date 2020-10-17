@@ -67,6 +67,29 @@
                 }
             })
         }
+
+
+        function ahide() {
+            var flag = $('#apassword').attr('type');
+            if (flag == "password"){
+                $('#apassword').attr("type","text");
+            } else {
+                $('#apassword').attr("type","password");
+            }
+        }
+
+
+
+        $(function () {
+            $("#loginFunChoose").find("li").each(function () {
+                var a = $(this).find("a:first")[0];
+                if ($(a).attr("href") === location.pathname) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        })
     </script>
 </head>
 <body>
@@ -84,30 +107,27 @@
             <img src="images/login_slogan.png" height="429" width="571" class="img_mid"/></div>
         <div class="content_mid">
             <div class="content_menu">
-                <ul class="menu_ul">
-                    <li id="li1" class="menu_li1" style="float: left">
-                        <a href="login.jsp" target="_Self">用户登录</a>
-                    </li>
-                    <li id="li2" class="menu_li2">
-                        <a href="adminLogin.jsp " target="_Self">管理员登录</a>
-                    </li>
+                <ul class="nav nav-pills" id="loginFunChoose">
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/login.jsp" target="_Self">用户登录</a></li>
+                    <li role="presentation"> <a href="${pageContext.request.contextPath}/adminLogin.jsp" target="_Self">管理员登录</a></li>
                 </ul>
             </div>
             <form class="form-horizontal" id="loginform" style="margin-left: 30px">
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="aname" name="aname" placeholder="请输入管理员姓名">
+                        <input type="text" autocomplete="off" class="form-control" id="aname" name="aname" placeholder="请输入管理员姓名">
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="apassword" name="apassword" placeholder="请输入密码">
+                    <div class="col-sm-10" style="width: 320px">
+                        <span class="glyphicon glyphicon-eye-open" style="float: right;margin-top: 10px;margin-right: 30px" aria-hidden="true" id="shide" onclick="ahide()"></span>
+                        <input type="password" autocomplete="off" style="width: 238px" class="form-control" id="apassword" name="apassword" placeholder="请输入密码">
                     </div>
                 </div>
 
                 <div class="form-group" >
                     <div class="col-sm-10" style="width: 150px">
-                        <input type="text" class="form-control" id="verifycode" name="verifycode"  placeholder="请输入验证码" style="width: 150px">
+                        <input type="text" autocomplete="off" class="form-control" id="verifycode" name="verifycode"  placeholder="请输入验证码" style="width: 150px">
                     </div>
                     <div>
                         <a href="javascript:refreshCode()"><img style="margin-left: 30px;width: 74px;height: 34px" src="${pageContext.request.contextPath}/checkCodeServlet" title="看不清点击刷新" id="vcode"/></a>
@@ -116,10 +136,7 @@
 
                 <div class="form-group">
                     <div style="width: 320px;margin-left:0; height: 30px" >
-                        <button type="button" style="width: 150px;margin-left: 15px"  class="btn btn-default content_imput" id="login" onclick="adminlogin()">登录</button>
-                    </div>
-                    <div>
-                        <a href="${pageContext.request.contextPath}/forget.jsp" style="margin-left: 10px;margin-top:10px;height: 10px">忘记密码</a>
+                        <button type="button" style="width: 238px;margin-left: 15px"  class="btn btn-default content_imput" id="login" onclick="adminlogin()">登录</button>
                     </div>
                 </div>
             </form>
