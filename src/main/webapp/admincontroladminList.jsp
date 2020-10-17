@@ -44,46 +44,74 @@
                 }
             });
         })
+
+
+        function logout(){
+            swal({
+                    title: "确定退出吗？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定退出！",
+                    closeOnConfirm: false
+                },
+                function(){
+                    location = "${pageContext.request.contextPath}/adminLogoutServlet";
+                });
+        }
     </script>
 </head>
-<body>
-
+<body style="padding-top:50px">
     <div class="nav1">
-        <ul class="nav nav-tabs" id="adminFunChoose">
-            <ul class="nav nav-tabs">
-            <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/findAllAdminServlet#">管理员信息管理</a></li>
-            <li role="presentation"><a href="${pageContext.request.contextPath}/findAllUserServlet">用户信息管理</a></li>
-            <li role="presentation"><a href="${pageContext.request.contextPath}/adminControlMedicineServlet">仓库管理</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li role="presentation"><a href="${pageContext.request.contextPath}/adminaddadmin.jsp">添加</a></li>
-                <li role="presentation"><a href="javascript:void(0)">删除选中</a></li>
-                <li role="presentation" class="dropdown" style="margin-right: 30px">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="javascript:logout()">退出登录</a></li>
+        <nav class="navbar navbar-fixed-top">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="container-fluid">
+                <ul class="nav nav-tabs" id="adminFunChoose">
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/findAllAdminServlet">管理员信息管理</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/findAllUserServlet">用户信息管理</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/adminControlMedicineServlet">仓库管理</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/adminFeedbackServlet">用户反馈</a></li>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li role="presentation"><a href="${pageContext.request.contextPath}/adminaddadmin.jsp">添加</a></li>
+                        <li role="presentation"><a href="javascript:deleteChoose()">删除选中</a></li>
+                        <li role="presentation" class="dropdown" style="margin-right: 30px">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:logout()">退出登录</a></li>
+                            </ul>
+                        </li>
                     </ul>
-                </li>
-            </ul>
-        </ul>
+                </ul>
+            </div>
+        </nav>
+
     </div>
 
-    <div class="nav2"></div>
+    <div class="nav2">
+        <div id="controlAdmintop">
+            <img src="images/title.png">
+        </div>
+    </div>
 
     <div class="nav3">
         <div class="container1"></div>
         <div class="container2">
-        <div id="controlAdmintop">
-            <img src="images/title.png">
-        </div>
+
         <div id="controlAdminBg">
             <div id="controlAdminMain">
                 <div id="controlAdminTab">
                     <table class="table table-bordered table-hover">
                         <thead>
-                        <td style="width: 10%"><input type="checkbox" id="topcheckbox"></td>
+                        <td style="width: 10%"><input type="checkbox" id="topcheckbox" class="admincheck"></td>
                         <td style="width: 20%">编号</td>
                         <td style="width: 20%">账号</td>
                         <td style="width: 20%">密码</td>
@@ -92,7 +120,7 @@
                         <tbody id="adminbody">
                         <c:forEach items="${adminInfos}" var="adminInfo">
                             <tr>
-                                <td><input type="checkbox" name="aid" value="${adminInfo.aid}"></td>
+                                <td><input type="checkbox" name="aid" value="${adminInfo.aid}" class="admincheck"></td>
                                 <td>${adminInfo.aid}</td>
                                 <td>${adminInfo.aname}</td>
                                 <td>${adminInfo.apassword}</td>
@@ -178,23 +206,29 @@
         });
     }
     function deleteChoose() {
-        swal({
-            title: "确定删除吗？",
-            text: "你将无法恢复这些管理员！",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定删除！",
-            cancelButtonText: "取消删除！",
-            closeOnConfirm: false,
-            closeOnCancel: false
-        }, function (isConfirm) {
-            if (isConfirm) {
-                deletechoose()
-            } else {
-                swal("取消！", "这些管理员现在安全了:)", "error");
-            }
-        });
+        var checked = $("input[class='admincheck']:checked");
+        if (checked.length==0){
+            swal("请至少选择一个")
+        }else {
+            swal({
+                title: "确定删除吗？",
+                text: "你将无法恢复这些管理员！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定删除！",
+                cancelButtonText: "取消删除！",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    deletechoose()
+                } else {
+                    swal("取消！", "这些管理员现在安全了:)", "error");
+                }
+            });
+        }
+
     }
     function deletechoose() {
         var checkeds=$("#adminbody :checked");

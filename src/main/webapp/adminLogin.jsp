@@ -62,7 +62,7 @@
                             location = '${pageContext.request.contextPath}/adminLogin.jsp';
                         })
                     }else if (data=="login_success") {
-                        location = '${pageContext.request.contextPath}/adminchoose.jsp';
+                        location = '${pageContext.request.contextPath}/findAllAdminServlet';
                     }
                 }
             })
@@ -75,9 +75,6 @@
         <tr class="tr_header">
             <td class="table_header">
                 <img src="images/login_logo.png" height="49" width="334"/></td>
-            <td class="table_header">
-                <span class="span_header">新用户，</span><a href="regist.jsp" class="a_header">快速注册</a>
-            </td>
         </tr>
     </table>
 </div>

@@ -3,6 +3,7 @@ package com.czu.dao.Impl;
 import com.czu.dao.AdminDao;
 import com.czu.domain.AdminUserInfo;
 import com.czu.domain.AdminInfo;
+import com.czu.domain.FeedBack;
 import com.czu.domain.Medicine;
 import com.czu.util.JDBCUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -188,6 +189,18 @@ public class AdminDaoImpl implements AdminDao {
     public void updateMedicine(Medicine medicine) {
         String sql="update medicine set mname=?,mmode=?,mefficacy=?,mprice=?,mnumber=? where mno=?";
         template.update(sql,medicine.getMname(),medicine.getMmode(),medicine.getMefficacy(),medicine.getMprice(),medicine.getMnumber(),medicine.getMno());
+    }
+
+    @Override
+    public List<FeedBack> finAllFeedback() {
+        String sql = "select * from feedback";
+        return template.query(sql,new BeanPropertyRowMapper<FeedBack>(FeedBack.class));
+    }
+
+    @Override
+    public void deleteFeedbackInfo(String fid) {
+        String sql="delete from feedback where fid=?";
+        template.update(sql,fid);
     }
 
 

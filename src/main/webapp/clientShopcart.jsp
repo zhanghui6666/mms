@@ -37,33 +37,40 @@
                     <li><a href="${pageContext.request.contextPath}/findAgencyByPageServlet">药店</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right barshopcart">
+                    <li><a href="#" data-toggle="modal" data-target="#myModal" >反馈</a></li>
                     <li><a href="${pageContext.request.contextPath}/findShopCartByPageServlet">购物车</a></li>
                     <li><a href="javascript:logout()">退出登录</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">反馈</h4>
+                </div>
+                <div class="modal-body">
+                    <form  method="post" id="feedbackForm">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="反馈信息" name="ctext" style="width:500px" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="color: black">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="feedbackreg()" data-dismiss="modal">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <div class="nav2">
     <div class="logo_container">
-        <%-- <form class="form-inline" style="float:right;margin-top:30px" action="${pageContext.request.contextPath}/findAgencyByPageServlet" method="post">
-             <div class="form-group">
-                 <label for="agencyNo">药店编号</label>
-                 <input style="width: 150px" type="text" name="ano" value="${condition1.ano[0]}" class="form-control" id="agencyNo">
-             </div>
-             <div class="form-group">
-                 <label for="agencyName">药店负责人姓名</label>
-                 <input style="width: 150px" type="text" name="mname" value="${condition1.aname[0]}" class="form-control" id="agencyName">
-             </div>
-             <div class="form-group">
-                 <label for="agencyRemark">药店名</label>
-                 <input style="width: 150px" type="text" name="mefficacy" value="${condition1.aremark[0]}" class="form-control"
-                        id="agencyRemark">
-             </div>
-             <button type="submit" class="btn btn-default" style="margin-left: 30px;margin-right: 10px">查询药店信息</button>
-         </form>--%>
         <img src="images/title.png">
     </div>
 </div>
@@ -118,11 +125,6 @@
                     </c:forEach>
                 </table>
 
-                <%--<div class="panel-footer" style="text-align: right;">
-                <a class="btn btn-primary" href="javascript:buyMedicine();"  role="button" style="margin-left: 50px;">购买</a>
-                共计<span id="total" >0</span>元
-                </div>--%>
-
             </div>
             <nav class="navbar navbar-default navbar-fixed-bottom">
                 <div class="container-fluid">
@@ -140,121 +142,21 @@
             </nav>
         </form>
 
-
-        <%-- &lt;%&ndash;分页&ndash;%&gt;
-         <div style="float: left">
-             <nav aria-label="Page navigation">
-                 <ul class="pagination">
-                     <c:if test="${pb2.currentPage == 1}">
-                     <li class="disabled">
-                      </c:if>
-
-                         <c:if test="${pb2.currentPage != 1}">
-                     <li>
-                         </c:if>
-                         <c:if test="${pb2.currentPage != 1}">
-                         <a href="${pageContext.request.contextPath}/findShopCartByPageServlet?currentPage=${pb2.currentPage - 1}&rows=10" aria-label="Previous">
-                             </c:if>
-
-                             <span aria-hidden="true">&laquo;</span>
-                         </a>
-                     </li>
-
-                     &lt;%&ndash;中间页&ndash;%&gt;
-                     &lt;%&ndash;显示6页中间页[begin=起始页,end=最大页]&ndash;%&gt;
-                     &lt;%&ndash;总页数没有6页&ndash;%&gt;
-                     <c:choose>
-                         <c:when test="${pb2.totalPage <= 6}">
-                             <c:set var="begin" value="1"/>
-                             <c:set var="end" value="${pb2.totalPage}"/>
-                         </c:when>
-                         &lt;%&ndash;页数超过了6页&ndash;%&gt;
-                         <c:otherwise>
-                             <c:set var="begin" value="${pb2.currentPage - 1}"/>
-                             <c:set var="end" value="${pb2.currentPage + 3}"/>
-                             &lt;%&ndash;如果begin减1后为0,设置起始页为1,最大页为6&ndash;%&gt;
-                             <c:if test="${begin -1 <= 0}">
-                                 <c:set var="begin" value="1"/>
-                                 <c:set var="end" value="6"/>
-                             </c:if>
-                             &lt;%&ndash;如果end超过最大页,设置起始页=最大页-5&ndash;%&gt;
-                             <c:if test="${end > pb2.totalPage}">
-                                 <c:set var="begin" value="${pb2.totalPage - 5}"/>
-                                 <c:set var="end" value="${pb2.totalPage}"/>
-                             </c:if>
-                         </c:otherwise>
-                     </c:choose>
-
-                     &lt;%&ndash;遍历&ndash;%&gt;
-                     <c:forEach var="i" begin="${begin}" end="${end}">
-                         &lt;%&ndash;当前页,选中&ndash;%&gt;
-                         <c:if test="${pb2.currentPage == i}">
-                             <li class="active">
-                                 <a href="${pageContext.request.contextPath}/findShopCartByPageServlet?currentPage=${i}&rows=10">${i}</a>
-                             </li>
-                         </c:if>
-
-                         <c:if test="${pb2.currentPage != i}">
-                             <li>
-                                 <a href="${pageContext.request.contextPath}/findShopCartByPageServlet?currentPage=${i}&rows=10">${i}</a>
-                             </li>
-                         </c:if>
-                     </c:forEach>
-
-                     &lt;%&ndash;<c:forEach begin="1" end="${pb.totalPage}" var="i">
-
-                         <c:if test="${pb.currentPage == i}">
-                             <li class="active"><a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a></li>
-                         </c:if>
-
-                         <c:if test="${pb.currentPage != i}">
-                             <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet?currentPage=${i}&rows=50&mno=${condition.mno[0]}&mname=${condition.mname[0]}&mefficacy=${condition.mefficacy[0]}">${i}</a></li>
-                         </c:if>
-                     </c:forEach>&ndash;%&gt;
-
-                     <c:if test="${pb2.currentPage ==pb2.totalPage}">
-                     <li class="disabled">
-                         </c:if>
-
-                         <c:if test="${pb2.currentPage !=pb2.totalPage}">
-                     <li>
-                         </c:if>
-                         <c:if test="${pb2.currentPage != pb2.totalPage}">
-                         <a href="${pageContext.request.contextPath}/findShopCartByPageServlet?currentPage=${pb2.currentPage + 1}&rows=10"
-                            aria-label="Next">
-                             </c:if>
-                             <span aria-hidden="true">&raquo;</span>
-                         </a>
-                     </li>
-                 </ul>
-             </nav>
-         </div>
-
-         &lt;%&ndash;跳转指定页数&ndash;%&gt;
-         <div style="float: right;margin-top: 22px;">
-             <div class="jump" style="float: left">
-                 <div class="page-jump">
-                     <div class="input-group">
-                         <input type="text" class="form-control" id="pageCode" name="pageCode" value="${pb2.currentPage}" style="width:100px">
-                         <span class="input-group-btn">
-                         <button class="btn btn-default" type="submit" onclick="_go()" style="background: black">Go!</button>
-                         </span>
-                     </div><!-- /input-group -->
-                 </div><!-- /.col-lg-6 -->
-
-             </div>
-
-             &lt;%&ndash;总页数&ndash;%&gt;
-             <div style="float: left;">
-                 <span style="font-size: 25px;margin-left: 20px; float: left">
-                     共${pb2.totalCount}条记录，共${pb2.totalPage}页
-                 </span>
-             </div>
-         </div>--%>
     </div>
     <div class="container3"></div>
 </div>
 <script>
+
+    function feedbackreg() {
+        $.ajax({
+            url: "./feedbackServlet",
+            type: "post",
+            data: $('#feedbackForm').serialize(),
+        });
+    }
+
+
+
     function buydel(mno) {
         location = 'deleteOrderServlet?mno=' + mno;
     }
@@ -370,14 +272,5 @@
     }*/
 
 </script>
-
-
-<%
-    String delMessage = (String) session.getAttribute("delMessage");
-    if (delMessage == null || "".equals(delMessage)) {
-    } else {
-
-    }
-%>
 </body>
 </html>

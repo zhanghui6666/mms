@@ -3,6 +3,7 @@ package com.czu.service.Impl;
 import com.czu.dao.ClientDao;
 import com.czu.dao.Impl.ClientDaoImpl;
 import com.czu.domain.Client;
+import com.czu.domain.FeedBack;
 import com.czu.service.ClientService;
 
 public class ClientServiceImpl implements ClientService {
@@ -31,5 +32,15 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public String findIfRepeat(String cno) {
         return cdao.findIfRepeat(cno);
+    }
+
+    @Override
+    public Client findClient(String cno) {
+        return cdao.findClient(cno);
+    }
+
+    @Override
+    public void Insertfeedback(FeedBack feedBack) {
+        cdao.Insertfeedback(feedBack);
     }
 }

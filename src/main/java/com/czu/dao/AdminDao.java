@@ -2,6 +2,7 @@ package com.czu.dao;
 
 import com.czu.domain.AdminUserInfo;
 import com.czu.domain.AdminInfo;
+import com.czu.domain.FeedBack;
 import com.czu.domain.Medicine;
 
 import java.util.List;
@@ -106,4 +107,8 @@ public interface AdminDao {
      * @param medicine
      */
     void updateMedicine(Medicine medicine);
+
+    List<FeedBack> finAllFeedback();
+
+    void deleteFeedbackInfo(String fid);
 }

@@ -34,35 +34,50 @@
     </script>
 </head>
 <body>
-<div class="nav1">
+<div class="nav1" style="padding-top:50px">
+    <nav class="navbar navbar-fixed-top">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="container-fluid">
 
-        <ul class="nav nav-tabs" id="adminFunChoose">
-        <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/findAllAdminServlet#">管理员信息管理</a></li>
-        <li role="presentation"><a href="${pageContext.request.contextPath}/findAllUserServlet">用户信息管理</a></li>
-        <li role="presentation"><a href="${pageContext.request.contextPath}/adminControlMedicineServlet">仓库管理</a></li>
-        <form class="navbar-form navbar-left" style="margin-left: 80px">
-            <div class="form-group">
-                <input style="width: 200px" type="text" name="mno" class="form-control" id="medicineno" value="${condition.mno[0]}" placeholder="药品编号">
-                <input style="width: 200px;margin-left: 20px" type="text" name="mname" class="form-control" value="${condition.mname[0]}" id="medicineName" placeholder="药品名">
-                <input style="width: 200px;margin-left: 20px" type="text" name="mefficacy" class="form-control" value="${condition.mefficacy[0]}" id="medicineFunction" placeholder="药品功效">
-            </div>
-            <button type="submit" style="margin-left: 20px;color: black" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            <ul class="nav nav-tabs" id="adminFunChoose">
+                <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/findAllAdminServlet">管理员信息管理</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/findAllUserServlet">用户信息管理</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/adminControlMedicineServlet">仓库管理</a></li>
+                <li role="presentation"><a href="${pageContext.request.contextPath}/adminFeedbackServlet">用户反馈</a></li>
+                <form class="navbar-form navbar-left" style="margin-left: 100px">
+                    <div class="form-group">
+                        <input style="width: 200px" type="text" name="mno" class="form-control" id="medicineno" value="${condition.mno[0]}" placeholder="药品编号">
+                        <input style="width: 200px;margin-left: 20px" type="text" name="mname" class="form-control" value="${condition.mname[0]}" id="medicineName" placeholder="药品名">
+                        <input style="width: 200px;margin-left: 20px" type="text" name="mefficacy" class="form-control" value="${condition.mefficacy[0]}" id="medicineFunction" placeholder="药品功效">
+                    </div>
+                    <button type="submit" style="margin-left: 20px;color: black" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-        <li><a href="javascript:deleteChoose()">删除选中</a></li>
-        <li><a href="${pageContext.request.contextPath}/adminAddMedicine.jsp">添加</a></li>
-        <li><a href="${pageContext.request.contextPath}/adminchoose.jsp">返回</a></li>
-        <li role="presentation" class="dropdown" style="margin-right: 30px">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="javascript:logout()">退出登录</a></li>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="javascript:deleteChoose()">删除选中</a></li>
+                    <li><a href="${pageContext.request.contextPath}/adminAddMedicine.jsp">添加</a></li>
+                    <li role="presentation" class="dropdown" style="margin-right: 30px">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:logout()">退出登录</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </ul>
-        </li>
-        </ul>
-    </ul>
+
+        </div>
+    </nav>
+
+
+
 
 </div>
 
@@ -81,21 +96,21 @@
             <div class="table-responsive">
                 <table border="1" class="table table-bordered table-hover table-condensed" id="tb1" style="width: 99%;table-layout: fixed;">
                     <tr class="success">
-                        <th style="width:3%"><input type="checkbox" id="firstCb"></th>
-                        <th style="width:7%">编号</th>
+                        <th style="width:3%"><input type="checkbox" id="firstCb" class="medicinecheck"></th>
+                        <th style="width:10%">编号</th>
                         <th style="width:10%">药名</th>
                         <th style="width:5%">特性</th>
                         <th style="width:40%">作用</th>
                         <th style="width:5%">单价</th>
                         <th style="width:5%">数量</th>
                         <th style="width:5%">序号</th>
-                        <th style="width:20%">操作</th>
+                        <th style="width:15%">操作</th>
                     </tr>
 
                     <tbody id="medicinebody">
                     <c:forEach items="${medicinePageBean.list}" var="medicine">
                         <tr>
-                            <th><input type="checkbox" name="mid" value="${medicine.mid}"></th>
+                            <th><input type="checkbox" name="mid" value="${medicine.mid}" class="medicinecheck"></th>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
                                 onmouseout="this.className = 'wrap'">${medicine.mno}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
@@ -298,23 +313,28 @@
         });
     }
     function deleteChoose() {
-        swal({
-            title: "确定删除吗？",
-            text: "你将无法恢复这些药品！",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定删除！",
-            cancelButtonText: "取消删除！",
-            closeOnConfirm: false,
-            closeOnCancel: false
-        }, function (isConfirm) {
-            if (isConfirm) {
-                deletechoose()
-            } else {
-                swal("取消！", "这些药品现在安全了:)", "error");
-            }
-        });
+        var checked = $("input[class='medicinecheck']:checked");
+        if (checked.length==0){
+            swal("请至少选择一种药品")
+        }else {
+            swal({
+                title: "确定删除吗？",
+                text: "你将无法恢复这些药品！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定删除！",
+                cancelButtonText: "取消删除！",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    deletechoose()
+                } else {
+                    swal("取消！", "这些药品现在安全了:)", "error");
+                }
+            });
+        }
     }
     function deletechoose() {
         var checkeds=$("#medicinebody :checked");

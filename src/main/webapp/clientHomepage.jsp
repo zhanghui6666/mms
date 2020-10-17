@@ -13,6 +13,15 @@
     <link rel="stylesheet" href="css/myclient.css">
     <link rel="stylesheet" href="css/sweetalert.css">
     <script src="js/sweetalert-dev.js"></script>
+    <script>
+        function feedbackreg() {
+            $.ajax({
+                url: "./feedbackServlet",
+                type: "post",
+                data: $('#feedbackForm').serialize(),
+            });
+        }
+    </script>
 </head>
 <body style="padding-top:50px">
 <div class="nav1">
@@ -33,12 +42,37 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right barshopcart">
+                    <li><a href="#" data-toggle="modal" data-target="#myModal" >反馈</a></li>
                     <li><a href="${pageContext.request.contextPath}/findShopCartByPageServlet">购物车</a></li>
                     <li><a href="javascript:logout()">退出登录</a></li>
+
+
                 </ul>
             </div>
         </div>
     </nav>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">反馈</h4>
+                </div>
+                <div class="modal-body">
+                    <form  method="post" id="feedbackForm">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="反馈信息" name="ctext" style="width:500px" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="color: black">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="feedbackreg()" data-dismiss="modal">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="nav2">

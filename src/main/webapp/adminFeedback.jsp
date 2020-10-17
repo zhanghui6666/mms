@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>用户信息</title>
+    <title>用户反馈</title>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/sweetalert-dev.js"></script>
@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/myclient.css">
-   <%-- <link rel="stylesheet" href="css/controluser.css">
---%>
+    <%-- <link rel="stylesheet" href="css/controluser.css">
+ --%>
     <script>
         window.onload = function(){
             document.getElementById("topcheckbox").onclick = function () {
@@ -93,7 +93,7 @@
         </div>
     </nav>
 
-    </div>
+</div>
 
 
 <div class="nav2">
@@ -112,47 +112,26 @@
                 <table border="1" class="table table-bordered table-hover table-condensed" id="tb1" style="width: 99%;table-layout: fixed;">
                     <thead>
                     <td style="width:2%"><input type="checkbox" id="topcheckbox" class="usercheck"></td>
-                    <td style="width:3%" >编号</td>
-                    <td style="width:7%">用户名</td>
-                    <td style="width:7%">密码</td>
-                    <td style="width:5%">姓名</td>
-                    <td style="width:4%">性别</td>
-                    <td style="width:5%">年龄</td>
-                    <td style="width:10%">地址</td>
-                    <td style="width:10%">电话号码</td>
-                    <td style="width:10%">症状</td>
-                    <td style="width:12%">注册日期</td>
-                    <td style="width:11%">状态</td>
-                    <td style="width:14%">操作</td>
+                    <td style="width:3%" >序号</td>
+                    <td style="width:15%">用户账号</td>
+                    <td style="width:15%">用户名</td>
+                    <td style="width:45%">反馈信息</td>
+                    <td style="width:20%">操作</td>
+
                     </thead>
                     <tbody id="userbody">
-                    <c:forEach items="${adminUserInfos}" var="adminUserInfo">
+                    <c:forEach items="${feedBacks}" var="feedBacks" varStatus="status">
                         <tr>
-                            <td><input type="checkbox" name="cid" value="${adminUserInfo.cid}" class="usercheck"></td>
+                            <td><input type="checkbox" name="cid" value="${status.index+1}" class="usercheck"></td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${adminUserInfo.cid}</td>
+                                onmouseout="this.className = 'wrap'">${status.index+1}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${adminUserInfo.cno}</td>
+                                onmouseout="this.className = 'wrap'">${feedBacks.cno}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${adminUserInfo.cpassword}</td>
+                                onmouseout="this.className = 'wrap'">${feedBacks.cname}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${adminUserInfo.cname}</td>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${adminUserInfo.csex}</td>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${adminUserInfo.cage}</td>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${adminUserInfo.caddress}</td>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${adminUserInfo.cphone}</td>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${adminUserInfo.csymptom}</td>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${adminUserInfo.cdate}</td>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${adminUserInfo.cremark}</td>
-                            <td style="text-align: center"><a style="margin-right: 10px" href="${pageContext.request.contextPath}/adminFindOneUserServlet?cno=${adminUserInfo.cno}" class="btn btn-primary">编辑</a>
-                                <a href="javascript:void(0)" onclick="del(${adminUserInfo.cno})" class="btn btn-primary">删除</a></td>
+                                onmouseout="this.className = 'wrap'">${feedBacks.ctext}</td>
+                            <td style="text-align: center"><a href="javascript:void(0)" onclick="del(${feedBacks.fid})" class="btn btn-primary">删除</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -162,9 +141,6 @@
     </div>
     <div class="container3"></div>
 </div>
-
-
-
 
 
 </body>
@@ -201,10 +177,10 @@
 
 
 <script>
-    function del(cno){
+    function del(fid){
         swal({
             title: "确定删除吗？",
-            text: "你将无法恢复这个用户！",
+            text: "你将无法恢复这个反馈！",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -215,9 +191,9 @@
         }, function (isConfirm) {
             if (isConfirm) {
 
-                location="${pageContext.request.contextPath}/adminDeleteUserServlet?cno="+cno;
+                location="${pageContext.request.contextPath}/adminDeleteFeedbackServlet?fid="+fid;
             } else {
-                swal("取消！", "这个用户现在安全了:)", "error");
+                swal("取消！", "取消成功", "error");
             }
         });
     }
@@ -229,7 +205,7 @@
         }else{
             swal({
                 title: "确定删除吗？",
-                text: "你将无法恢复这些用户！",
+                text: "你将无法恢复这些反馈！",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -241,7 +217,7 @@
                 if (isConfirm) {
                     deletechoose()
                 } else {
-                    swal("取消！", "这些用户现在安全了:)", "error");
+                    swal("取消！", "取消成功", "error");
                 }
             });
         }
@@ -256,7 +232,7 @@
             var ano=child.eq(2).text();
             userlist.push(ano);
         })
-        location="adminDeleteChooseUserServlet?cnos="+userlist;
+        location="adminDeleteChooseFeedbackServlet?fids="+userlist;
     }
 </script>
 </html>

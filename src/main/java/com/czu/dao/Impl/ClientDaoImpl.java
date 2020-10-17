@@ -2,6 +2,7 @@ package com.czu.dao.Impl;
 
 import com.czu.dao.ClientDao;
 import com.czu.domain.Client;
+import com.czu.domain.FeedBack;
 import com.czu.util.JDBCUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -64,5 +65,21 @@ public class ClientDaoImpl implements ClientDao {
         }catch (Exception e){
             return null;
         }
+    }
+
+    @Override
+    public Client findClient(String cno) {
+        try {
+            String sql = "select * from client where cno = ?";
+            return template.queryForObject(sql,new BeanPropertyRowMapper<Client>(Client.class),cno);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public void Insertfeedback(FeedBack feedBack) {
+        String sql = "insert into feedback values(null,?,?,?)";
+        template.update(sql,feedBack.getCno(),feedBack.getCname(),feedBack.getCtext());
     }
 }

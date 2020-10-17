@@ -2,10 +2,7 @@ package com.czu.service.Impl;
 
 import com.czu.dao.AdminDao;
 import com.czu.dao.Impl.AdminDaoImpl;
-import com.czu.domain.AdminUserInfo;
-import com.czu.domain.AdminInfo;
-import com.czu.domain.Medicine;
-import com.czu.domain.PageBean;
+import com.czu.domain.*;
 import com.czu.service.AdminService;
 
 import java.util.List;
@@ -126,6 +123,16 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void updateMedicine(Medicine medicine) {
         adminDao.updateMedicine(medicine);
+    }
+
+    @Override
+    public List<FeedBack> finAllFeedback() {
+        return adminDao.finAllFeedback();
+    }
+
+    @Override
+    public void deleteFeedbackInfo(String fid) {
+        adminDao.deleteFeedbackInfo(fid);
     }
 
 
