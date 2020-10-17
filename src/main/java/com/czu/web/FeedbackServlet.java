@@ -19,11 +19,11 @@ public class FeedbackServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         String ctext = request.getParameter("ctext");
         String cno = (String) request.getSession().getAttribute("cno");
-        System.out.println("cno"+cno);
-        System.out.println("ctext"+ctext);
+        //System.out.println("cno"+cno);
+        //System.out.println("ctext"+ctext);
         ClientService clientService = new ClientServiceImpl();
         Client client1 = clientService.findClient(cno);
-        System.out.println(client1);
+        //System.out.println(client1);
         String cname = client1.getCname();
         FeedBack feedback = new FeedBack();
         feedback.setCno(cno);

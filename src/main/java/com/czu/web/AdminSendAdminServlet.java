@@ -14,7 +14,7 @@ public class AdminSendAdminServlet extends HttpServlet {
         //1.获取参数
         String aname = request.getParameter("aname");
 
-        System.out.println("aname:"+aname);
+       //System.out.println("aname:"+aname);
 
         //传递值
         request.getSession().setAttribute("updateAname",aname);

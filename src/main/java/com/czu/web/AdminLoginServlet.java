@@ -31,24 +31,24 @@ public class AdminLoginServlet extends HttpServlet {
         adminLogin.setApassword(apassword);
         AdminLoginService adminLoginService = new AdminLoginServiceImpl();
         AdminLogin adminlogin = adminLoginService.Adlogin(adminLogin);
-        System.out.println(verifycode);
-        System.out.println(adminlogin);
+        //System.out.println(verifycode);
+        //System.out.println(adminlogin);
 
         if (verifycode==null || verifycode.length()<=0 && adminlogin == null) {
-            System.out.println("error");
+            //System.out.println("error");
             response.getWriter().write("error");
         }else if (!checkcode_server.equalsIgnoreCase(verifycode) && adminlogin == null){
-            System.out.println("all_error");
+            //System.out.println("all_error");
             response.getWriter().write("all_error");
         }
         else if (!checkcode_server.equalsIgnoreCase(verifycode) && adminlogin != null) {
-            System.out.println("verifycode_error");
+           // System.out.println("verifycode_error");
             response.getWriter().write("verifycode_error");
         } else if (checkcode_server.equalsIgnoreCase(verifycode) && adminlogin == null) {
-            System.out.println("login_error");
+            //System.out.println("login_error");
             response.getWriter().write("login_error");
         } else if (checkcode_server.equalsIgnoreCase(verifycode) && adminlogin != null) {
-            System.out.println("login_success");
+            //System.out.println("login_success");
             request.getSession().setAttribute("aname", aname);
             response.getWriter().write("login_success");
         }

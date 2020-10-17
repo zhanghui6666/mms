@@ -20,7 +20,7 @@ public class DeleteOrderServlet extends HttpServlet {
         String _mnos = request.getParameter("mno");
         String[] mnos = _mnos.split(",");
         for (String mno : mnos) {
-            System.out.println(mno);
+            //System.out.println(mno);
             shopCartService.deleteShopCart(cno,mno);
         }
         String delMessage = "删除成功！";
