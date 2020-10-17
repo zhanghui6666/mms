@@ -28,7 +28,7 @@ public interface AdminService {
      * 修改一个管理员密码
      * @param aid
      */
-    void updateAdminInfo(String aid,String password);
+    Integer updateAdminInfo(String aid,String password);
 
     /**
      * 查询所有的用户信息

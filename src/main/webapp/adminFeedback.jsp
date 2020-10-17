@@ -62,7 +62,7 @@
 <body style="padding-top:50px">
 
 <div class="nav1">
-    <nav class="navbar navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                 data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
@@ -71,6 +71,7 @@
             <span class="icon-bar"></span>
         </button>
         <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav nav-tabs" id="adminFunChoose">
                 <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/findAllAdminServlet">管理员信息管理</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/findAllUserServlet">用户信息管理</a></li>
@@ -90,6 +91,7 @@
                     </li>
                 </ul>
             </ul>
+            </div>
         </div>
     </nav>
 
@@ -226,7 +228,7 @@
 
     }
     function deletechoose() {
-        var checkeds=$("input[class='feedbackcheck']:checked");
+        var checkeds=$("input[name='cid']:checked");
         var fids=[];
         $.each(checkeds,function (i,n) {
             n=$(n)

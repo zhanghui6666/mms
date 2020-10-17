@@ -35,6 +35,7 @@ public class ClientRegisterServlet extends HttpServlet {
             e.printStackTrace();
         }
         client.setCdate(new Date());
+        //System.out.println(client);
         Integer flag = clientService.Regist(client);
         if (flag == 1){
             response.getWriter().write("success");

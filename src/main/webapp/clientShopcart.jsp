@@ -62,7 +62,7 @@
                 <div class="modal-body">
                     <form  method="post" id="feedbackForm">
                         <div class="input-group">
-                            <input type="text" autocomplete="off" class="form-control" placeholder="反馈信息" name="ctext" style="width:500px" aria-describedby="basic-addon1">
+                            <input type="text" autocomplete="off" class="form-control ctext" placeholder="反馈信息" name="ctext" style="width:500px" aria-describedby="basic-addon1">
                         </div>
                     </form>
                 </div>

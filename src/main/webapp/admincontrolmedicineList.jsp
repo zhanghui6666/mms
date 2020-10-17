@@ -35,7 +35,7 @@
 </head>
 <body>
 <div class="nav1" style="padding-top:50px">
-    <nav class="navbar navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                 data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
@@ -44,20 +44,19 @@
             <span class="icon-bar"></span>
         </button>
         <div class="container-fluid">
-
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav nav-tabs" id="adminFunChoose">
                 <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/findAllAdminServlet">管理员信息管理</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/findAllUserServlet">用户信息管理</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/adminControlMedicineServlet">仓库管理</a></li>
                 <li role="presentation"><a href="${pageContext.request.contextPath}/adminFeedbackServlet">用户反馈</a></li>
-                <form class="navbar-form navbar-left" style="margin-left: 100px">
+                <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/adminControlMedicineServlet" style="margin-left: 100px">
                     <div class="form-group">
                         <input style="width: 200px" type="text" name="mno" class="form-control" id="medicineno" value="${condition.mno[0]}" placeholder="药品编号">
                         <input style="width: 200px;margin-left: 20px" type="text" name="mname" class="form-control" value="${condition.mname[0]}" id="medicineName" placeholder="药品名">
                         <input style="width: 200px;margin-left: 20px" type="text" name="mefficacy" class="form-control" value="${condition.mefficacy[0]}" id="medicineFunction" placeholder="药品功效">
                     </div>
                     <button type="submit" style="margin-left: 20px;color: black" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="javascript:deleteChoose()">删除选中</a></li>
@@ -72,7 +71,7 @@
                     </li>
                 </ul>
             </ul>
-
+            </div>
         </div>
     </nav>
 

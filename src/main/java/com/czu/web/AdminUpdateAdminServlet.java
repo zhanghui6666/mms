@@ -19,11 +19,13 @@ public class AdminUpdateAdminServlet extends HttpServlet {
         String apassword = request.getParameter("apassword");
         //调用方法修改密码
         AdminService adminService=new AdminServiceImpl();
-        adminService.updateAdminInfo(aname,apassword);
-        String updateAdminMessage="修改成功";
-        request.getSession().setAttribute("updateAdminMessage", updateAdminMessage);
-        //跳转到对应界面
-        request.getRequestDispatcher("/findAllAdminServlet").forward(request,response);
+        Integer flag = adminService.updateAdminInfo(aname, apassword);
+
+        if (flag == 1){
+            response.getWriter().write("success");
+        }else {
+            response.getWriter().write("error");
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

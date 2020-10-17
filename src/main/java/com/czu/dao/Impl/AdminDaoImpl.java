@@ -73,9 +73,14 @@ public class AdminDaoImpl implements AdminDao {
      * 修改一个管理员密码
      * @param aname
      */
-    public void updateAdmin(String aname, String password) {
-        String sql="update admin set apassword=? where aname=?";
-        template.update(sql,password,aname);
+    public Integer updateAdmin(String aname, String password) {
+        try {
+            String sql="update admin set apassword=? where aname=?";
+            Integer flag = template.update(sql,password,aname);
+            return flag;
+        }catch (Exception e){
+            return null;
+        }
     }
 
     /**

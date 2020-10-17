@@ -58,7 +58,7 @@ public interface AdminDao {
      * @param aname
      * @param password
      */
-    void updateAdmin(String aname, String password);
+    Integer updateAdmin(String aname, String password);
 
     /**
      * 查询符合条件的药品总条数

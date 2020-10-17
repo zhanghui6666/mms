@@ -36,7 +36,7 @@
                     <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet">药品大全</a></li>
                     <li><a href="${pageContext.request.contextPath}/findAgencyByPageServlet">药店</a></li>
                 </ul>
-                <form class="navbar-form navbar-left" style="margin-left: 150px">
+                <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/findMedicineByPageServlet" style="margin-left: 150px">
                     <div class="form-group">
                         <input style="width: 200px" type="text" name="mno" class="form-control" id="medicineno" value="${condition.mno[0]}" placeholder="药品编号">
                         <input style="width: 200px;margin-left: 20px" type="text" name="mname" class="form-control" value="${condition.mname[0]}" id="medicineName" placeholder="药品名">
@@ -71,7 +71,7 @@
                 <div class="modal-body">
                     <form  method="post" id="feedbackForm">
                         <div class="input-group">
-                            <input type="text" autocomplete="off" class="form-control" placeholder="反馈信息" name="ctext" style="width:500px" aria-describedby="basic-addon1">
+                            <input type="text" autocomplete="off" class="form-control ctext" placeholder="反馈信息" name="ctext" style="width:500px" aria-describedby="basic-addon1">
                         </div>
                     </form>
                 </div>
@@ -129,7 +129,7 @@
                                 onmouseout="this.className = 'wrap'">${medicine.mnumber}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
                                 onmouseout="this.className = 'wrap'">${medicine.mid}</td>
-                            <td><a class="btn btn-primary" href="javascript:;" onclick="addShopCart(${medicine.mno})"
+                            <td><a class="btn btn-primary" href="javascript:;" onclick="addShopCart('${medicine.mno}')"
                                    role="button" style="margin-left: 50px;">加入购物车</a></td>
                         </tr>
                     </c:forEach>

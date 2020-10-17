@@ -26,8 +26,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void updateAdminInfo(String aname, String password) {
-        adminDao.updateAdmin(aname,password);
+    public Integer updateAdminInfo(String aname, String password) {
+        return  adminDao.updateAdmin(aname,password);
     }
 
 

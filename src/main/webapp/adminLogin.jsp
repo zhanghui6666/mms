@@ -108,8 +108,8 @@
         <div class="content_mid">
             <div class="content_menu">
                 <ul class="nav nav-pills" id="loginFunChoose">
-                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/login.jsp" target="_Self">用户登录</a></li>
-                    <li role="presentation"> <a href="${pageContext.request.contextPath}/adminLogin.jsp" target="_Self">管理员登录</a></li>
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/login.jsp" target="_self">用户登录</a></li>
+                    <li role="presentation"> <a href="${pageContext.request.contextPath}/adminLogin.jsp" target="_self">管理员登录</a></li>
                 </ul>
             </div>
             <form class="form-horizontal" id="loginform" style="margin-left: 30px">

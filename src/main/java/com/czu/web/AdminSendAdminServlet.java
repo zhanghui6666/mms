@@ -13,12 +13,13 @@ public class AdminSendAdminServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         //1.获取参数
         String aname = request.getParameter("aname");
-        String apassword = request.getParameter("apassword");
+
+        System.out.println("aname:"+aname);
+
         //传递值
-        request.setAttribute("updateAname",aname);
-        request.setAttribute("updateApassword",apassword);
+        request.getSession().setAttribute("updateAname",aname);
         //跳转页面
-        request.getRequestDispatcher("/adminUpdateAdmin.jsp").forward(request,response);
+        //request.getRequestDispatcher("/adminUpdateAdmin.jsp").forward(request,response);
 
     }
 

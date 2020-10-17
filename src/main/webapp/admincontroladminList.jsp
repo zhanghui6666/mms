@@ -59,11 +59,49 @@
                     location = "${pageContext.request.contextPath}/adminLogoutServlet";
                 });
         }
+
+
+        function adminAddreg() {
+            var aname = $(".aname").val();
+            var apassword = $(".apassword").val();
+            var reg = /^\s*$/
+            var flag1 = aname != null && aname != undefined && !reg.test(aname);
+            var flag2 = apassword != null && apassword != undefined && !reg.test(apassword);
+                if (flag1 && flag2){
+                $.ajax({
+                    url: "./addAdminServlet",
+                    type: "post",
+                    data: $('#adminAddForm').serialize(),
+                    success:function (data) {
+                        if (data == "success"){
+                            swal({
+                                title:"添加成功！"
+                            },function () {
+                                window.location.reload();
+                            })
+                        }else if (data == "error"){
+                            swal({
+                                title:"添加失败",
+                                text:"管理员账号重复"
+                            },function () {
+                                window.location.reload();
+                            })
+                        }
+                    }
+                });
+            }else {
+                swal({
+                    title: "写点什么吧！"
+                },function () {
+                    window.location.reload();
+                })
+            }
+        }
     </script>
 </head>
 <body style="padding-top:50px">
     <div class="nav1">
-        <nav class="navbar navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -72,6 +110,7 @@
                 <span class="icon-bar"></span>
             </button>
             <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav nav-tabs" id="adminFunChoose">
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/findAllAdminServlet">管理员信息管理</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/findAllUserServlet">用户信息管理</a></li>
@@ -79,7 +118,7 @@
                     <li role="presentation"><a href="${pageContext.request.contextPath}/adminFeedbackServlet">用户反馈</a></li>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li role="presentation"><a href="${pageContext.request.contextPath}/adminaddadmin.jsp">添加</a></li>
+                        <li role="presentation"><a href="#" data-toggle="modal" data-target="#myModal">添加</a></li>
                         <li role="presentation"><a href="javascript:deleteChoose()">删除选中</a></li>
                         <li class="dropdown" style="margin-right: 30px;margin-top:3px">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -91,8 +130,64 @@
                         </li>
                     </ul>
                 </ul>
+                </div>
             </div>
         </nav>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加管理员</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form  method="post" id="adminAddForm">
+                            <div class="input-group">
+                                <input type="text" class="form-control aname" placeholder="请输入管理员账号" autocomplete="off" name="aname" style="width:500px" aria-describedby="basic-addon1">
+                                <input type="password" class="form-control apassword" placeholder="请输入管理员密码" autocomplete="off" name="apassword" style="width:500px;margin-top: 30px" aria-describedby="basic-addon1">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="color: black">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="adminAddreg()" data-dismiss="modal">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel2">修改管理员密码</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form  method="post" id="adminModifyForm">
+                        <div class="form-group">
+                            <label for="aname">账号</label>
+                            <input type="text" class="form-control aname" id="aname" autocomplete="off" name="aname" readonly="readonly" style="width:500px" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="form-group">
+                            <label for="apassword">密码</label>
+                            <input type="password" class="form-control apassword" id="apassword" placeholder="请输入管理员密码" autocomplete="off" name="apassword" style="width:500px;margin-top: 30px" aria-describedby="basic-addon1">
+                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="color: black">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="adminMdifyPassword()" data-dismiss="modal">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
 
     </div>
 
@@ -124,7 +219,7 @@
                                 <td>${adminInfo.aid}</td>
                                 <td>${adminInfo.aname}</td>
                                 <td>${adminInfo.apassword}</td>
-                                <td style="text-align: center"><a style="margin-right: 30px" href="${pageContext.request.contextPath}/adminSendAdminServlet?aname=${adminInfo.aname}&apassword=${adminInfo.apassword}" class="btn btn-large btn-primary">改密</a>
+                                <td style="text-align: center"><a class="btn btn-large btn-primary" href="javascript:;" onclick="sendaname('${adminInfo.aname}')" role="button" style="margin-right: 30px"  data-toggle="modal" data-target="#myModal2">改密</a>
                                     <a href="javascript:void(0)" onclick="del(${adminInfo.aid})" class="btn btn-large btn-primary">删除</a></td>
                             </tr>
                         </c:forEach>
@@ -186,6 +281,48 @@
 
 
 <script>
+
+    function sendaname(aname) {
+       $("#aname").val(aname);
+    }
+
+    function adminMdifyPassword() {
+        var aname = $("#aname").val();
+        var apassword = $("#apassword").val();
+        var reg = /^\s*$/
+        var flag1 = aname != null && aname != undefined && !reg.test(aname);
+        var flag2 = apassword != null && apassword != undefined && !reg.test(apassword);
+        if (flag1 && flag2){
+            $.ajax({
+                url: "./adminUpdateAdminServlet",
+                type: "post",
+                data: $('#adminModifyForm').serialize(),
+                success:function (data) {
+                    if (data == "success"){
+                        swal({
+                            title:"修改成功！"
+                        },function () {
+                            window.location.reload();
+                        })
+                    }else if (data == "error"){
+                        swal({
+                            title:"修改失败",
+                            text:"服务器异常"
+                        },function () {
+                            window.location.reload();
+                        })
+                    }
+                }
+            });
+        }else {
+            swal({
+                title: "写点什么吧！"
+            },function () {
+                window.location.reload();
+            })
+        }
+    }
+
     function del(aid){
         swal({
             title: "确定删除吗？",

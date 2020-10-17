@@ -36,7 +36,7 @@
                     <li><a href="${pageContext.request.contextPath}/findMedicineByPageServlet">药品大全</a></li>
                     <li><a href="${pageContext.request.contextPath}/findAgencyByPageServlet">药店</a></li>
                 </ul>
-                <form class="navbar-form navbar-left" style="margin-left: 150px">
+                <form class="navbar-form navbar-left" action="${pageContext.request.contextPath}/findAgencyByPageServlet" style="margin-left: 150px">
                     <div class="form-group">
                         <input style="width: 200px" type="text" name="ano" class="form-control" id="agencyNo" value="${condition1.ano[0]}" placeholder="药店编号">
                         <input style="width: 200px;margin-left: 20px" type="text" name="aname" class="form-control" value="${condition1.aname[0]}" id="agencyName" placeholder="负责人名">
@@ -70,7 +70,7 @@
                 <div class="modal-body">
                     <form  method="post" id="feedbackForm">
                         <div class="input-group">
-                            <input type="text" autocomplete="off" class="form-control" placeholder="反馈信息" name="ctext" style="width:500px" aria-describedby="basic-addon1">
+                            <input type="text" autocomplete="off" class="form-control ctext" placeholder="反馈信息" name="ctext" style="width:500px" aria-describedby="basic-addon1">
                         </div>
                     </form>
                 </div>
@@ -234,8 +234,24 @@
 </div>
 <script>
 
+    function logout(){
+        swal({
+                title: "确定退出吗？",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定退出！",
+                closeOnConfirm: false
+            },
+            function(){
+                location = "${pageContext.request.contextPath}/logoutServlet";
+            });
+    }
+
+
     function feedbackreg() {
         var ctext = $(".ctext").val();
+        console
         var reg = /^\s*$/
         if (ctext != null && ctext != undefined && !reg.test(ctext)){
             $.ajax({

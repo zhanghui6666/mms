@@ -33,28 +33,25 @@ public class AddAdminServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-
+        System.out.println(admininfo);
         //调用service来判断并保存
         AdminService service=new AdminServiceImpl();
         List<AdminInfo> adminInfos=service.findAllAdminInfo();
         int is=0;
-        for (AdminInfo aadmininfo :
-                adminInfos) {
+        for (AdminInfo aadmininfo : adminInfos) {
             if (aadmininfo.getAname().equals(admininfo.getAname())){
                 is++;
             }
         }
+        System.out.println(is);
         if (is>0){
-            message="添加的是重复的，添加失败";
-            request.getSession().setAttribute("message", message);
+            response.getWriter().write("error");
         }else {
-            message="添加成功";
-            service.addAdminInfo(admininfo);
-            request.getSession().setAttribute("message", message);
+            response.getWriter().write("success");
         }
 
         //跳转到查找界面
-        response.sendRedirect(request.getContextPath()+"/findAllAdminServlet");
+        //response.sendRedirect(request.getContextPath()+"/findAllAdminServlet");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

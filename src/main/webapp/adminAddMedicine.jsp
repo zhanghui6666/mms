@@ -76,7 +76,6 @@
                     <input type="submit" value="添加" class="btn btn-primary btn_submit" onclick="submit()">
                     <a href="${pageContext.request.contextPath}/adminControlMedicineServlet"><input type="button" value="返回" class="btn btn-primary" style="margin-left: 50px"></a>
                 </div>
-
             </form>
         </div>
     </div>

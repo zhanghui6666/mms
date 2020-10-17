@@ -107,7 +107,7 @@
                 </div>
                 <div class="form-group">
                     <label for="date">注册日期</label>
-                    <input type="text" class="form-control form_group" required="required" id="date"
+                    <input type="text" class="form-control form_group" required="required" id="date" readonly="readonly"
                            placeholder="请输入您的出生日期" value="<%= adminUserInfo.getCdate()%>" name="cdate">
                 </div>
                 <div class>
