@@ -77,7 +77,7 @@
 </div>
 
 <!-- Modal -->
-<%--<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -85,7 +85,7 @@
                 <h4 class="modal-title" id="myModalLabel2">订单</h4>
             </div>
             <div class="modal-body">
-                <table border="1" class="table table-bordered table-hover  table-condensed" id="tb2"
+                <table border="1" class="table table-bordered table-hover  table-condensed" id="tb1"
                        style="width: 100%;table-layout: fixed;">
                     <tr class="success">
                         <th style="width:5%"><input type="checkbox" id="checkAllOrders" name="checkbox" class="checkedId">
@@ -125,7 +125,7 @@
             </div>
         </div>
     </div>
-</div>--%>
+</div>
 
 
 </div>
@@ -183,7 +183,6 @@
 </div>
 <script>
 
-
     function feedbackreg() {
         var ctext = $(".ctext").val();
         var reg = /^\s*$/
@@ -205,8 +204,6 @@
         }
     }
 
-
-
     function buydel(mno) {
         location = 'deleteOrderServlet?mno=' + mno;
     }
@@ -224,10 +221,6 @@
                 location = "${pageContext.request.contextPath}/logoutServlet";
             });
     }
-
-
-
-
 
     function deleteOrders(oid) {
         swal({

@@ -17,11 +17,10 @@ public class FindAllOrdersServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         String cno = (String) request.getSession().getAttribute("cno");
-        System.out.println(cno);
+        //System.out.println(cno);
         ShopCartService shopCartService = new ShopCartServiceImpl();
         List<Orders> orders = shopCartService.findAllOrders(cno);
-        //System.out.println(orders);
-        request.setAttribute("orders",orders);
+        request.getSession().setAttribute("orders",orders);
         //System.out.println(orders);
         request.getRequestDispatcher("/clientOrders.jsp").forward(request,response);
 

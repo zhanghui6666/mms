@@ -77,6 +77,7 @@
             </div>
         </div>
     </nav>
+
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -137,9 +138,8 @@
     </div>
     <div class="container3"></div>
 </div>
-
-
 <script>
+
     function logout(){
         swal({
                 title: "确定退出吗？",
@@ -153,10 +153,6 @@
                 location = "${pageContext.request.contextPath}/logoutServlet";
             });
     }
-
-
-
-
 
 
     $(function () {

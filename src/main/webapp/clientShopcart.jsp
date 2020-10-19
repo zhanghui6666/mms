@@ -76,58 +76,6 @@
     </div>
 </div>
 
-<!-- Modal -->
-<%--<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel2">订单</h4>
-            </div>
-            <div class="modal-body">
-                <table border="1" class="table table-bordered table-hover  table-condensed" id="tb2"
-                       style="width: 100%;table-layout: fixed;">
-                    <tr class="success">
-                        <th style="width:5%"><input type="checkbox" id="checkAllOrders" name="checkbox" class="checkedId">
-                        <th style="width:20%">药品名</th>
-                        <th style="width:10%">单价</th>
-                        <th style="width:10%">数量</th>
-                        <th style="width:10%">总价</th>
-                        <th style="width:28%">购买日期</th>
-                        <th style="width:17%">操作</th>
-                    </tr>
-
-                    <c:forEach items="${orders}" var="orders" varStatus="status">
-                        <tr>
-                            <th class="wrap"><input type="checkbox" id="checkedBox1" name="ordercheckedId" class="ordercheckedId"
-                                                    value="${status.index+1}"></th>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${orders.mname}</td>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${orders.mprice}</td>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${orders.num}</td>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${orders.totalprice}</td>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${orders.date}</td>
-                            <td style="text-align: center">
-                                <a class="btn btn-primary" role="button"
-                                   onclick="deleteOrders(${orders.oid})">删除</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" style="color: black">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>--%>
-
-
 </div>
 <div class="nav2">
     <div class="logo_container">

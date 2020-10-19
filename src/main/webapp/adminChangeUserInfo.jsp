@@ -62,19 +62,19 @@
                         if (adminUserInfo.getCsex().equals("男")) {
                     %>
                     <label class="radio-inline">
-                        <input type="radio" name="csex" value="man" checked="true"> 男
+                        <input type="radio" name="csex" value="男" checked="true"> 男
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="csex" value="woman"> 女
+                        <input type="radio" name="csex" value="女"> 女
                     </label>
                     <%
                     } else {
                     %>
                     <label class="radio-inline">
-                        <input type="radio" name="csex" value="man"> 男
+                        <input type="radio" name="csex" value="男"> 男
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="csex" value="woman" checked="true"> 女
+                        <input type="radio" name="csex" value="女" checked="true"> 女
                     </label>
                     <%
                         }

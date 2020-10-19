@@ -186,9 +186,6 @@
             </div>
         </div>
 
-
-
-
     </div>
 
     <div class="nav2">

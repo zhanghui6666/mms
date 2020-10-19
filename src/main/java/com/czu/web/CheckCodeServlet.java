@@ -34,7 +34,7 @@ public class CheckCodeServlet extends HttpServlet {
 		//获取画笔
 		Graphics g = image.getGraphics();
 		//设置画笔颜色为灰色
-		g.setColor(Color.GRAY);
+		g.setColor(Color.black);
 		//填充图片
 		g.fillRect(0,0, width,height);
 		
@@ -44,7 +44,7 @@ public class CheckCodeServlet extends HttpServlet {
 		request.getSession().setAttribute("CHECKCODE_SERVER",checkCode);
 		
 		//设置画笔颜色为黄色
-		g.setColor(Color.YELLOW);
+		g.setColor(Color.white);
 		//设置字体的小大
 		g.setFont(new Font("黑体", Font.BOLD,24));
 		//向图片上写入验证码
@@ -60,7 +60,7 @@ public class CheckCodeServlet extends HttpServlet {
 	 * 产生4位随机字符串 
 	 */
 	private String getCheckCode() {
-		String base = "0123456789ABCDEFGabcdefg";
+		String base = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 		int size = base.length();
 		Random r = new Random();
 		StringBuffer sb = new StringBuffer();

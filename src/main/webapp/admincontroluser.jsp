@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/myclient.css">
-   <%-- <link rel="stylesheet" href="css/controluser.css">
---%>
+    <%-- <link rel="stylesheet" href="css/controluser.css">
+ --%>
     <script>
         window.onload = function(){
             document.getElementById("topcheckbox").onclick = function () {
@@ -72,30 +72,30 @@
         </button>
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav nav-tabs" id="adminFunChoose">
-                <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/findAllAdminServlet">管理员信息管理</a></li>
-                <li role="presentation"><a href="${pageContext.request.contextPath}/findAllUserServlet">用户信息管理</a></li>
-                <li role="presentation"><a href="${pageContext.request.contextPath}/adminControlMedicineServlet">仓库管理</a></li>
-                <li role="presentation"><a href="${pageContext.request.contextPath}/adminFeedbackServlet">用户反馈</a></li>
+                <ul class="nav nav-tabs" id="adminFunChoose">
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/findAllAdminServlet">管理员信息管理</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/findAllUserServlet">用户信息管理</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/adminControlMedicineServlet">仓库管理</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/adminFeedbackServlet">用户反馈</a></li>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li role="presentation"><a href="javascript:void(0)" onclick="deleteChoose()">删除选中</a></li>
-                    <li class="dropdown" style="margin-right: 30px;margin-top:3px">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                        </a>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li role="presentation"><a href="javascript:void(0)" onclick="deleteChoose()">删除选中</a></li>
+                        <li class="dropdown" style="margin-right: 30px;margin-top:3px">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            </a>
 
-                        <ul class="dropdown-menu">
-                            <li><a href="javascript:logout()">退出登录</a></li>
-                        </ul>
-                    </li>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:logout()">退出登录</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </ul>
-            </ul>
             </div>
         </div>
     </nav>
 
-    </div>
+</div>
 
 
 <div class="nav2">
