@@ -99,4 +99,6 @@ public interface AdminService {
     List<FeedBack> finAllFeedback();
 
     void deleteFeedbackInfo(String fid);
+
+    String findAdminExist(String cno);
 }

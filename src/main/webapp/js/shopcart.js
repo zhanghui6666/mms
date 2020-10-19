@@ -93,7 +93,7 @@ $(document).ready(function () {
                             },
                             type: "post",
                             success: function () {
-                                $.post("./deleteOrderServlet", {mno: mno}, function () {
+                                $.post("./deleteShopcartServlet", {mno: mno}, function () {
                                     swal({
                                             title: '购买成功',
                                             text: '成功购买了药品',
@@ -138,7 +138,7 @@ $(document).ready(function () {
                         var mno = $(this).parent().next().next().map(function () {
                             return this.innerHTML
                         }).get().join();
-                        $.post("./deleteOrderServlet", {mno: mno}, function () {
+                        $.post("./deleteShopcartServlet", {mno: mno}, function () {
                             swal({
                                     title: '删除成功',
                                     text: '成功删除了药品',
@@ -160,6 +160,9 @@ $(document).ready(function () {
 
 
 });
+
+
+
 
 
 /*导航栏选中效果*/

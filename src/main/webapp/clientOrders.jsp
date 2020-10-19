@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>购物车</title>
+    <title>订单</title>
     <script src="js/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -144,62 +144,38 @@
     <div class="container2">
         <form id="form" method="post">
             <div class="table-responsive">
-                <table border="1" class="table table-bordered table-hover  table-condensed" id="tb1"
+                <table border="1" class="table table-bordered table-hover  table-condensed" id="tb2"
                        style="width: 100%;table-layout: fixed;">
                     <tr class="success">
-                        <th style="width:3%"><input type="checkbox" id="checkAll" name="checkbox" class="checkedId">
-                        <th style="width:7%">序号</th>
-                        <th style="width:10%">药品编号</th>
-                        <th style="width:10%">药品名</th>
-                        <th style="width:35%">药品功效</th>
-                        <th style="width:10%">药品单价</th>
-                        <th style="width:5%">药品数量</th>
-                        <th style="width:10%">药品总价</th>
-                        <th style="width:10%">操作</th>
+                        <th style="width:20%">药品名</th>
+                        <th style="width:10%">单价</th>
+                        <th style="width:10%">数量</th>
+                        <th style="width:10%">总价</th>
+                        <th style="width:28%">购买日期</th>
+                        <th style="width:17%">操作</th>
                     </tr>
 
-                    <c:forEach items="${shopcart}" var="shopcart" varStatus="status">
+                    <c:forEach items="${orders}" var="orders" varStatus="status">
                         <tr>
-                            <th class="wrap"><input type="checkbox" id="checkedBox" name="checkedId" class="checkedId"
-                                                    value="${status.index+1}"
-                                                    totalprice="${shopcart.mprice * shopcart.num}"></th>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${status.index+1}</td>
+                                onmouseout="this.className = 'wrap'">${orders.mname}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${shopcart.mno}</td>
+                                onmouseout="this.className = 'wrap'">${orders.mprice}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${shopcart.mname}</td>
+                                onmouseout="this.className = 'wrap'">${orders.num}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${shopcart.mefficacy}</td>
+                                onmouseout="this.className = 'wrap'">${orders.totalprice}</td>
                             <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${shopcart.mprice}</td>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${shopcart.num}</td>
-                            <td class="wrap" onmouseover="this.className = 'wrap1'"
-                                onmouseout="this.className = 'wrap'">${shopcart.mprice * shopcart.num}</td>
-                            <td>
-                                <a class="btn btn-primary" role="button" style="margin-left: 50px;"
-                                   onclick="deleteShopCart(${shopcart.mno})">删除</a>
+                                onmouseout="this.className = 'wrap'">${orders.date}</td>
+                            <td style="text-align: center">
+                                <a class="btn btn-primary" role="button"
+                                   onclick="deleteOrders(${orders.oid})">删除</a>
                             </td>
                         </tr>
                     </c:forEach>
                 </table>
 
             </div>
-            <nav class="navbar navbar-default navbar-fixed-bottom">
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse">
-                        <div style="text-align: left;float: left;margin-top:8px;margin-left: 135px">
-                            <a class="btn btn-danger delAll" href="javascript:void(0);" id="delSelected" role="button">删除选中</a>
-                        </div>
-                        <div style="text-align: right;float: right;margin-top:8px;margin-right: 135px;color: #D9534F;font-size: 25px">
-                            <%--<button class="btn btn-danger buy" style="margin-right: 20px">购买</button>--%>
-                            <a class="btn btn-danger buy" style="margin-right: 20px" role="button">购买</a>
-                            共计<span id="total">0</span>元
-                        </div>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
-            </nav>
         </form>
 
     </div>
@@ -207,18 +183,6 @@
 </div>
 <script>
 
-    function findOrders() {
-        $.ajax({
-            url:"./findAllOrdersServlet",
-            type:"post",
-            success:function (orders) {
-                $('#myModal2').find(".modal-body").html(orders);
-                $('#myModal2').modal("show");
-
-            }
-        })
-
-    }
 
     function feedbackreg() {
         var ctext = $(".ctext").val();
@@ -261,48 +225,9 @@
             });
     }
 
-    function  deleteShopCart(mno) {
-        swal({
-                title: "确定删除吗？",
-                text: "删除这个药品",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定删除！",
-                cancelButtonText: "取消删除！",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            },
-            function (isConfirm) {
-                if (isConfirm) {
-                    $.ajax({
-                        url: "./deleteShopcartServlet",
-                        data: {mno: mno},
-                        type: "post",
-                        success: function () {
-                            swal({
-                                    title: '删除成功',
-                                    text: '成功删除了药品',
-                                    type: 'success',
-                                    confirmButtonText: '确定',
-                                },
-                                function () {
-                                    location = 'findShopCartByPageServlet';
-                                }
-                            );
-                        }
-                    })
-                } else {
-                    swal("取消！", "您的药品未被删除)", "error");
-                }
-            });
-    }
 
 
 
-    $("#myModal2").on("hidden.bs.modal", function() {
-        $(this).removeData("bs.modal");
-    });
 
     function deleteOrders(oid) {
         swal({
@@ -330,9 +255,7 @@
                                     confirmButtonText: '确定',
                                 },
                                 function () {
-                                    //location = 'findShopCartByPageServlet';
-                                   /* $('#myModal2').modal('handleUpdate')*/
-                                    $("#myModal2").on("shown.bs.modal", function () {}).modal('show');
+                                    location = 'findAllOrdersServlet';
                                 }
                             );
                         }
@@ -343,64 +266,6 @@
             });
     }
 
-
-    window.onload = function () {
-        document.getElementById("delSelected").onclick = function (mno) {
-            swal({
-                    title: "确定删除吗？",
-                    text: "再见",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定删除！",
-                    cancelButtonText: "取消删除！",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
-                function (isConfirm) {
-                    if (isConfirm) {
-                        swal({
-                                title: '删除成功',
-                                text: '成功删除了药品',
-                                type: 'success',
-                                confirmButtonText: '确定',
-                            },
-                            function (isConfirm) {
-                                if (isConfirm) {
-                                    var flag = false;
-                                    //判断是否有选中条目
-                                    var cbs = document.getElementsByName('checkedId');
-                                    for (let i = 0; i < cbs.length; i++) {
-                                        if (cbs[i].checked) {
-                                            //有一个条目选中了
-                                            flag = true;
-                                            break;
-                                        }
-                                    }
-                                    if (flag) {//有条目被选中
-                                        //提交表单
-                                        document.getElementById("form").submit();
-                                    }
-                                }
-                            }
-                        );
-                    } else {
-                        swal("取消！", "你的药品未被删除)", "error");
-                    }
-
-                });
-        }
-
-    }
-    /*window.onload = function () {
-        document.getElementById("checkAll").onclick = function () {
-
-            var cbs = document.getElementsByName('checkedId');
-            for (let i = 0; i < cbs.length; i++) {
-                cbs[i].checked = this.checked;
-            }
-        };
-    }*/
 
 </script>
 </body>

@@ -111,4 +111,6 @@ public interface AdminDao {
     List<FeedBack> finAllFeedback();
 
     void deleteFeedbackInfo(String fid);
+
+    String findAdminExist(String cno);
 }

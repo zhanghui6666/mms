@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 
 @WebServlet("/addOrderServlet")
 public class AddOrderServlet extends HttpServlet {
@@ -43,7 +44,7 @@ public class AddOrderServlet extends HttpServlet {
         orders.setMprice(mprice);
         orders.setNum(num);
         orders.setTotalprice(totalprice);
-
+        orders.setDate(new Date());
         ShopCartService shopCartService = new ShopCartServiceImpl();
         shopCartService.addOrder(orders);
 

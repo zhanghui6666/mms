@@ -208,5 +208,15 @@ public class AdminDaoImpl implements AdminDao {
         template.update(sql,fid);
     }
 
+    @Override
+    public String findAdminExist(String cno) {
+        try {
+            String sql = "select aname from admin where aname = ?";
+            return template.queryForObject(sql,String.class,cno);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
 
 }

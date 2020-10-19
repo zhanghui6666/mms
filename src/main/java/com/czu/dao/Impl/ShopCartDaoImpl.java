@@ -36,7 +36,20 @@ public class ShopCartDaoImpl implements ShopCartDao {
 
     @Override
     public void addOrder(Orders orders) {
-        String sql = "insert into orders values(null,?,?,?,?,?,?,?)";
-        template.update(sql,orders.getCno(),orders.getMno(),orders.getMname(),orders.getMefficacy(),orders.getMprice(),orders.getNum(),orders.getTotalprice());
+        String sql = "insert into orders values(null,?,?,?,?,?,?,?,?)";
+        template.update(sql,orders.getCno(),orders.getMno(),orders.getMname(),orders.getMefficacy(),orders.getMprice(),orders.getNum(),orders.getTotalprice(),orders.getDate());
+    }
+
+    @Override
+    public List<Orders> findAllOrders(String cno) {
+        String sql = "select * from orders where cno = ?";
+        List<Orders> orders = template.query(sql,new BeanPropertyRowMapper<Orders>(Orders.class),cno);
+        return orders;
+    }
+
+    @Override
+    public void deleteOrders(String cno, String oid) {
+        String sql = "delete from orders where oid = ? and cno = ?";
+        template.update(sql,oid,cno);
     }
 }

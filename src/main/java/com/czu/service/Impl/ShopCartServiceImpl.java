@@ -28,4 +28,14 @@ public class ShopCartServiceImpl implements ShopCartService {
     public void addOrder(Orders orders) {
         sdao.addOrder(orders);
     }
+
+    @Override
+    public List<Orders> findAllOrders(String cno) {
+        return sdao.findAllOrders(cno);
+    }
+
+    @Override
+    public void deleteOrders(String cno, String oid) {
+        sdao.deleteOrders(cno,oid);
+    }
 }

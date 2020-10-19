@@ -135,5 +135,10 @@ public class AdminServiceImpl implements AdminService {
         adminDao.deleteFeedbackInfo(fid);
     }
 
+    @Override
+    public String findAdminExist(String cno) {
+        return adminDao.findAdminExist(cno);
+    }
+
 
 }

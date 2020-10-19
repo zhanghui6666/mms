@@ -1,5 +1,7 @@
 package com.czu.domain;
 
+import java.util.Date;
+
 public class Orders {
     private Integer oid;
     private String cno;
@@ -9,6 +11,15 @@ public class Orders {
     private Integer mprice;
     private Integer num;
     private Integer totalprice;
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public Integer getOid() {
         return oid;
@@ -85,6 +96,7 @@ public class Orders {
                 ", mprice=" + mprice +
                 ", num=" + num +
                 ", totalprice=" + totalprice +
+                ", date=" + date +
                 '}';
     }
 }

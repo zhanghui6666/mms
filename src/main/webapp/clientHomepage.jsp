@@ -65,6 +65,7 @@
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a href="${pageContext.request.contextPath}/findAllOrdersServlet" id="findAllOrders">我的订单</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#myModal" >反馈</a></li>
                             <li><a href="javascript:logout()">退出登录</a></li>
                         </ul>

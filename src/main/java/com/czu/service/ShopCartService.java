@@ -16,4 +16,7 @@ public interface ShopCartService {
 
     void addOrder(Orders orders);
 
+    List<Orders> findAllOrders(String cno);
+
+    void deleteOrders(String cno, String oid);
 }

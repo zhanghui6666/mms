@@ -33,7 +33,7 @@ public class AddAdminServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        //System.out.println(admininfo);
+        System.out.println(admininfo);
         //调用service来判断并保存
         AdminService service=new AdminServiceImpl();
         List<AdminInfo> adminInfos=service.findAllAdminInfo();
@@ -47,6 +47,7 @@ public class AddAdminServlet extends HttpServlet {
         if (is>0){
             response.getWriter().write("error");
         }else {
+            service.addAdminInfo(admininfo);
             response.getWriter().write("success");
         }
 

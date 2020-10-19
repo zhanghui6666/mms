@@ -1,6 +1,8 @@
 package com.czu.web;
 
+import com.czu.service.AdminService;
 import com.czu.service.ClientService;
+import com.czu.service.Impl.AdminServiceImpl;
 import com.czu.service.Impl.ClientServiceImpl;
 
 import javax.servlet.ServletException;
@@ -17,12 +19,14 @@ public class FindRepeatServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String cno = request.getParameter("cno");
         ClientService clientService = new ClientServiceImpl();
+        AdminService adminService = new AdminServiceImpl();
+        String aname = adminService.findAdminExist(cno);
         //异步提交验证cno是否重名
         String cnoflag = clientService.findIfRepeat(cno);
         //System.out.println(cnoflag);
-        if (cno.equals(cnoflag)){
+        if (cno.equals(cnoflag) || cno.equals(aname)){
             response.getWriter().write("true");
-        }else if (cnoflag == null){
+        }else if (cnoflag == null && aname == null){
             response.getWriter().write("false");
         }
     }

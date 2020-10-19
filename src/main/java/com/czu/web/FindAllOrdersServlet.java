@@ -1,5 +1,6 @@
 package com.czu.web;
 
+import com.czu.domain.Orders;
 import com.czu.service.Impl.ShopCartServiceImpl;
 import com.czu.service.ShopCartService;
 
@@ -8,21 +9,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet("/deleteOrderServlet")
-public class DeleteOrderServlet extends HttpServlet {
+@WebServlet("/findAllOrdersServlet")
+public class FindAllOrdersServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        request.setCharacterEncoding("utf-8");
+        String cno = (String) request.getSession().getAttribute("cno");
+        System.out.println(cno);
         ShopCartService shopCartService = new ShopCartServiceImpl();
-        String cno = (String) session.getAttribute("cno");
-        String _oids = request.getParameter("oid");
-        String[] oids = _oids.split(",");
-        for (String oid : oids) {
-            //System.out.println(oid);
-            shopCartService.deleteOrders(cno,oid);
-        }
+        List<Orders> orders = shopCartService.findAllOrders(cno);
+        //System.out.println(orders);
+        request.setAttribute("orders",orders);
+        //System.out.println(orders);
+        request.getRequestDispatcher("/clientOrders.jsp").forward(request,response);
+
+
 
     }
 
